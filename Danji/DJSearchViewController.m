@@ -11,29 +11,40 @@
 
 @implementation DJSearchViewController
 
-- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+
+#pragma mark - view
+
+
+- (void)viewDidLoad
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    
-    if (self)
-    {
-        [self setTitle:@"search"];
-        [[self tabBarItem] setTitle:nil];
-        [[self tabBarItem] setImage:[UIImage imageNamed:@"Search"]];
-    }
-    
-    return self;
-}
-
-
-- (void)viewDidLoad {
     [super viewDidLoad];
-    [[self view] setBackgroundColor:[UIColor colorWithRed:1 green:0.99 blue:0.8 alpha:1]];
-
+    [[self view] setBackgroundColor:[UIColor colorWithRed:0.99 green:0.95 blue:0.84 alpha:1]];
+    
+    [self setupNavigationBar];
 }
 
-- (void)didReceiveMemoryWarning {
+
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
+}
+
+
+#pragma mark - private
+
+
+- (void)setupNavigationBar
+{
+    UINavigationBar *navBar = [[self navigationController] navigationBar];
+    CGFloat width = [navBar bounds].size.width;
+    CGFloat height = [navBar bounds].size.height;
+    
+    UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(10, 0, width - 20, height)];
+    [searchBar setTranslucent:YES];
+    [searchBar setBarTintColor:[UIColor colorWithRed:0.85 green:0.96 blue:0.9 alpha:1]];
+    
+    [navBar addSubview:searchBar];
+    
 }
 
 /*

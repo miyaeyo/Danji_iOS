@@ -26,6 +26,7 @@
     [self setWindow:window];
     
     [self setupTabBarControllerWithViewCortollers:[self setupViewControllers]];
+    
 
     return YES;
 }
@@ -65,6 +66,22 @@
     [tabbarController setViewControllers:viewControllers];
     [[tabbarController tabBar] setBarTintColor:[UIColor colorWithRed:0.49 green:0.36 blue:0.35 alpha:1]];
     
+    [[tabbarController tabBar] setTintColor:[UIColor whiteColor]];
+    
+    UITabBarItem *home = [[[tabbarController tabBar] items] objectAtIndex:0];
+    UITabBarItem *search = [[[tabbarController tabBar] items] objectAtIndex:1];
+    UITabBarItem *write = [[[tabbarController tabBar] items] objectAtIndex:2];
+    UITabBarItem *mypage = [[[tabbarController tabBar] items] objectAtIndex:3];
+    
+    [home setImage:[UIImage imageNamed:@"home.png"]];
+    [home setTitle:@"home"];
+    [search setImage:[UIImage imageNamed:@"search.png"]];
+    [search setTitle:@"search"];
+    [write setImage:[UIImage imageNamed:@"write.png"]];
+    [write setTitle:@"write"];
+    [mypage setImage:[UIImage imageNamed:@"mypage.png"]];
+    [mypage setTitle:@"mypage"];
+    
     [[self window] setRootViewController:tabbarController];
 }
 
@@ -93,7 +110,6 @@
     [[navigationViewController navigationBar] setBarTintColor:[UIColor colorWithRed:0.68
                                                                               green:0.8
                                                                                blue:0.78 alpha:1]];
-    
     return navigationViewController;
 }
 
@@ -124,7 +140,6 @@
     [[navigationViewController navigationBar] setBarTintColor:[UIColor colorWithRed:0.68
                                                                               green:0.8
                                                                                blue:0.78 alpha:1]];
-    
     return navigationViewController;
 }
 
@@ -140,7 +155,6 @@
     [[navigationViewController navigationBar] setBarTintColor:[UIColor colorWithRed:0.68
                                                                               green:0.8
                                                                                blue:0.78 alpha:1]];
-    
     return navigationViewController;
 }
 

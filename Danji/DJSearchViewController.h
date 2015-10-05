@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DJSearchViewController : UIViewController
+
+@interface DJSearchViewController : UIViewController <UISearchBarDelegate>
 
 @end

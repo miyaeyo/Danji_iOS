@@ -17,6 +17,11 @@
 		9E4E43361BC1764B006FB05E /* DJSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E4E43351BC1764B006FB05E /* DJSearchViewController.m */; };
 		9E4E43391BC1765C006FB05E /* DJWriteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E4E43381BC1765C006FB05E /* DJWriteViewController.m */; };
 		9E4E433C1BC1766F006FB05E /* DJMypageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E4E433B1BC1766F006FB05E /* DJMypageViewController.m */; };
+		9E4E43401BC2589B006FB05E /* home.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E4E433D1BC2589B006FB05E /* home.png */; };
+		9E4E43411BC2589B006FB05E /* mypage.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E4E433E1BC2589B006FB05E /* mypage.png */; };
+		9E4E43421BC2589B006FB05E /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E4E433F1BC2589B006FB05E /* search.png */; };
+		9E4E43441BC258F4006FB05E /* write.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E4E43431BC258F4006FB05E /* write.png */; };
+		9E4E43481BC2794C006FB05E /* danji.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E4E43461BC2794B006FB05E /* danji.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +54,11 @@
 		9E4E43381BC1765C006FB05E /* DJWriteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJWriteViewController.m; sourceTree = "<group>"; };
 		9E4E433A1BC1766F006FB05E /* DJMypageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DJMypageViewController.h; sourceTree = "<group>"; };
 		9E4E433B1BC1766F006FB05E /* DJMypageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJMypageViewController.m; sourceTree = "<group>"; };
+		9E4E433D1BC2589B006FB05E /* home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home.png; sourceTree = "<group>"; };
+		9E4E433E1BC2589B006FB05E /* mypage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mypage.png; sourceTree = "<group>"; };
+		9E4E433F1BC2589B006FB05E /* search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search.png; sourceTree = "<group>"; };
+		9E4E43431BC258F4006FB05E /* write.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = write.png; sourceTree = "<group>"; };
+		9E4E43461BC2794B006FB05E /* danji.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = danji.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +100,7 @@
 		9E4E43011BC11A40006FB05E /* Danji */ = {
 			isa = PBXGroup;
 			children = (
+				9E4E43451BC25920006FB05E /* Images */,
 				9E4E432F1BC17401006FB05E /* Controller */,
 				9E4E43301BC1740A006FB05E /* View */,
 				9E4E432E1BC173F8006FB05E /* Model */,
@@ -156,6 +167,18 @@
 			children = (
 			);
 			name = View;
+			sourceTree = "<group>";
+		};
+		9E4E43451BC25920006FB05E /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				9E4E43461BC2794B006FB05E /* danji.png */,
+				9E4E43431BC258F4006FB05E /* write.png */,
+				9E4E433D1BC2589B006FB05E /* home.png */,
+				9E4E433E1BC2589B006FB05E /* mypage.png */,
+				9E4E433F1BC2589B006FB05E /* search.png */,
+			);
+			name = Images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -238,8 +261,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9E4E43401BC2589B006FB05E /* home.png in Resources */,
+				9E4E43441BC258F4006FB05E /* write.png in Resources */,
+				9E4E43481BC2794C006FB05E /* danji.png in Resources */,
+				9E4E43421BC2589B006FB05E /* search.png in Resources */,
 				9E4E430E1BC11A40006FB05E /* Main.storyboard in Resources */,
 				9E4E43131BC11A40006FB05E /* LaunchScreen.xib in Resources */,
+				9E4E43411BC2589B006FB05E /* mypage.png in Resources */,
 				9E4E43101BC11A40006FB05E /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

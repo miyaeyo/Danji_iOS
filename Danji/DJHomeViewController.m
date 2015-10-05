@@ -11,31 +11,44 @@
 
 @implementation DJHomeViewController
 
-- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+
+#pragma mark - view
+
+
+- (void)viewDidLoad
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    
-    if (self)
-    {
-        [self setTitle:@"home"];
-    }
-    
-    return self;
-}
-
-
-- (void)viewDidLoad {
     [super viewDidLoad];
+    [[self view] setBackgroundColor:[UIColor colorWithRed:0.99 green:0.95 blue:0.84 alpha:1]];
     
-    [[self view] setBackgroundColor:[UIColor colorWithRed:1 green:0.99 blue:0.8 alpha:1]];
-    [[self tabBarItem] setImage:[UIImage imageNamed:@"home.png"]];
-    [[self tabBarItem] setTitle:@"home"];
-
-    
+    [self setupNavigationBar];
 }
 
-- (void)didReceiveMemoryWarning {
+
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
+}
+
+
+#pragma mark - private
+
+- (void)setupNavigationBar
+{
+    UINavigationBar *navBar = [[self navigationController] navigationBar];
+    UIView *titleView = [[UIView alloc] initWithFrame:[navBar bounds]];
+    
+    UIImageView *appIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"danji.png"]];
+    
+    UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(28, 10, 100, 30)];
+    [title setTextAlignment:NSTextAlignmentLeft];
+    [title setTextColor:[UIColor whiteColor]];
+    [title setFont:[UIFont boldSystemFontOfSize:20.0]];
+    [title setText:@"DANJI"];
+    
+    [titleView addSubview:appIcon];
+    [titleView addSubview:title];
+    
+    [[navBar topItem] setTitleView:titleView];
 }
 
 /*
