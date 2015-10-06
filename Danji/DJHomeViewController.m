@@ -21,6 +21,7 @@
     [[self view] setBackgroundColor:[UIColor colorWithRed:0.99 green:0.95 blue:0.84 alpha:1]];
     
     [self setupNavigationBar];
+    
 }
 
 
@@ -35,6 +36,7 @@
 - (void)setupNavigationBar
 {
     UINavigationBar *navBar = [[self navigationController] navigationBar];
+    
     UIView *titleView = [[UIView alloc] initWithFrame:[navBar bounds]];
     
     UIImageView *appIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"danji.png"]];
