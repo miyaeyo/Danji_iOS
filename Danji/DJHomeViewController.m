@@ -22,6 +22,9 @@
     
     [self setupNavigationBar];
     
+    PFObject *testObject = [PFObject objectWithClassName:@"TestObject"];
+    testObject[@"foo"] = @"bar";
+    [testObject saveInBackground];
 }
 
 
@@ -40,9 +43,10 @@
     UIView *titleView = [[UIView alloc] initWithFrame:[navBar bounds]];
     
     UIImageView *appIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"danji.png"]];
+    [appIcon setFrame:CGRectMake([navBar bounds].size.width/2 - 55, 0, [appIcon bounds].size.width, [navBar bounds].size.height)];
     
-    UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(28, 10, 100, 30)];
-    [title setTextAlignment:NSTextAlignmentLeft];
+    UILabel *title = [[UILabel alloc] initWithFrame:[navBar bounds]];
+    [title setTextAlignment:NSTextAlignmentCenter];
     [title setTextColor:[UIColor whiteColor]];
     [title setFont:[UIFont boldSystemFontOfSize:20.0]];
     [title setText:@"DANJI"];

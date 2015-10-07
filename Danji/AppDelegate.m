@@ -7,10 +7,12 @@
 //
 
 #import "AppDelegate.h"
+#import "DJLoginViewController.h"
 #import "DJHomeViewController.h"
 #import "DJSearchViewController.h"
 #import "DJWriteViewController.h"
 #import "DJMypageViewController.h"
+#import <Parse/Parse.h>
 
 
 @implementation AppDelegate
@@ -21,9 +23,16 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [Parse enableLocalDatastore];
+    [Parse setApplicationId:@"9bsJRraxnOoVjbhqsCjA35Gb4OMc29jzwcuZCKRq"
+                  clientKey:@"A3ydVgCH2c8QKwLUEmUS36fMprzVingTwDuMVyGb"];
+    [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+    
     UIWindow *window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     [window makeKeyAndVisible];
     [self setWindow:window];
+    
+    //[self setupLoginViewController];
     
     [self setupTabBarControllerWithViewCortollers:[self setupViewControllers]];
     
@@ -59,6 +68,12 @@
 
 #pragma mark - setup
 
+- (void)setupLoginViewController
+{
+    DJLoginViewController *viewController = [[DJLoginViewController alloc] initWithNibName:nil bundle:nil];
+    
+    [[self window] setRootViewController:viewController];
+}
 
 - (void)setupTabBarControllerWithViewCortollers:(NSArray *)viewControllers
 {
