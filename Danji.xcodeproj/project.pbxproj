@@ -15,13 +15,27 @@
 		9E4E431F1BC11A40006FB05E /* DanjiTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E4E431E1BC11A40006FB05E /* DanjiTests.m */; };
 		9E4E43331BC1763C006FB05E /* DJHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E4E43321BC1763C006FB05E /* DJHomeViewController.m */; };
 		9E4E43361BC1764B006FB05E /* DJSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E4E43351BC1764B006FB05E /* DJSearchViewController.m */; };
-		9E4E43391BC1765C006FB05E /* DJWriteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E4E43381BC1765C006FB05E /* DJWriteViewController.m */; };
-		9E4E433C1BC1766F006FB05E /* DJMypageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E4E433B1BC1766F006FB05E /* DJMypageViewController.m */; };
 		9E4E43401BC2589B006FB05E /* home.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E4E433D1BC2589B006FB05E /* home.png */; };
 		9E4E43411BC2589B006FB05E /* mypage.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E4E433E1BC2589B006FB05E /* mypage.png */; };
 		9E4E43421BC2589B006FB05E /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E4E433F1BC2589B006FB05E /* search.png */; };
 		9E4E43441BC258F4006FB05E /* write.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E4E43431BC258F4006FB05E /* write.png */; };
 		9E4E43481BC2794C006FB05E /* danji.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E4E43461BC2794B006FB05E /* danji.png */; };
+		9E96149C1BCB9C0900D14B1E /* DJWriteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E96149B1BCB9C0900D14B1E /* DJWriteViewController.m */; };
+		9E96149F1BCBA9CD00D14B1E /* DJSignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E96149E1BCBA9CD00D14B1E /* DJSignupViewController.m */; };
+		9EE2B26C1BC5063F003B929E /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EE2B26B1BC5063F003B929E /* Bolts.framework */; };
+		9EE2B26E1BC5064F003B929E /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EE2B26D1BC5064F003B929E /* Parse.framework */; };
+		9EE2B2701BC50754003B929E /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EE2B26F1BC50754003B929E /* AudioToolbox.framework */; };
+		9EE2B2721BC50770003B929E /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EE2B2711BC50770003B929E /* CFNetwork.framework */; };
+		9EE2B2741BC50781003B929E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EE2B2731BC50781003B929E /* CoreGraphics.framework */; };
+		9EE2B2761BC50789003B929E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EE2B2751BC50789003B929E /* CoreLocation.framework */; };
+		9EE2B2781BC50796003B929E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EE2B2771BC50796003B929E /* QuartzCore.framework */; };
+		9EE2B27A1BC507A2003B929E /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EE2B2791BC507A2003B929E /* Security.framework */; };
+		9EE2B27C1BC507AD003B929E /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EE2B27B1BC507AD003B929E /* StoreKit.framework */; };
+		9EE2B27E1BC507BC003B929E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EE2B27D1BC507BC003B929E /* SystemConfiguration.framework */; };
+		9EE2B2801BC507CC003B929E /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EE2B27F1BC507CC003B929E /* libz.dylib */; };
+		9EE2B2821BC50817003B929E /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EE2B2811BC50817003B929E /* libsqlite3.dylib */; };
+		9EE2B2871BC51E73003B929E /* launch.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EE2B2861BC51E73003B929E /* launch.png */; };
+		9EE2B28C1BCB4CD4003B929E /* DJLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EE2B28B1BCB4CD4003B929E /* DJLoginViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,15 +64,30 @@
 		9E4E43321BC1763C006FB05E /* DJHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJHomeViewController.m; sourceTree = "<group>"; };
 		9E4E43341BC1764B006FB05E /* DJSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DJSearchViewController.h; sourceTree = "<group>"; };
 		9E4E43351BC1764B006FB05E /* DJSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJSearchViewController.m; sourceTree = "<group>"; };
-		9E4E43371BC1765C006FB05E /* DJWriteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DJWriteViewController.h; sourceTree = "<group>"; };
-		9E4E43381BC1765C006FB05E /* DJWriteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJWriteViewController.m; sourceTree = "<group>"; };
-		9E4E433A1BC1766F006FB05E /* DJMypageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DJMypageViewController.h; sourceTree = "<group>"; };
-		9E4E433B1BC1766F006FB05E /* DJMypageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJMypageViewController.m; sourceTree = "<group>"; };
 		9E4E433D1BC2589B006FB05E /* home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home.png; sourceTree = "<group>"; };
 		9E4E433E1BC2589B006FB05E /* mypage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mypage.png; sourceTree = "<group>"; };
 		9E4E433F1BC2589B006FB05E /* search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search.png; sourceTree = "<group>"; };
 		9E4E43431BC258F4006FB05E /* write.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = write.png; sourceTree = "<group>"; };
 		9E4E43461BC2794B006FB05E /* danji.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = danji.png; sourceTree = "<group>"; };
+		9E4E434A1BC3AF0C006FB05E /* DJLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DJLoginViewController.h; sourceTree = "<group>"; };
+		9E96149A1BCB9C0900D14B1E /* DJWriteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DJWriteViewController.h; sourceTree = "<group>"; };
+		9E96149B1BCB9C0900D14B1E /* DJWriteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJWriteViewController.m; sourceTree = "<group>"; };
+		9E96149D1BCBA9CD00D14B1E /* DJSignupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DJSignupViewController.h; sourceTree = "<group>"; };
+		9E96149E1BCBA9CD00D14B1E /* DJSignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJSignupViewController.m; sourceTree = "<group>"; };
+		9EE2B26B1BC5063F003B929E /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
+		9EE2B26D1BC5064F003B929E /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		9EE2B26F1BC50754003B929E /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		9EE2B2711BC50770003B929E /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		9EE2B2731BC50781003B929E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		9EE2B2751BC50789003B929E /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		9EE2B2771BC50796003B929E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		9EE2B2791BC507A2003B929E /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		9EE2B27B1BC507AD003B929E /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		9EE2B27D1BC507BC003B929E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		9EE2B27F1BC507CC003B929E /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		9EE2B2811BC50817003B929E /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		9EE2B2861BC51E73003B929E /* launch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch.png; sourceTree = "<group>"; };
+		9EE2B28B1BCB4CD4003B929E /* DJLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJLoginViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +95,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9EE2B2821BC50817003B929E /* libsqlite3.dylib in Frameworks */,
+				9EE2B2801BC507CC003B929E /* libz.dylib in Frameworks */,
+				9EE2B27E1BC507BC003B929E /* SystemConfiguration.framework in Frameworks */,
+				9EE2B27C1BC507AD003B929E /* StoreKit.framework in Frameworks */,
+				9EE2B27A1BC507A2003B929E /* Security.framework in Frameworks */,
+				9EE2B2781BC50796003B929E /* QuartzCore.framework in Frameworks */,
+				9EE2B2761BC50789003B929E /* CoreLocation.framework in Frameworks */,
+				9EE2B2741BC50781003B929E /* CoreGraphics.framework in Frameworks */,
+				9EE2B2721BC50770003B929E /* CFNetwork.framework in Frameworks */,
+				9EE2B2701BC50754003B929E /* AudioToolbox.framework in Frameworks */,
+				9EE2B26E1BC5064F003B929E /* Parse.framework in Frameworks */,
+				9EE2B26C1BC5063F003B929E /* Bolts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,6 +123,7 @@
 		9E4E42F61BC11A40006FB05E = {
 			isa = PBXGroup;
 			children = (
+				9EE2B2831BC509FE003B929E /* Frameworks */,
 				9E4E43011BC11A40006FB05E /* Danji */,
 				9E4E431B1BC11A40006FB05E /* DanjiTests */,
 				9E4E43001BC11A40006FB05E /* Products */,
@@ -150,14 +192,9 @@
 			children = (
 				9E4E43061BC11A40006FB05E /* AppDelegate.h */,
 				9E4E43071BC11A40006FB05E /* AppDelegate.m */,
-				9E4E43311BC1763C006FB05E /* DJHomeViewController.h */,
-				9E4E43321BC1763C006FB05E /* DJHomeViewController.m */,
-				9E4E43341BC1764B006FB05E /* DJSearchViewController.h */,
-				9E4E43351BC1764B006FB05E /* DJSearchViewController.m */,
-				9E4E43371BC1765C006FB05E /* DJWriteViewController.h */,
-				9E4E43381BC1765C006FB05E /* DJWriteViewController.m */,
-				9E4E433A1BC1766F006FB05E /* DJMypageViewController.h */,
-				9E4E433B1BC1766F006FB05E /* DJMypageViewController.m */,
+				9EDDD6C11BC3AF78002DB4B2 /* Login */,
+				9EDDD6C21BC3AFBC002DB4B2 /* Main */,
+				9E9614991BCB9BCD00D14B1E /* Write */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -172,6 +209,7 @@
 		9E4E43451BC25920006FB05E /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				9EE2B2861BC51E73003B929E /* launch.png */,
 				9E4E43461BC2794B006FB05E /* danji.png */,
 				9E4E43431BC258F4006FB05E /* write.png */,
 				9E4E433D1BC2589B006FB05E /* home.png */,
@@ -179,6 +217,56 @@
 				9E4E433F1BC2589B006FB05E /* search.png */,
 			);
 			name = Images;
+			sourceTree = "<group>";
+		};
+		9E9614991BCB9BCD00D14B1E /* Write */ = {
+			isa = PBXGroup;
+			children = (
+				9E96149A1BCB9C0900D14B1E /* DJWriteViewController.h */,
+				9E96149B1BCB9C0900D14B1E /* DJWriteViewController.m */,
+			);
+			name = Write;
+			sourceTree = "<group>";
+		};
+		9EDDD6C11BC3AF78002DB4B2 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				9E4E434A1BC3AF0C006FB05E /* DJLoginViewController.h */,
+				9EE2B28B1BCB4CD4003B929E /* DJLoginViewController.m */,
+				9E96149D1BCBA9CD00D14B1E /* DJSignupViewController.h */,
+				9E96149E1BCBA9CD00D14B1E /* DJSignupViewController.m */,
+			);
+			name = Login;
+			sourceTree = "<group>";
+		};
+		9EDDD6C21BC3AFBC002DB4B2 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				9E4E43311BC1763C006FB05E /* DJHomeViewController.h */,
+				9E4E43321BC1763C006FB05E /* DJHomeViewController.m */,
+				9E4E43341BC1764B006FB05E /* DJSearchViewController.h */,
+				9E4E43351BC1764B006FB05E /* DJSearchViewController.m */,
+			);
+			name = Main;
+			sourceTree = "<group>";
+		};
+		9EE2B2831BC509FE003B929E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9EE2B2811BC50817003B929E /* libsqlite3.dylib */,
+				9EE2B27F1BC507CC003B929E /* libz.dylib */,
+				9EE2B27D1BC507BC003B929E /* SystemConfiguration.framework */,
+				9EE2B27B1BC507AD003B929E /* StoreKit.framework */,
+				9EE2B2791BC507A2003B929E /* Security.framework */,
+				9EE2B2771BC50796003B929E /* QuartzCore.framework */,
+				9EE2B2751BC50789003B929E /* CoreLocation.framework */,
+				9EE2B2731BC50781003B929E /* CoreGraphics.framework */,
+				9EE2B2711BC50770003B929E /* CFNetwork.framework */,
+				9EE2B26F1BC50754003B929E /* AudioToolbox.framework */,
+				9EE2B26D1BC5064F003B929E /* Parse.framework */,
+				9EE2B26B1BC5063F003B929E /* Bolts.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -267,6 +355,7 @@
 				9E4E43421BC2589B006FB05E /* search.png in Resources */,
 				9E4E430E1BC11A40006FB05E /* Main.storyboard in Resources */,
 				9E4E43131BC11A40006FB05E /* LaunchScreen.xib in Resources */,
+				9EE2B2871BC51E73003B929E /* launch.png in Resources */,
 				9E4E43411BC2589B006FB05E /* mypage.png in Resources */,
 				9E4E43101BC11A40006FB05E /* Images.xcassets in Resources */,
 			);
@@ -286,9 +375,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9E4E433C1BC1766F006FB05E /* DJMypageViewController.m in Sources */,
 				9E4E43361BC1764B006FB05E /* DJSearchViewController.m in Sources */,
-				9E4E43391BC1765C006FB05E /* DJWriteViewController.m in Sources */,
+				9EE2B28C1BCB4CD4003B929E /* DJLoginViewController.m in Sources */,
+				9E96149C1BCB9C0900D14B1E /* DJWriteViewController.m in Sources */,
+				9E96149F1BCBA9CD00D14B1E /* DJSignupViewController.m in Sources */,
 				9E4E43081BC11A40006FB05E /* AppDelegate.m in Sources */,
 				9E4E43051BC11A40006FB05E /* main.m in Sources */,
 				9E4E43331BC1763C006FB05E /* DJHomeViewController.m in Sources */,
@@ -419,6 +509,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = Danji/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -429,6 +523,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = Danji/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -488,6 +586,7 @@
 				9E4E43241BC11A40006FB05E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9E4E43251BC11A40006FB05E /* Build configuration list for PBXNativeTarget "DanjiTests" */ = {
 			isa = XCConfigurationList;
@@ -496,6 +595,7 @@
 				9E4E43271BC11A40006FB05E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
