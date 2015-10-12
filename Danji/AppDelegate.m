@@ -7,9 +7,6 @@
 //
 
 #import "AppDelegate.h"
-#import "DJLoginViewController.h"
-#import "DJHomeViewController.h"
-#import "DJSearchViewController.h"
 #import <Parse/Parse.h>
 
 

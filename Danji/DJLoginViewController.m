@@ -8,11 +8,15 @@
 
 #import "DJLoginViewController.h"
 
+
 @implementation DJLoginViewController
 {
     __weak IBOutlet UITextField *mUserName;
     __weak IBOutlet UITextField *mPassword;
 }
+
+#pragma mark - view
+
 
 - (void)viewDidLoad
 {
@@ -23,6 +27,9 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+    
+    mUserName = nil;
+    mPassword = nil;
 }
 
 
@@ -38,5 +45,18 @@
 
 
 #pragma mark - action
+
+
+- (IBAction)signupButtonTapped:(id)sender
+{
+    //signup
+}
+
+
+- (IBAction)loginButtonTapped:(id)sender
+{
+    //login
+}
+
 
 @end

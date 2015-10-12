@@ -10,6 +10,9 @@
 
 
 @implementation DJSearchViewController
+{
+    UISearchBar *mSearchBar;
+}
 
 
 #pragma mark - view
@@ -19,6 +22,7 @@
 {
     [super viewDidLoad];
     
+    [self setupSearchBar];
 }
 
 
@@ -28,15 +32,23 @@
 }
 
 
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
+ #pragma mark - setup
+
+
+ - (void)setupSearchBar
+ {
+     UINavigationBar *navBar = [[self navigationController] navigationBar];
+     CGFloat width = [navBar bounds].size.width;
+     CGFloat height = [navBar bounds].size.height;
+
+     mSearchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(10, 0, width - 20, height)];
+     [mSearchBar setTranslucent:YES];
+     [mSearchBar setBarTintColor:[UIColor colorWithRed:0.85 green:0.96 blue:0.9 alpha:1]];
+
+     [navBar addSubview:mSearchBar];
  }
- */
+
+
 
 @end
 
@@ -45,23 +57,5 @@
 
 
 
-/*
-#pragma mark - private
-
-
-- (void)setupNavigationBar
-{
-    UINavigationBar *navBar = [[self navigationController] navigationBar];
-    CGFloat width = [navBar bounds].size.width;
-    CGFloat height = [navBar bounds].size.height;
-    
-    UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(10, 0, width - 20, height)];
-    [searchBar setTranslucent:YES];
-    [searchBar setBarTintColor:[UIColor colorWithRed:0.85 green:0.96 blue:0.9 alpha:1]];
-    
-    [navBar addSubview:searchBar];
-    
-}
-*/
 
 

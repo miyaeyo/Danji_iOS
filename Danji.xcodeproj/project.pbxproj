@@ -20,6 +20,8 @@
 		9E4E43421BC2589B006FB05E /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E4E433F1BC2589B006FB05E /* search.png */; };
 		9E4E43441BC258F4006FB05E /* write.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E4E43431BC258F4006FB05E /* write.png */; };
 		9E4E43481BC2794C006FB05E /* danji.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E4E43461BC2794B006FB05E /* danji.png */; };
+		9E96149C1BCB9C0900D14B1E /* DJWriteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E96149B1BCB9C0900D14B1E /* DJWriteViewController.m */; };
+		9E96149F1BCBA9CD00D14B1E /* DJSignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E96149E1BCBA9CD00D14B1E /* DJSignupViewController.m */; };
 		9EE2B26C1BC5063F003B929E /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EE2B26B1BC5063F003B929E /* Bolts.framework */; };
 		9EE2B26E1BC5064F003B929E /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EE2B26D1BC5064F003B929E /* Parse.framework */; };
 		9EE2B2701BC50754003B929E /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EE2B26F1BC50754003B929E /* AudioToolbox.framework */; };
@@ -68,6 +70,10 @@
 		9E4E43431BC258F4006FB05E /* write.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = write.png; sourceTree = "<group>"; };
 		9E4E43461BC2794B006FB05E /* danji.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = danji.png; sourceTree = "<group>"; };
 		9E4E434A1BC3AF0C006FB05E /* DJLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DJLoginViewController.h; sourceTree = "<group>"; };
+		9E96149A1BCB9C0900D14B1E /* DJWriteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DJWriteViewController.h; sourceTree = "<group>"; };
+		9E96149B1BCB9C0900D14B1E /* DJWriteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJWriteViewController.m; sourceTree = "<group>"; };
+		9E96149D1BCBA9CD00D14B1E /* DJSignupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DJSignupViewController.h; sourceTree = "<group>"; };
+		9E96149E1BCBA9CD00D14B1E /* DJSignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJSignupViewController.m; sourceTree = "<group>"; };
 		9EE2B26B1BC5063F003B929E /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		9EE2B26D1BC5064F003B929E /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		9EE2B26F1BC50754003B929E /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -188,6 +194,7 @@
 				9E4E43071BC11A40006FB05E /* AppDelegate.m */,
 				9EDDD6C11BC3AF78002DB4B2 /* Login */,
 				9EDDD6C21BC3AFBC002DB4B2 /* Main */,
+				9E9614991BCB9BCD00D14B1E /* Write */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -212,11 +219,22 @@
 			name = Images;
 			sourceTree = "<group>";
 		};
+		9E9614991BCB9BCD00D14B1E /* Write */ = {
+			isa = PBXGroup;
+			children = (
+				9E96149A1BCB9C0900D14B1E /* DJWriteViewController.h */,
+				9E96149B1BCB9C0900D14B1E /* DJWriteViewController.m */,
+			);
+			name = Write;
+			sourceTree = "<group>";
+		};
 		9EDDD6C11BC3AF78002DB4B2 /* Login */ = {
 			isa = PBXGroup;
 			children = (
 				9E4E434A1BC3AF0C006FB05E /* DJLoginViewController.h */,
 				9EE2B28B1BCB4CD4003B929E /* DJLoginViewController.m */,
+				9E96149D1BCBA9CD00D14B1E /* DJSignupViewController.h */,
+				9E96149E1BCBA9CD00D14B1E /* DJSignupViewController.m */,
 			);
 			name = Login;
 			sourceTree = "<group>";
@@ -359,6 +377,8 @@
 			files = (
 				9E4E43361BC1764B006FB05E /* DJSearchViewController.m in Sources */,
 				9EE2B28C1BCB4CD4003B929E /* DJLoginViewController.m in Sources */,
+				9E96149C1BCB9C0900D14B1E /* DJWriteViewController.m in Sources */,
+				9E96149F1BCBA9CD00D14B1E /* DJSignupViewController.m in Sources */,
 				9E4E43081BC11A40006FB05E /* AppDelegate.m in Sources */,
 				9E4E43051BC11A40006FB05E /* main.m in Sources */,
 				9E4E43331BC1763C006FB05E /* DJHomeViewController.m in Sources */,
