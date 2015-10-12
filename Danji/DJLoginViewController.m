@@ -9,31 +9,34 @@
 #import "DJLoginViewController.h"
 
 @implementation DJLoginViewController
+{
+    __weak IBOutlet UITextField *mUserName;
+    __weak IBOutlet UITextField *mPassword;
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    [[self view] setBackgroundColor:[UIColor colorWithRed:0.68 green:0.8 blue:0.78 alpha:1]];
-    
-    UILabel *idLabel = [[UILabel alloc] initWithFrame:[[self view] bounds]];
-    [idLabel setText:@"USER NAME"];
-    [idLabel setTextColor:[UIColor colorWithRed:0.49 green:0.36 blue:0.35 alpha:1]];
 }
+
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    if ([PFUser currentUser])
+    {
+        [self performSegueWithIdentifier:@"startDanji" sender:self];
+    }
 }
-*/
+
+
+#pragma mark - action
 
 @end

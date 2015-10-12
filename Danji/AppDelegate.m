@@ -10,8 +10,6 @@
 #import "DJLoginViewController.h"
 #import "DJHomeViewController.h"
 #import "DJSearchViewController.h"
-#import "DJWriteViewController.h"
-#import "DJMypageViewController.h"
 #import <Parse/Parse.h>
 
 
@@ -28,16 +26,14 @@
                   clientKey:@"A3ydVgCH2c8QKwLUEmUS36fMprzVingTwDuMVyGb"];
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     
+    
+    return YES;
+    /*
     UIWindow *window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     [window makeKeyAndVisible];
     [self setWindow:window];
-    
-    //[self setupLoginViewController];
-    
     [self setupTabBarControllerWithViewCortollers:[self setupViewControllers]];
-    
-
-    return YES;
+    */
 }
 
 
@@ -65,7 +61,9 @@
 {
 }
 
+@end
 
+/*
 #pragma mark - setup
 
 - (void)setupLoginViewController
@@ -171,7 +169,7 @@
                                                                               green:0.8
                                                                                blue:0.78 alpha:1]];
     return navigationViewController;
-}
+}*/
 
 
-@end
+
