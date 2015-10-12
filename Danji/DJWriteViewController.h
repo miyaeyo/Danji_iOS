@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 
 
-@interface DJWriteViewController : UIViewController
+@interface DJWriteViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate>
 
 @end
