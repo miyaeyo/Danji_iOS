@@ -354,6 +354,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="laB-4x-cs5" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="home" image="home.png" id="f8g-FU-dLD"/>
                     <toolbarItems/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="OBu-Le-oAI">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -436,8 +437,8 @@
         <image name="write.png" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="50j-24-Auo"/>
-        <segue reference="B94-P4-QZE"/>
+        <segue reference="iRr-gH-SCw"/>
+        <segue reference="URE-jQ-NEC"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>
