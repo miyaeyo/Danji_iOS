@@ -14,7 +14,7 @@
     __weak IBOutlet UITextField *mInputFormPicker;
     __weak IBOutlet UITextField *mCategoryPicker;
     NSArray *mInputForms;
-    NSArray *mCategorys;
+    NSArray *mCategories;
 }
 
 
@@ -22,14 +22,7 @@
 {
     [super viewDidLoad];
     
-    mInputForms = [[NSArray alloc] initWithObjects:@"dialog", @"paragraph", nil];
-    
-    
-    UIPickerView *inputFormPicker = [[UIPickerView alloc] init];
-    [inputFormPicker setDataSource:self];
-    [inputFormPicker setDelegate:self];
-    [inputFormPicker setShowsSelectionIndicator:YES];
-    [mInputFormPicker setInputView:inputFormPicker];
+    [self setupPickerView];
 }
 
 
@@ -68,23 +61,62 @@
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-    return [mInputForms count];
+    if (component == 0)
+    {
+        return [mInputForms count];
+    }
+    else
+    {
+        return [mCategories count];
+    }
 }
 
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    return [mInputForms objectAtIndex:row];
+    if (component == 0)
+    {
+        return [mInputForms objectAtIndex:row];
+    }
+    else
+    {
+        return [mCategories objectAtIndex:row];
+    }
 }
 
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    [mInputFormPicker setText:[mInputForms objectAtIndex:row]];
+    if (component == 0)
+    {
+        [mInputFormPicker setText:[mInputForms objectAtIndex:row]];
+    }
+    else
+    {
+        [mCategoryPicker setText:[mCategories objectAtIndex:row]];
+    }
 }
 
 
+#pragma mark - setup
 
+
+- (void)setupPickerView
+{
+    mInputForms = [[NSArray alloc] initWithObjects:@"dialog", @"paragraph", nil];
+    mCategories = [[NSArray alloc] initWithObjects:@"movie", @"drama", @"book", @"poem", @"music", @"cartoon", nil];
+    
+    
+    UIPickerView *pickerView= [[UIPickerView alloc] init];
+    [pickerView setDataSource:self];
+    [pickerView setDelegate:self];
+    [pickerView setShowsSelectionIndicator:YES];
+    [pickerView setBackgroundColor:[UIColor colorWithRed:0.74 green:0.82 blue:0.8 alpha:1]];
+    [pickerView setTintColor:[UIColor whiteColor]];
+    
+    [mInputFormPicker setInputView:pickerView];
+    [mCategoryPicker setInputView:pickerView];
+}
 
 
 @end
