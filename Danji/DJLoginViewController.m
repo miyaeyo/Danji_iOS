@@ -47,15 +47,38 @@
 #pragma mark - action
 
 
-- (IBAction)signupButtonTapped:(id)sender
-{
-    //signup
-}
-
-
 - (IBAction)loginButtonTapped:(id)sender
 {
-    //login
+    if ([[mUserName text] length] == 0 || [[mPassword text] length] == 0)
+    {
+        [[[UIAlertView alloc] initWithTitle:@"Missing information"
+                                    message:@"Make sure you fill all of the information"
+                                   delegate:nil
+                          cancelButtonTitle:@"OK"
+                          otherButtonTitles:nil, nil] show];
+    }
+    else
+    {
+        [PFUser logInWithUsernameInBackground:[mUserName text]
+                                     password:[mPassword text]
+                                        block:^(PFUser *user, NSError *error)
+         {
+             if (user)
+             {
+                 [self performSegueWithIdentifier:@"startDanji" sender:self];
+             }
+             else
+             {
+                 [[[UIAlertView alloc] initWithTitle:@"fail to login"
+                                             message:@"Check your input or signup"
+                                            delegate:nil
+                                   cancelButtonTitle:@"OK"
+                                   otherButtonTitles:nil, nil] show];
+             }
+         }];
+
+    }
+    
 }
 
 

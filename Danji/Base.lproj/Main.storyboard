@@ -59,7 +59,6 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="signupButtonTapped:" destination="STo-Eb-bCJ" eventType="touchUpInside" id="fEi-s5-ovY"/>
                                     <segue destination="IVn-U2-1rf" kind="presentation" modalTransitionStyle="crossDissolve" id="CYV-oX-5fA"/>
                                 </connections>
                             </button>
@@ -73,7 +72,6 @@
                                 </state>
                                 <connections>
                                     <action selector="loginButtonTapped:" destination="STo-Eb-bCJ" eventType="touchUpInside" id="Szd-ix-WmU"/>
-                                    <segue destination="L0b-fm-6EF" kind="presentation" identifier="startDanji" modalTransitionStyle="crossDissolve" id="50j-24-Auo"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -84,6 +82,7 @@
                     <connections>
                         <outlet property="mPassword" destination="laF-Rq-t24" id="0eW-BC-Tjr"/>
                         <outlet property="mUserName" destination="qCA-Cz-237" id="rKV-6n-5Yy"/>
+                        <segue destination="L0b-fm-6EF" kind="presentation" identifier="startDanji" modalTransitionStyle="crossDissolve" id="n1A-cF-LnQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eVD-WD-ga0" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -130,13 +129,13 @@
                                 <rect key="frame" x="15" y="247" width="289" height="30"/>
                                 <color key="backgroundColor" red="0.99215686270000003" green="0.94901960780000005" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="confirm password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Lku-H6-Ldz">
                                 <rect key="frame" x="15" y="314" width="289" height="30"/>
                                 <color key="backgroundColor" red="0.99215686270000003" green="0.94901960780000005" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hfD-Ri-cfh">
                                 <rect key="frame" x="93" y="385" width="133" height="36"/>
@@ -148,7 +147,6 @@
                                 </state>
                                 <connections>
                                     <action selector="registerButtonTapped:" destination="IVn-U2-1rf" eventType="touchUpInside" id="kjr-Ca-hO0"/>
-                                    <segue destination="STo-Eb-bCJ" kind="presentation" modalTransitionStyle="crossDissolve" id="B94-P4-QZE"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t7e-mG-9Ko">
@@ -176,6 +174,7 @@
                         <outlet property="mConfirmPassword" destination="Lku-H6-Ldz" id="AXI-dh-Jlv"/>
                         <outlet property="mPassword" destination="lMQ-FS-bze" id="Xmj-Wu-Isi"/>
                         <outlet property="mUserName" destination="nbw-Ot-eP6" id="UtR-69-tYW"/>
+                        <segue destination="STo-Eb-bCJ" kind="presentation" identifier="signupCompleted" id="Nby-nJ-dF2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pxb-6o-XEa" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -244,12 +243,19 @@
                     </view>
                     <navigationItem key="navigationItem" id="0p7-zh-c19">
                         <nil key="title"/>
-                        <barButtonItem key="leftBarButtonItem" title="Logout" id="vQp-vT-D0U">
-                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            <connections>
-                                <action selector="logoutButtonTapped:" destination="1Hq-UV-Dzc" id="Rk1-CS-J5B"/>
-                                <segue destination="STo-Eb-bCJ" kind="presentation" modalTransitionStyle="crossDissolve" id="URE-jQ-NEC"/>
-                            </connections>
+                        <barButtonItem key="leftBarButtonItem" id="kgc-uF-Y9N">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="eBt-CZ-mNi">
+                                <rect key="frame" x="-23" y="-15" width="71" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <state key="normal" title="Logout">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="logoutButtonTapped:" destination="1Hq-UV-Dzc" eventType="touchUpInside" id="F8P-PP-fXL"/>
+                                    <segue destination="STo-Eb-bCJ" kind="presentation" modalTransitionStyle="crossDissolve" id="edf-hM-xlQ"/>
+                                </connections>
+                            </button>
                         </barButtonItem>
                         <view key="titleView" contentMode="scaleToFill" id="NAo-nl-Yj5">
                             <rect key="frame" x="115" y="4" width="91" height="37"/>
@@ -292,14 +298,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="input form" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ic7-M1-JJm">
-                                <rect key="frame" x="-5" y="64" width="160" height="35"/>
+                                <rect key="frame" x="-5" y="64" width="161" height="35"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="textColor" red="0.47058823529999999" green="0.36078431370000003" blue="0.34901960780000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="category" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dSk-jS-bTB">
-                                <rect key="frame" x="157" y="64" width="163" height="35"/>
+                                <rect key="frame" x="157" y="64" width="161" height="35"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="textColor" red="0.47058823529999999" green="0.36078431370000003" blue="0.34901960780000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
@@ -457,8 +463,8 @@
         <image name="write.png" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="iRr-gH-SCw"/>
-        <segue reference="B94-P4-QZE"/>
+        <segue reference="n1A-cF-LnQ"/>
+        <segue reference="Nby-nJ-dF2"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>

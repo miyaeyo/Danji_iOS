@@ -34,8 +34,9 @@
 
 - (IBAction)logoutButtonTapped:(id)sender
 {
-    //logout
+    [PFUser logOut];
 }
+
 
 
 @end

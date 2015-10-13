@@ -37,7 +37,53 @@
 
 - (IBAction)registerButtonTapped:(id)sender
 {
-    //register
+    if ([[mUserName text] length] != 0 && [[mPassword text] length] != 0 && [[mPassword text] isEqualToString:[mConfirmPassword text]])
+    {
+        PFUser *user = [PFUser user];
+        [user setUsername:[mUserName text]];
+        [user setPassword:[mPassword text]];
+        
+        [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
+        {
+            if (!error)
+            {
+                [[[UIAlertView alloc] initWithTitle:@"success to signup"
+                                            message:@"welcome Danji, login and enjoy Danji"
+                                           delegate:nil
+                                  cancelButtonTitle:@"OK"
+                                  otherButtonTitles:nil, nil] show];
+                [PFUser logOut];
+                [self performSegueWithIdentifier:@"signupCompleted" sender:self];
+            }
+            else
+            {
+                [[[UIAlertView alloc] initWithTitle:@"fail to signup"
+                                            message:@"User name already exists"
+                                           delegate:nil
+                                  cancelButtonTitle:@"OK"
+                                  otherButtonTitles:nil, nil] show];
+
+            }
+            
+        }];
+    }
+    else if ([[mUserName text] length] == 0 || [[mPassword text] length] == 0)
+    {
+        [[[UIAlertView alloc] initWithTitle:@"Missing information"
+                                    message:@"Make sure you fill all of the information"
+                                   delegate:nil
+                          cancelButtonTitle:@"OK"
+                          otherButtonTitles:nil, nil] show];
+    }
+    else
+    {
+        [[[UIAlertView alloc] initWithTitle:@"Not match password"
+                                    message:@"Check your password"
+                                   delegate:nil
+                          cancelButtonTitle:@"OK"
+                          otherButtonTitles:nil, nil] show];
+
+    }
 }
 
 
