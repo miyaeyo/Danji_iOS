@@ -13,8 +13,8 @@
 {
     __weak IBOutlet UITextField *mInputFormPicker;
     __weak IBOutlet UITextField *mCategoryPicker;
-    NSArray *mInputForms;
-    NSArray *mCategories;
+    NSArray                     *mInputForms;
+    NSArray                     *mCategories;
 }
 
 

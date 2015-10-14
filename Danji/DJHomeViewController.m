@@ -7,6 +7,7 @@
 //
 
 #import "DJHomeViewController.h"
+#import "DJHomeViewCell.h"
 
 
 @implementation DJHomeViewController
@@ -20,6 +21,9 @@
     [super viewDidLoad];
     
     [[[self tabBarController] tabBar] setTintColor:[UIColor whiteColor]];
+    
+    [[self tableView] setDelegate:self];
+    [[self tableView] setDataSource:self];
 }
 
 
@@ -31,10 +35,25 @@
 
 #pragma mark - action
 
-
 - (IBAction)logoutButtonTapped:(id)sender
 {
     [PFUser logOut];
+}
+
+
+
+#pragma mark - tableView
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 10;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    DJHomeViewCell *cell = [[self tableView] dequeueReusableCellWithIdentifier:@"contentsCell"];
+    
+    return cell;
 }
 
 

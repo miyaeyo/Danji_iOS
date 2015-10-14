@@ -10,6 +10,6 @@
 #import <Parse/Parse.h>
 
 
-@interface DJHomeViewController : UIViewController
+@interface DJHomeViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate>
 
 @end

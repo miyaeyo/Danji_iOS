@@ -29,6 +29,10 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+    
+    mUserName = nil;
+    mPassword = nil;
+    mConfirmPassword = nil;
 }
 
 
@@ -52,13 +56,14 @@
                                            delegate:nil
                                   cancelButtonTitle:@"OK"
                                   otherButtonTitles:nil, nil] show];
+                
                 [PFUser logOut];
                 [self performSegueWithIdentifier:@"signupCompleted" sender:self];
             }
             else
             {
                 [[[UIAlertView alloc] initWithTitle:@"fail to signup"
-                                            message:@"User name already exists"
+                                            message:@"Username already taken"
                                            delegate:nil
                                   cancelButtonTitle:@"OK"
                                   otherButtonTitles:nil, nil] show];
