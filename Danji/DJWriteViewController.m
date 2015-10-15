@@ -32,6 +32,8 @@
     
     mInputFormPicker = nil;
     mCategoryPicker = nil;
+    mInputForms = nil;
+    mCategories = nil;
 }
 
 
@@ -95,6 +97,12 @@
     {
         [mCategoryPicker setText:[mCategories objectAtIndex:row]];
     }
+    
+    if (![[mInputFormPicker text] isEqualToString:@""] && ![[mCategoryPicker text] isEqualToString:@""])
+    {
+        [[self view] endEditing:YES];
+    }
+    
 }
 
 
@@ -106,13 +114,11 @@
     mInputForms = [[NSArray alloc] initWithObjects:@"dialog", @"paragraph", nil];
     mCategories = [[NSArray alloc] initWithObjects:@"movie", @"drama", @"book", @"poem", @"music", @"cartoon", nil];
     
-    
-    UIPickerView *pickerView= [[UIPickerView alloc] init];
+    UIPickerView *pickerView = [[UIPickerView alloc] init];
     [pickerView setDataSource:self];
     [pickerView setDelegate:self];
     [pickerView setShowsSelectionIndicator:YES];
     [pickerView setBackgroundColor:[UIColor colorWithRed:0.74 green:0.82 blue:0.8 alpha:1]];
-    [pickerView setTintColor:[UIColor whiteColor]];
     
     [mInputFormPicker setInputView:pickerView];
     [mCategoryPicker setInputView:pickerView];

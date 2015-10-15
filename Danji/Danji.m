@@ -11,6 +11,15 @@
 
 @implementation Danji
 
+@dynamic UserName;
+@dynamic Category;
+@dynamic Title;
+@dynamic Creator;
+@dynamic ContentsImage;
+@dynamic ContentsBody;
+@dynamic LikeCount;
+
+
 + (void)load
 {
     [self registerSubclass];
@@ -22,3 +31,15 @@
 }
 
 @end
+
+
+/*
+ @dynamic userName;
+ @dynamic category;
+ @dynamic title;
+ @dynamic creator;
+ @dynamic image;
+ @dynamic body;
+ @dynamic likeCount;
+ */
+

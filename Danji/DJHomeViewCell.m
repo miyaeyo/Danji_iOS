@@ -10,17 +10,16 @@
 
 @implementation DJHomeViewCell
 {
-    __weak IBOutlet UIImageView *mContentsImage;
-    __weak IBOutlet UILabel *mContentsBody;
-    __weak IBOutlet UILabel *mlikeCount;
-    __weak IBOutlet UILabel *mContentsReference;
+    __weak IBOutlet UIImageView *mImage;
+    __weak IBOutlet UILabel *mBody;
+    __weak IBOutlet UILabel *mLikeCount;
+    __weak IBOutlet UILabel *mReference;
     
     __weak IBOutlet UIButton *mLikeButton;
 }
 
 
 #pragma mark - subviews
-
 
 - (void)layoutSubviews
 {
@@ -32,10 +31,23 @@
 
 #pragma mark - public
 
-
 - (void)inputContents:(DJContents *)contents
 {
+    [mImage setImage:[contents image]];
+    [mBody setText:[contents body]];
+    [mLikeCount setText:[NSString stringWithFormat:@"%ld", [contents likeCount]]];
+    [mReference setText:[contents reference]];
     
+}
+
+
+#pragma mark - action
+
+- (IBAction)likeButtonTapped:(id)sender
+{
+    NSInteger likeCount = [[mLikeCount text] integerValue];
+    likeCount ++;
+    [mLikeCount setText:[NSString stringWithFormat:@"%ld", likeCount]];
 }
 
 @end

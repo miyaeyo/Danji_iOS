@@ -26,6 +26,7 @@
 		9EE150631BCDFF660034258E /* Danji.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EE150621BCDFF660034258E /* Danji.m */; };
 		9EE150661BCE02540034258E /* DJHomeViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EE150651BCE02540034258E /* DJHomeViewCell.m */; };
 		9EE150681BCE26F30034258E /* like.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EE150671BCE26F30034258E /* like.png */; };
+		9EE1506B1BCF78EF0034258E /* DJContentsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EE1506A1BCF78EF0034258E /* DJContentsManager.m */; };
 		9EE2B26C1BC5063F003B929E /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EE2B26B1BC5063F003B929E /* Bolts.framework */; };
 		9EE2B26E1BC5064F003B929E /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EE2B26D1BC5064F003B929E /* Parse.framework */; };
 		9EE2B2701BC50754003B929E /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EE2B26F1BC50754003B929E /* AudioToolbox.framework */; };
@@ -85,6 +86,9 @@
 		9EE150641BCE02540034258E /* DJHomeViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DJHomeViewCell.h; sourceTree = "<group>"; };
 		9EE150651BCE02540034258E /* DJHomeViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJHomeViewCell.m; sourceTree = "<group>"; };
 		9EE150671BCE26F30034258E /* like.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = like.png; sourceTree = "<group>"; };
+		9EE150691BCF78EF0034258E /* DJContentsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DJContentsManager.h; sourceTree = "<group>"; };
+		9EE1506A1BCF78EF0034258E /* DJContentsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJContentsManager.m; sourceTree = "<group>"; };
+		9EE1506E1BCFAFCE0034258E /* DJContentsDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DJContentsDelegate.h; sourceTree = "<group>"; };
 		9EE2B26B1BC5063F003B929E /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		9EE2B26D1BC5064F003B929E /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		9EE2B26F1BC50754003B929E /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -157,6 +161,7 @@
 				9E4E432F1BC17401006FB05E /* Controller */,
 				9E4E43301BC1740A006FB05E /* View */,
 				9E4E432E1BC173F8006FB05E /* Model */,
+				9EE1506C1BCFAE160034258E /* Delegate */,
 				9E4E430C1BC11A40006FB05E /* Main.storyboard */,
 				9E4E430F1BC11A40006FB05E /* Images.xcassets */,
 				9E4E43111BC11A40006FB05E /* LaunchScreen.xib */,
@@ -196,6 +201,8 @@
 			children = (
 				9EE1505E1BCDEFAF0034258E /* DJContents.h */,
 				9EE1505F1BCDEFAF0034258E /* DJContents.m */,
+				9EE150691BCF78EF0034258E /* DJContentsManager.h */,
+				9EE1506A1BCF78EF0034258E /* DJContentsManager.m */,
 				9EE150611BCDFF660034258E /* Danji.h */,
 				9EE150621BCDFF660034258E /* Danji.m */,
 			);
@@ -266,6 +273,14 @@
 				9E4E43351BC1764B006FB05E /* DJSearchViewController.m */,
 			);
 			name = Main;
+			sourceTree = "<group>";
+		};
+		9EE1506C1BCFAE160034258E /* Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				9EE1506E1BCFAFCE0034258E /* DJContentsDelegate.h */,
+			);
+			name = Delegate;
 			sourceTree = "<group>";
 		};
 		9EE2B2831BC509FE003B929E /* Frameworks */ = {
@@ -394,6 +409,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9EE1506B1BCF78EF0034258E /* DJContentsManager.m in Sources */,
 				9E4E43361BC1764B006FB05E /* DJSearchViewController.m in Sources */,
 				9EE150661BCE02540034258E /* DJHomeViewCell.m in Sources */,
 				9EE2B28C1BCB4CD4003B929E /* DJLoginViewController.m in Sources */,
