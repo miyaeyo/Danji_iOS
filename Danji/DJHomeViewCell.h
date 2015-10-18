@@ -11,8 +11,6 @@
 
 @interface DJHomeViewCell : UITableViewCell
 
-
 - (void)inputContents:(DJContents *)contents;
-
 
 @end

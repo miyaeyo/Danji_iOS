@@ -24,8 +24,6 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    
-    
 }
 
 
@@ -33,7 +31,7 @@
 
 - (void)inputContents:(DJContents *)contents
 {
-    [mImage setImage:[contents image]];
+    [self setupImage:[contents image]];
     [mBody setText:[contents body]];
     [mLikeCount setText:[NSString stringWithFormat:@"%ld", [contents likeCount]]];
     [mReference setText:[contents reference]];
@@ -50,20 +48,32 @@
     [mLikeCount setText:[NSString stringWithFormat:@"%ld", likeCount]];
 }
 
+
+#pragma mark - setup
+
+- (void)setupImage:(PFFile *)image
+{
+    [image getDataInBackgroundWithBlock:^(NSData *data, NSError *error)
+    {
+        if (error)
+        {
+            NSLog(@"%@ %@", error, [error userInfo]);
+        }
+        else
+        {
+            UIImage *original = [UIImage imageWithData:data];
+            CGSize screenSize = [[UIScreen mainScreen] bounds].size;
+            CGSize newSize = CGSizeMake(screenSize.width, original.size.height * screenSize.width / original.size.width);
+            
+            UIGraphicsBeginImageContext(newSize);
+            [original drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+            UIImage *resized = UIGraphicsGetImageFromCurrentImageContext();
+            UIGraphicsEndImageContext();
+
+            [mImage setImage:resized];
+        }
+    }];
+}
+
 @end
-
-
-
-//- (void)awakeFromNib {
-//    // Initialization code
-//}
-//
-
-//- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-//    [super setSelected:selected animated:animated];
-//
-//    // Configure the view for the selected state
-//}
-//
-
 

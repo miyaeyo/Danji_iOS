@@ -9,6 +9,7 @@
 #import "DJHomeViewController.h"
 #import "DJHomeViewCell.h"
 #import "DJContentsManager.h"
+#import "DJContents.h"
 
 
 @implementation DJHomeViewController
@@ -16,35 +17,47 @@
     __weak IBOutlet UITextField *mCategory;
     NSArray                     *mCategories;
     DJHomeViewCell              *mCell;
-    NSArray                     *mContentsList;
+    DJContentsManager           *mContentsManager;
+    DJContents                  *mContents;
+    NSMutableArray              *mContentsList;
+    
+    UIActivityIndicatorView     *mSpinner;
 }
 
 
 #pragma mark - view
 
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
+    
     [[[self tabBarController] tabBar] setTintColor:[UIColor whiteColor]];
+    [[self tableView] setBackgroundColor:[UIColor whiteColor]];
+    
+    mContentsManager = [[DJContentsManager alloc] init];
+    [mContentsManager setDelegate:self];
+    [mContentsManager contentsFromParseDB];
     
     [self setupPickerView];
     
     [[self tableView] setDelegate:self];
     [[self tableView] setDataSource:self];
     
-    mContentsList = [NSArray arrayWithArray:[[[DJContentsManager alloc] init] contentsList]];
+    mContentsList = [[NSMutableArray alloc] init];
+    
 }
-
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+    
     mCategories = nil;
     mCategory = nil;
     mCell = nil;
-    mContentsList = nil;
+    mContentsManager = nil;
+    mContents = nil;
+    
 }
 
 
@@ -89,31 +102,44 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    mCell = [[self tableView] dequeueReusableCellWithIdentifier:@"contentsCell"];
+    DJHomeViewCell *cell = [[self tableView] dequeueReusableCellWithIdentifier:@"contentsCell"];
+    [cell inputContents:[mContentsList objectAtIndex:[indexPath row]]];
     
-    return mCell;
+    return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //Calculate a height based on a cell
-    DJHomeViewCell *cell = [[self tableView] dequeueReusableCellWithIdentifier:@"contentsCell"];
+    if (!mCell)
+    {
+        mCell = [[self tableView] dequeueReusableCellWithIdentifier:@"contentsCell"];
+    }
     
-    //Configure the cell
-    [cell layoutIfNeeded];
+    [mCell inputContents:[mContentsList objectAtIndex:[indexPath row]]];
     
-    //Layout the cell
-    CGFloat height = [[cell contentView] systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+    [mCell layoutIfNeeded];
     
-    //Get the height for the cell
+    CGFloat height = [[mCell contentView] systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
     
-    return height;
+    return height + 1;
     
 }
 
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 200;
+    return 100;
+}
+
+
+#pragma mark - contents delegate
+
+- (void)contentsManager:(DJContentsManager *)contentsManager didFinishMakeAContents:(DJContents *)contents
+{
+    mContents = [DJContents contentsWithImage:[contents image] body:[contents body] reference:[contents reference] likeCount:[contents likeCount]];
+    
+    [mContentsList addObject:mContents];
+    
+    [[self tableView] reloadData];
 }
 
 
@@ -131,7 +157,6 @@
     
     [mCategory setInputView:pickerView];
 }
-
 
 
 @end

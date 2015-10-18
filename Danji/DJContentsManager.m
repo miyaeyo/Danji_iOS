@@ -9,14 +9,19 @@
 #import "DJContentsManager.h"
 #import <Parse/Parse.h>
 #import "Danji.h"
-#import "DJContents.h"
+
 
 @implementation DJContentsManager
+{
+    __weak id<DJContentsDelegate> mDelegate;
+}
 
-- (NSArray *)contentsList
+@synthesize delegate = mDelegate;
+
+
+- (void)contentsFromParseDB
 {
     @autoreleasepool {
-        NSMutableArray *tempContentsList = [[NSMutableArray alloc] init];
         
         PFQuery *query = [Danji query];
         [query orderByDescending:@"createdAt"];
@@ -30,56 +35,34 @@
              {
                  for (Danji *aDanji in results)
                  {
-                     @autoreleasepool {
-                         [[aDanji ContentsImage] getDataInBackgroundWithBlock:^(NSData *data, NSError *error)
+                     @autoreleasepool
+                     {
+                         PFFile *image = [aDanji ContentsImage];
+                         NSString *body = [aDanji ContentsBody];
+                         NSString *reference;
+                         
+                         if ([[aDanji Creator] isEqualToString:@""])
                          {
-                             if (error)
-                             {
-                                 NSLog(@"%@ %@", error, [error userInfo]);
-                             }
-                             else
-                             {
-                                 UIImage *image = [UIImage imageWithData:data];
-                                 
-                                 //UIImage *image = [self imageFromPFFile:[aDanji ContentsImage]];
-                                 NSString *body = [aDanji ContentsBody];
-                                 NSString *reference = [[[aDanji Creator] stringByAppendingString:@", "] stringByAppendingString:[aDanji Title]];
-                                 NSInteger likeCount = [aDanji LikeCount];
-                                 
-                                 DJContents *contents = [DJContents contentsWithImage:image body:body reference:reference likeCount:likeCount];
-                                 [tempContentsList addObject:contents];
-
-                             }
-                         }];
-
+                             reference = [NSString stringWithString:[aDanji Title]];
+                         }
+                         else
+                         {
+                              reference = [NSString stringWithFormat:@"%@, %@", [aDanji Creator], [aDanji Title]];
+                         }
+                        
+                         NSInteger likeCount = [aDanji LikeCount];
+                         DJContents *contents = [DJContents contentsWithImage:image body:body reference:reference likeCount:likeCount];
+                         
+                         [mDelegate contentsManager:self didFinishMakeAContents:contents];
+                         
                      }
                 }
              }
          }];
         
-        return [NSArray arrayWithArray:tempContentsList];
     }
    
 }
 
-//- (UIImage *)imageFromPFFile:(PFFile *)file
-//{
-//    // 이 작업을 thread로 빼서할건지 생각해보기...
-//
-//    [file getDataInBackgroundWithBlock:^(NSData *data, NSError *error)
-//    {
-//        if (error)
-//        {
-//            NSLog(@"%@ %@", error, [error userInfo]);
-//        }
-//        else
-//        {
-//           image = [UIImage imageWithData:data];
-//        }
-//    }];
-//    
-//    
-//    //return [UIImage imageWithData:[file getData]];
-//}
 
 @end

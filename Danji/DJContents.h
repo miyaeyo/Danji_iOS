@@ -14,13 +14,13 @@
 @interface DJContents : NSOperation
 
 
-@property (nonatomic, readonly) UIImage    *image;
+@property (nonatomic, readonly) PFFile    *image;
 @property (nonatomic, readonly) NSString  *body;
 @property (nonatomic, readonly) NSString  *reference;
 @property (nonatomic, readonly) NSInteger likeCount;
 
 
-+ (instancetype)contentsWithImage:(UIImage *)image
++ (instancetype)contentsWithImage:(PFFile *)image
                              body:(NSString *)body
                         reference:(NSString *)reference
                         likeCount:(NSInteger)likeCount;

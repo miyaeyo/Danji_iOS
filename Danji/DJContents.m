@@ -10,10 +10,10 @@
 
 @implementation DJContents
 {
-    __weak UIImage    *mImage;
-    __weak NSString  *mBody;
-    __weak NSString  *mReference;
-    NSInteger        mLikeCount;
+    PFFile    *mImage;
+    NSString  *mBody;
+    NSString  *mReference;
+    NSInteger mLikeCount;
 }
 
 @synthesize image = mImage;
@@ -24,7 +24,7 @@
 
 #pragma mark - init
 
-+ (instancetype)contentsWithImage:(UIImage *)image
++ (instancetype)contentsWithImage:(PFFile *)image
                              body:(NSString *)body
                         reference:(NSString *)reference
                         likeCount:(NSInteger)likeCount
@@ -32,7 +32,8 @@
     return [[self alloc] initWithImage:image body:body reference:reference likeCount:likeCount];
 }
 
-- (instancetype)initWithImage:(UIImage *)image
+
+- (instancetype)initWithImage:(PFFile *)image
                          body:(NSString *)body
                     reference:(NSString *)reference
                     likeCount:(NSInteger)likeCount

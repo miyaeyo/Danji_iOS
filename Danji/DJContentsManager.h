@@ -7,10 +7,23 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "DJContents.h"
+
+@class DJContentsManager;
+
+@protocol DJContentsDelegate <NSObject>
+
+@required
+- (void)contentsManager:(DJContentsManager *)contentsManager didFinishMakeAContents:(DJContents *)contents;
+
+@end
+
 
 @interface DJContentsManager : NSObject
 
+@property (nonatomic, weak) id<DJContentsDelegate> delegate;
 
-- (NSArray *)contentsList;
+- (void)contentsFromParseDB;
+
 
 @end
