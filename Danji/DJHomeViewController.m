@@ -7,7 +7,7 @@
 //
 
 #import "DJHomeViewController.h"
-#import "DJHomeViewCell.h"
+#import "DJContentsViewCell.h"
 #import "DJContentsManager.h"
 #import "DJContents.h"
 
@@ -16,7 +16,7 @@
 {
     __weak IBOutlet UITextField *mCategory;
     NSArray                     *mCategories;
-    DJHomeViewCell              *mCell;
+    DJContentsViewCell              *mCell;
     DJContentsManager           *mContentsManager;
     DJContents                  *mContents;
     NSMutableArray              *mContentsList;
@@ -102,7 +102,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    DJHomeViewCell *cell = [[self tableView] dequeueReusableCellWithIdentifier:@"contentsCell"];
+    DJContentsViewCell *cell = [[self tableView] dequeueReusableCellWithIdentifier:@"contentsCell"];
     [cell inputContents:[mContentsList objectAtIndex:[indexPath row]]];
     
     return cell;
@@ -139,7 +139,11 @@
     
     [mContentsList addObject:mContents];
     
-    [[self tableView] reloadData];
+    if ([mContentsList count] >= 5)
+    {
+        [[self tableView] reloadData];
+    }
+    
 }
 
 

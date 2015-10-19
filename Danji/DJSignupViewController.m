@@ -38,39 +38,13 @@
 
 #pragma mark - action
 
-
 - (IBAction)registerButtonTapped:(id)sender
 {
     if ([[mUserName text] length] != 0 && [[mPassword text] length] != 0 && [[mPassword text] isEqualToString:[mConfirmPassword text]])
     {
-        PFUser *user = [PFUser user];
-        [user setUsername:[mUserName text]];
-        [user setPassword:[mPassword text]];
+        //to do: id length, password length check
+        [self signUpNewUser];
         
-        [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
-        {
-            if (!error)
-            {
-                [[[UIAlertView alloc] initWithTitle:@"success to signup"
-                                            message:@"welcome Danji, login and enjoy Danji"
-                                           delegate:nil
-                                  cancelButtonTitle:@"OK"
-                                  otherButtonTitles:nil, nil] show];
-                
-                [PFUser logOut];
-                [self performSegueWithIdentifier:@"signupCompleted" sender:self];
-            }
-            else
-            {
-                [[[UIAlertView alloc] initWithTitle:@"fail to signup"
-                                            message:@"Username already taken"
-                                           delegate:nil
-                                  cancelButtonTitle:@"OK"
-                                  otherButtonTitles:nil, nil] show];
-
-            }
-            
-        }];
     }
     else if ([[mUserName text] length] == 0 || [[mPassword text] length] == 0)
     {
@@ -89,6 +63,43 @@
                           otherButtonTitles:nil, nil] show];
 
     }
+}
+
+
+#pragma mark - signup
+
+- (void)signUpNewUser
+{
+    PFUser *user = [PFUser user];
+    [user setUsername:[mUserName text]];
+    [user setPassword:[mPassword text]];
+    
+    [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
+     {
+         if (error)
+         {
+             [[[UIAlertView alloc] initWithTitle:@"fail to signup"
+                                         message:@"Username already taken"
+                                        delegate:nil
+                               cancelButtonTitle:@"OK"
+                               otherButtonTitles:nil, nil] show];
+             
+             return;
+
+         }
+         
+         
+        [[[UIAlertView alloc] initWithTitle:@"success to signup"
+                                    message:@"welcome Danji, login and enjoy Danji"
+                                   delegate:nil
+                          cancelButtonTitle:@"OK"
+                          otherButtonTitles:nil, nil] show];
+             
+         [PFUser logOut];
+         [self performSegueWithIdentifier:@"signupCompleted" sender:self];
+         
+     }];
+    
 }
 
 

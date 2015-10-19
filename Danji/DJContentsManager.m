@@ -30,39 +30,42 @@
              if (error)
              {
                  NSLog(@"Error: %@ %@", error, [error userInfo]);
+                 return;
              }
-             else
-             {
-                 for (Danji *aDanji in results)
-                 {
-                     @autoreleasepool
-                     {
-                         PFFile *image = [aDanji ContentsImage];
-                         NSString *body = [aDanji ContentsBody];
-                         NSString *reference;
-                         
-                         if ([[aDanji Creator] isEqualToString:@""])
-                         {
-                             reference = [NSString stringWithString:[aDanji Title]];
-                         }
-                         else
-                         {
-                              reference = [NSString stringWithFormat:@"%@, %@", [aDanji Creator], [aDanji Title]];
-                         }
-                        
-                         NSInteger likeCount = [aDanji LikeCount];
-                         DJContents *contents = [DJContents contentsWithImage:image body:body reference:reference likeCount:likeCount];
-                         
-                         [mDelegate contentsManager:self didFinishMakeAContents:contents];
-                         
-                     }
-                }
-             }
-         }];
-        
+             
+             [self setupContentsWithContentsList:results];
+        }];
     }
-   
 }
 
+
+- (void)setupContentsWithContentsList:(NSArray *)contentsList
+{
+    for (Danji *danji in contentsList)
+    {
+        @autoreleasepool
+        {
+            PFFile *image = [danji ContentsImage];
+            NSString *body = [danji ContentsBody];
+            NSString *reference;
+            
+            if ([[danji Creator] isEqualToString:@""])
+            {
+                reference = [NSString stringWithString:[danji Title]];
+            }
+            else
+            {
+                reference = [NSString stringWithFormat:@"%@, %@", [danji Creator], [danji Title]];
+            }
+            
+            NSInteger likeCount = [danji LikeCount];
+            DJContents *contents = [DJContents contentsWithImage:image body:body reference:reference likeCount:likeCount];
+            
+            [mDelegate contentsManager:self didFinishMakeAContents:contents];
+            
+        }
+    }
+
+}
 
 @end
