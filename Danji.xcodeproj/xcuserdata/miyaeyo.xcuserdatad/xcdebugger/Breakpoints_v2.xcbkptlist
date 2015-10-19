@@ -110,11 +110,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Danji/DJPopularContentsCell.m"
-            timestampString = "466932355.760266"
+            timestampString = "466932698.652222"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "40"
-            endingLineNumber = "40"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
             landmarkName = "-inputData:withRank:"
             landmarkType = "5">
          </BreakpointContent>
