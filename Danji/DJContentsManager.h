@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "DJContents.h"
 
+
 @class DJContentsManager;
 
 @protocol DJContentsDelegate <NSObject>
@@ -24,6 +25,5 @@
 @property (nonatomic, weak) id<DJContentsDelegate> delegate;
 
 - (void)contentsFromParseDB;
-
 
 @end

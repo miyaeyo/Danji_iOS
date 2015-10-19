@@ -10,4 +10,5 @@
 
 @interface DJSearchResultController : UITableViewController
 
+
 @end

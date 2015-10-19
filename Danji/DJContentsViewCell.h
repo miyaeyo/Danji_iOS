@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "DJContents.h"
 
+
 @interface DJContentsViewCell : UITableViewCell
 
 - (void)inputContents:(DJContents *)contents;

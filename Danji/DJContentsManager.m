@@ -59,7 +59,10 @@
             }
             
             NSInteger likeCount = [danji LikeCount];
-            DJContents *contents = [DJContents contentsWithImage:image body:body reference:reference likeCount:likeCount];
+            DJContents *contents = [DJContents contentsWithImage:image
+                                                            body:body
+                                                       reference:reference
+                                                       likeCount:likeCount];
             
             [mDelegate contentsManager:self didFinishMakeAContents:contents];
             

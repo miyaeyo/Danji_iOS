@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "DJPopularContentsCell.h"
 
-
 @interface DJSearchViewController : UIViewController <UISearchBarDelegate, UISearchDisplayDelegate, UITableViewDataSource, UITableViewDelegate, DJPopularContentsDelegate>
 
 @end

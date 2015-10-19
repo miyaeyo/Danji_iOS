@@ -10,6 +10,7 @@
 #import <Parse/Parse.h>
 #import "DJContentsManager.h"
 
+
 @interface DJHomeViewController : UITableViewController <UIPickerViewDataSource, UIPickerViewDelegate, DJContentsDelegate>
 
 

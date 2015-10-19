@@ -16,14 +16,13 @@
     __weak IBOutlet UITextField *mPassword;
 }
 
-#pragma mark - view
 
+#pragma mark - view
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 }
-
 
 - (void)didReceiveMemoryWarning
 {
@@ -32,7 +31,6 @@
     mUserName = nil;
     mPassword = nil;
 }
-
 
 - (void)viewDidAppear:(BOOL)animated
 {
@@ -47,7 +45,6 @@
 
 #pragma mark - action
 
-
 - (IBAction)loginButtonTapped:(id)sender
 {
     if ([[mUserName text] length] == 0 || [[mPassword text] length] == 0)
@@ -57,29 +54,37 @@
                                    delegate:nil
                           cancelButtonTitle:@"OK"
                           otherButtonTitles:nil, nil] show];
-    }
-    else
-    {
-        [PFUser logInWithUsernameInBackground:[mUserName text]
-                                     password:[mPassword text]
-                                        block:^(PFUser *user, NSError *error)
-         {
-             if (user)
-             {
-                 [self performSegueWithIdentifier:@"startDanji" sender:self];
-             }
-             else
-             {
-                 [[[UIAlertView alloc] initWithTitle:@"fail to login"
-                                             message:@"Check your input or signup"
-                                            delegate:nil
-                                   cancelButtonTitle:@"OK"
-                                   otherButtonTitles:nil, nil] show];
-             }
-         }];
-
+        
+        return;
     }
     
+    [self login];
+}
+
+
+#pragma mark - private
+
+- (void)login
+{
+    [PFUser logInWithUsernameInBackground:[mUserName text]
+                                 password:[mPassword text]
+                                    block:^(PFUser *user, NSError *error)
+     {
+         if (user)
+         {
+             [self performSegueWithIdentifier:@"startDanji" sender:self];
+             
+             return;
+         }
+         
+         [[[UIAlertView alloc] initWithTitle:@"fail to login"
+                                     message:@"Check your input or signup"
+                                    delegate:nil
+                           cancelButtonTitle:@"OK"
+                           otherButtonTitles:nil, nil] show];
+         
+     }];
+
 }
 
 

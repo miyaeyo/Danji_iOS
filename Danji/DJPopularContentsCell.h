@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Danji.h"
 
+
 @class DJPopularContentsCell;
 
 @protocol DJPopularContentsDelegate <NSObject>
@@ -17,6 +18,7 @@
 - (void)popularContentsCell:(DJPopularContentsCell *)cell didContentsTapped:(NSString *)title;
 
 @end
+
 
 @interface DJPopularContentsCell : UITableViewCell
 

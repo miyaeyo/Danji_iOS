@@ -13,11 +13,9 @@
     __weak IBOutlet UILabel *mRank;
     __weak IBOutlet UIImageView *mIcon;
     __weak IBOutlet UILabel *mTitle;
-    
     __weak id<DJPopularContentsDelegate> mDelegate;
-    
-    
 }
+
 
 @synthesize delegate = mDelegate;
 
@@ -30,25 +28,19 @@
 
 - (void)inputData:(Danji *)danji withRank:(NSInteger)rank
 {
+    NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+                                [UIImage imageNamed:@"music.png"], @"music",
+                                [UIImage imageNamed:@"movie.png"], @"movie",
+                                [UIImage imageNamed:@"drama.png"], @"drama",
+                                [UIImage imageNamed:@"cartoon.png"], @"cartoon",
+                                [UIImage imageNamed:@"poem.png"], @"poem",
+                                [UIImage imageNamed:@"book.png"], @"book", nil];
     
-    NSArray *icons = [NSArray arrayWithObjects:[UIImage imageNamed:@"music.png"], [UIImage imageNamed:@"movie.png"], [UIImage imageNamed:@"drama.png"], [UIImage imageNamed:@"cartoon.png"], [UIImage imageNamed:@"poem.png"], [UIImage imageNamed:@"book.png"], nil];
-    NSArray *categorys = [NSArray arrayWithObjects:@"music", @"movie", @"drama", @"cartoon", @"poem", @"book", nil];
-    NSDictionary *dictionary = [NSDictionary dictionaryWithObjects:icons forKeys:categorys];
 
     [mRank setText:[NSString stringWithFormat:@"%ld", rank]];
     [mIcon setImage:[dictionary objectForKey:[danji Category]]];
     [mTitle setText:[danji Title]];
 }
 
+
 @end
-
-
-
-
-//
-//- (void)setSelected:(BOOL)selected animated:(BOOL)animated
-//{
-//    [super setSelected:selected animated:animated];
-//
-//
-//}

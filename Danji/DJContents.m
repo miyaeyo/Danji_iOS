@@ -24,6 +24,7 @@
 
 #pragma mark - init
 
+
 + (instancetype)contentsWithImage:(PFFile *)image
                              body:(NSString *)body
                         reference:(NSString *)reference
@@ -31,7 +32,6 @@
 {
     return [[self alloc] initWithImage:image body:body reference:reference likeCount:likeCount];
 }
-
 
 - (instancetype)initWithImage:(PFFile *)image
                          body:(NSString *)body

@@ -16,12 +16,10 @@
 {
     __weak IBOutlet UITextField *mCategory;
     NSArray                     *mCategories;
-    DJContentsViewCell              *mCell;
+    DJContentsViewCell          *mCell;
     DJContentsManager           *mContentsManager;
     DJContents                  *mContents;
     NSMutableArray              *mContentsList;
-    
-    UIActivityIndicatorView     *mSpinner;
 }
 
 
@@ -31,21 +29,11 @@
 {
     [super viewDidLoad];
     
-    
-    [[[self tabBarController] tabBar] setTintColor:[UIColor whiteColor]];
-    [[self tableView] setBackgroundColor:[UIColor whiteColor]];
-    
-    mContentsManager = [[DJContentsManager alloc] init];
-    [mContentsManager setDelegate:self];
-    [mContentsManager contentsFromParseDB];
-    
+    [self setupViewAttribute];
+    [self setupContentsManager];
     [self setupPickerView];
     
-    [[self tableView] setDelegate:self];
-    [[self tableView] setDataSource:self];
-    
     mContentsList = [[NSMutableArray alloc] init];
-    
 }
 
 - (void)didReceiveMemoryWarning
@@ -57,6 +45,7 @@
     mCell = nil;
     mContentsManager = nil;
     mContents = nil;
+    mContentsList = nil;
     
 }
 
@@ -69,7 +58,7 @@
 }
 
 
-#pragma mark - pickerView
+#pragma mark - picker view delegate
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
@@ -93,7 +82,7 @@
 }
 
 
-#pragma mark - tableView
+#pragma mark - table view delegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -114,15 +103,12 @@
     {
         mCell = [[self tableView] dequeueReusableCellWithIdentifier:@"contentsCell"];
     }
-    
     [mCell inputContents:[mContentsList objectAtIndex:[indexPath row]]];
-    
     [mCell layoutIfNeeded];
     
     CGFloat height = [[mCell contentView] systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
     
     return height + 1;
-    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -135,7 +121,10 @@
 
 - (void)contentsManager:(DJContentsManager *)contentsManager didFinishMakeAContents:(DJContents *)contents
 {
-    mContents = [DJContents contentsWithImage:[contents image] body:[contents body] reference:[contents reference] likeCount:[contents likeCount]];
+    mContents = [DJContents contentsWithImage:[contents image]
+                                         body:[contents body]
+                                    reference:[contents reference]
+                                    likeCount:[contents likeCount]];
     
     [mContentsList addObject:mContents];
     
@@ -143,11 +132,25 @@
     {
         [[self tableView] reloadData];
     }
-    
 }
 
 
 #pragma mark - setup
+
+- (void)setupViewAttribute
+{
+    [[[self tabBarController] tabBar] setTintColor:[UIColor whiteColor]];
+    [[self tableView] setBackgroundColor:[UIColor whiteColor]];
+    [[self tableView] setDelegate:self];
+    [[self tableView] setDataSource:self];
+}
+
+- (void)setupContentsManager
+{
+    mContentsManager = [[DJContentsManager alloc] init];
+    [mContentsManager setDelegate:self];
+    [mContentsManager contentsFromParseDB];
+}
 
 - (void)setupPickerView
 {
@@ -163,7 +166,11 @@
 }
 
 
+
+
 @end
+
+
 
 
 //- (void)setupNavigationBar

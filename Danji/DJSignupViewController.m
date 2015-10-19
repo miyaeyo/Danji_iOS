@@ -19,12 +19,10 @@
 
 #pragma mark - view
 
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 }
-
 
 - (void)didReceiveMemoryWarning
 {
@@ -43,7 +41,7 @@
     if ([[mUserName text] length] != 0 && [[mPassword text] length] != 0 && [[mPassword text] isEqualToString:[mConfirmPassword text]])
     {
         //to do: id length, password length check
-        [self signUpNewUser];
+        [self signUp];
         
     }
     else if ([[mUserName text] length] == 0 || [[mPassword text] length] == 0)
@@ -66,9 +64,9 @@
 }
 
 
-#pragma mark - signup
+#pragma mark - private
 
-- (void)signUpNewUser
+- (void)signUp
 {
     PFUser *user = [PFUser user];
     [user setUsername:[mUserName text]];
