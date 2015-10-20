@@ -67,26 +67,21 @@
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
-    //추천검색어 자동완성
-    NSLog(@"search bar text did change");
     mSearchQuery = searchText;
-    NSLog(@"%@", mSearchQuery);
     if ([searchText isEqualToString:@""])
     {
-        NSLog(@"%@", mContentsList);
         [mContentsList removeAllObjects];
         [[self tableView] reloadData];
+        return;
     }
-    
     [self setupContentsManager];
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
-    //검색어 관련된 contents보여주는 view present
-    
-    NSLog(@"search bar search button clicked");
     [mContentsList removeAllObjects];
+    [self setupContentsManager];
+    [[self tableView] reloadData];
 }
 
 
@@ -108,6 +103,7 @@
         [[self tableView] reloadData];
     }
 }
+
 
 #pragma mark - setup
 
