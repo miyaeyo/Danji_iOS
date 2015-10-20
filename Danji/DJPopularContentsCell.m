@@ -29,12 +29,12 @@
 - (void)inputData:(Danji *)danji withRank:(NSInteger)rank
 {
     NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:
-                                [UIImage imageNamed:@"music.png"], @"music",
-                                [UIImage imageNamed:@"movie.png"], @"movie",
-                                [UIImage imageNamed:@"drama.png"], @"drama",
-                                [UIImage imageNamed:@"cartoon.png"], @"cartoon",
-                                [UIImage imageNamed:@"poem.png"], @"poem",
-                                [UIImage imageNamed:@"book.png"], @"book", nil];
+                                [UIImage imageNamed:@"music"], @"music",
+                                [UIImage imageNamed:@"movie"], @"movie",
+                                [UIImage imageNamed:@"drama"], @"drama",
+                                [UIImage imageNamed:@"cartoon"], @"cartoon",
+                                [UIImage imageNamed:@"poem"], @"poem",
+                                [UIImage imageNamed:@"book"], @"book", nil];
     
 
     [mRank setText:[NSString stringWithFormat:@"%ld", rank]];

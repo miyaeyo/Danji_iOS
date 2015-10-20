@@ -39,9 +39,33 @@
 }
 
 
-- (void)setupContentsWithContentsList:(NSArray *)contentsList
+- (void)contentsFromParseDBWithQuery:(NSString *)aQuery
 {
-    for (Danji *danji in contentsList)
+    @autoreleasepool {
+        
+        PFQuery *query = [Danji query];
+        [query whereKey:@"Title" containsString:aQuery];
+        [query orderByDescending:@"createdAt"];
+        [query findObjectsInBackgroundWithBlock:^(NSArray *results, NSError *error)
+         {
+             if (error)
+             {
+                 NSLog(@"Error: %@ %@", error, [error userInfo]);
+                 return;
+             }
+             
+             [self setupContentsWithContentsList:results];
+         }];
+    }
+
+    
+    
+}
+
+
+- (void)setupContentsWithContentsList:(NSArray *)aContentsList
+{
+    for (Danji *danji in aContentsList)
     {
         @autoreleasepool
         {
@@ -65,7 +89,6 @@
                                                        likeCount:likeCount];
             
             [mDelegate contentsManager:self didFinishMakeAContents:contents];
-            
         }
     }
 

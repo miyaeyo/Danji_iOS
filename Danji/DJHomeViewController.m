@@ -17,8 +17,6 @@
     __weak IBOutlet UITextField *mCategory;
     NSArray                     *mCategories;
     DJContentsViewCell          *mCell;
-    DJContentsManager           *mContentsManager;
-    DJContents                  *mContents;
     NSMutableArray              *mContentsList;
 }
 
@@ -43,8 +41,6 @@
     mCategories = nil;
     mCategory = nil;
     mCell = nil;
-    mContentsManager = nil;
-    mContents = nil;
     mContentsList = nil;
     
 }
@@ -91,10 +87,10 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    DJContentsViewCell *cell = [[self tableView] dequeueReusableCellWithIdentifier:@"contentsCell"];
-    [cell inputContents:[mContentsList objectAtIndex:[indexPath row]]];
+    mCell = [[self tableView] dequeueReusableCellWithIdentifier:@"contentsCell"];
+    [mCell inputContents:[mContentsList objectAtIndex:[indexPath row]]];
     
-    return cell;
+    return mCell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -119,19 +115,17 @@
 
 #pragma mark - contents delegate
 
-- (void)contentsManager:(DJContentsManager *)contentsManager didFinishMakeAContents:(DJContents *)contents
+- (void)contentsManager:(DJContentsManager *)aContentsManager didFinishMakeAContents:(DJContents *)aContents
 {
-    mContents = [DJContents contentsWithImage:[contents image]
-                                         body:[contents body]
-                                    reference:[contents reference]
-                                    likeCount:[contents likeCount]];
+    DJContents *contents = [DJContents contentsWithImage:[aContents image]
+                                                    body:[aContents body]
+                                               reference:[aContents reference]
+                                               likeCount:[aContents likeCount]];
     
-    [mContentsList addObject:mContents];
-    
-    if ([mContentsList count] >= 5)
-    {
-        [[self tableView] reloadData];
-    }
+    [mContentsList addObject:contents];
+
+    [[self tableView] reloadData];
+   
 }
 
 
@@ -147,9 +141,9 @@
 
 - (void)setupContentsManager
 {
-    mContentsManager = [[DJContentsManager alloc] init];
-    [mContentsManager setDelegate:self];
-    [mContentsManager contentsFromParseDB];
+    DJContentsManager *contentsManager = [[DJContentsManager alloc] init];
+    [contentsManager setDelegate:self];
+    [contentsManager contentsFromParseDB];
 }
 
 - (void)setupPickerView
@@ -164,8 +158,6 @@
     
     [mCategory setInputView:pickerView];
 }
-
-
 
 
 @end

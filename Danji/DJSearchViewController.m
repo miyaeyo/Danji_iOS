@@ -19,13 +19,12 @@
     NSString *mPopularContentsTitle;
 }
 
+
 #pragma mark - view
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    [self setupSearchBar];
     
     [mTableView setDelegate:self];
     [mTableView setDataSource:self];
@@ -43,6 +42,11 @@
     mPopularContentsTitle = nil;
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self setupSearchBar];
+}
+
 
 #pragma mark - popular contents delegate
 
@@ -57,11 +61,14 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    [mSearchBar removeFromSuperview];
+    
     if ([[segue identifier] isEqualToString:@"popularContents"])
     {
-        id navigationBar = [[[segue destinationViewController] viewControllers] objectAtIndex:0];
+        id navigationBar = [segue destinationViewController];
         [navigationBar setTitle:[NSString stringWithFormat:@"검색: %@", mPopularContentsTitle]];
     }
+    
 }
 
 
@@ -70,6 +77,8 @@
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
 {
     NSLog(@"text did begin editing");
+    [self performSegueWithIdentifier:@"searchDetail" sender:self];
+    
 }
 
 - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar

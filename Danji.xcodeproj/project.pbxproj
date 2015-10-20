@@ -15,25 +15,14 @@
 		9E4E431F1BC11A40006FB05E /* DanjiTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E4E431E1BC11A40006FB05E /* DanjiTests.m */; };
 		9E4E43331BC1763C006FB05E /* DJHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E4E43321BC1763C006FB05E /* DJHomeViewController.m */; };
 		9E4E43361BC1764B006FB05E /* DJSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E4E43351BC1764B006FB05E /* DJSearchViewController.m */; };
-		9E4E43401BC2589B006FB05E /* home.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E4E433D1BC2589B006FB05E /* home.png */; };
-		9E4E43411BC2589B006FB05E /* mypage.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E4E433E1BC2589B006FB05E /* mypage.png */; };
-		9E4E43421BC2589B006FB05E /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E4E433F1BC2589B006FB05E /* search.png */; };
-		9E4E43441BC258F4006FB05E /* write.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E4E43431BC258F4006FB05E /* write.png */; };
 		9E4E43481BC2794C006FB05E /* danji.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E4E43461BC2794B006FB05E /* danji.png */; };
 		9E96149C1BCB9C0900D14B1E /* DJWriteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E96149B1BCB9C0900D14B1E /* DJWriteViewController.m */; };
 		9E96149F1BCBA9CD00D14B1E /* DJSignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E96149E1BCBA9CD00D14B1E /* DJSignupViewController.m */; };
 		9EE150601BCDEFAF0034258E /* DJContents.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EE1505F1BCDEFAF0034258E /* DJContents.m */; };
 		9EE150631BCDFF660034258E /* Danji.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EE150621BCDFF660034258E /* Danji.m */; };
 		9EE150661BCE02540034258E /* DJContentsViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EE150651BCE02540034258E /* DJContentsViewCell.m */; };
-		9EE150681BCE26F30034258E /* like.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EE150671BCE26F30034258E /* like.png */; };
 		9EE1506B1BCF78EF0034258E /* DJContentsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EE1506A1BCF78EF0034258E /* DJContentsManager.m */; };
 		9EE150741BD3F73C0034258E /* DJSearchResultController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EE150731BD3F73C0034258E /* DJSearchResultController.m */; };
-		9EE1507B1BD497100034258E /* music.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EE150751BD497100034258E /* music.png */; };
-		9EE1507C1BD497100034258E /* movie.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EE150761BD497100034258E /* movie.png */; };
-		9EE1507D1BD497100034258E /* drama.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EE150771BD497100034258E /* drama.png */; };
-		9EE1507E1BD497100034258E /* cartoon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EE150781BD497100034258E /* cartoon.png */; };
-		9EE1507F1BD497100034258E /* poem.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EE150791BD497100034258E /* poem.png */; };
-		9EE150801BD497100034258E /* book.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EE1507A1BD497100034258E /* book.png */; };
 		9EE150861BD498EC0034258E /* DJPopularContentsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EE150851BD498EC0034258E /* DJPopularContentsCell.m */; };
 		9EE2B26C1BC5063F003B929E /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EE2B26B1BC5063F003B929E /* Bolts.framework */; };
 		9EE2B26E1BC5064F003B929E /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EE2B26D1BC5064F003B929E /* Parse.framework */; };
@@ -77,10 +66,6 @@
 		9E4E43321BC1763C006FB05E /* DJHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJHomeViewController.m; sourceTree = "<group>"; };
 		9E4E43341BC1764B006FB05E /* DJSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DJSearchViewController.h; sourceTree = "<group>"; };
 		9E4E43351BC1764B006FB05E /* DJSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJSearchViewController.m; sourceTree = "<group>"; };
-		9E4E433D1BC2589B006FB05E /* home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home.png; sourceTree = "<group>"; };
-		9E4E433E1BC2589B006FB05E /* mypage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mypage.png; sourceTree = "<group>"; };
-		9E4E433F1BC2589B006FB05E /* search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search.png; sourceTree = "<group>"; };
-		9E4E43431BC258F4006FB05E /* write.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = write.png; sourceTree = "<group>"; };
 		9E4E43461BC2794B006FB05E /* danji.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = danji.png; sourceTree = "<group>"; };
 		9E4E434A1BC3AF0C006FB05E /* DJLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DJLoginViewController.h; sourceTree = "<group>"; };
 		9E96149A1BCB9C0900D14B1E /* DJWriteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DJWriteViewController.h; sourceTree = "<group>"; };
@@ -93,17 +78,10 @@
 		9EE150621BCDFF660034258E /* Danji.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Danji.m; sourceTree = "<group>"; };
 		9EE150641BCE02540034258E /* DJContentsViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DJContentsViewCell.h; sourceTree = "<group>"; };
 		9EE150651BCE02540034258E /* DJContentsViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJContentsViewCell.m; sourceTree = "<group>"; };
-		9EE150671BCE26F30034258E /* like.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = like.png; sourceTree = "<group>"; };
 		9EE150691BCF78EF0034258E /* DJContentsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DJContentsManager.h; sourceTree = "<group>"; };
 		9EE1506A1BCF78EF0034258E /* DJContentsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJContentsManager.m; sourceTree = "<group>"; };
 		9EE150721BD3F73C0034258E /* DJSearchResultController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DJSearchResultController.h; sourceTree = "<group>"; };
 		9EE150731BD3F73C0034258E /* DJSearchResultController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJSearchResultController.m; sourceTree = "<group>"; };
-		9EE150751BD497100034258E /* music.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = music.png; sourceTree = "<group>"; };
-		9EE150761BD497100034258E /* movie.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = movie.png; sourceTree = "<group>"; };
-		9EE150771BD497100034258E /* drama.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = drama.png; sourceTree = "<group>"; };
-		9EE150781BD497100034258E /* cartoon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cartoon.png; sourceTree = "<group>"; };
-		9EE150791BD497100034258E /* poem.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = poem.png; sourceTree = "<group>"; };
-		9EE1507A1BD497100034258E /* book.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = book.png; sourceTree = "<group>"; };
 		9EE150841BD498EC0034258E /* DJPopularContentsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DJPopularContentsCell.h; sourceTree = "<group>"; };
 		9EE150851BD498EC0034258E /* DJPopularContentsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJPopularContentsCell.m; sourceTree = "<group>"; };
 		9EE2B26B1BC5063F003B929E /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
@@ -251,19 +229,8 @@
 		9E4E43451BC25920006FB05E /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				9EE150751BD497100034258E /* music.png */,
-				9EE150761BD497100034258E /* movie.png */,
-				9EE150771BD497100034258E /* drama.png */,
-				9EE150781BD497100034258E /* cartoon.png */,
-				9EE150791BD497100034258E /* poem.png */,
-				9EE1507A1BD497100034258E /* book.png */,
-				9EE150671BCE26F30034258E /* like.png */,
 				9EE2B2861BC51E73003B929E /* launch.png */,
 				9E4E43461BC2794B006FB05E /* danji.png */,
-				9E4E43431BC258F4006FB05E /* write.png */,
-				9E4E433D1BC2589B006FB05E /* home.png */,
-				9E4E433E1BC2589B006FB05E /* mypage.png */,
-				9E4E433F1BC2589B006FB05E /* search.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -400,21 +367,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9E4E43401BC2589B006FB05E /* home.png in Resources */,
-				9E4E43441BC258F4006FB05E /* write.png in Resources */,
 				9E4E43481BC2794C006FB05E /* danji.png in Resources */,
-				9E4E43421BC2589B006FB05E /* search.png in Resources */,
 				9E4E430E1BC11A40006FB05E /* Main.storyboard in Resources */,
-				9EE1507B1BD497100034258E /* music.png in Resources */,
-				9EE150801BD497100034258E /* book.png in Resources */,
-				9EE1507E1BD497100034258E /* cartoon.png in Resources */,
 				9E4E43131BC11A40006FB05E /* LaunchScreen.xib in Resources */,
-				9EE1507D1BD497100034258E /* drama.png in Resources */,
-				9EE150681BCE26F30034258E /* like.png in Resources */,
-				9EE1507C1BD497100034258E /* movie.png in Resources */,
-				9EE1507F1BD497100034258E /* poem.png in Resources */,
 				9EE2B2871BC51E73003B929E /* launch.png in Resources */,
-				9E4E43411BC2589B006FB05E /* mypage.png in Resources */,
 				9E4E43101BC11A40006FB05E /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

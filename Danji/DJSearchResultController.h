@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DJContentsManager.h"
 
-@interface DJSearchResultController : UITableViewController
+@interface DJSearchResultController : UITableViewController <DJContentsDelegate>
 
 
 @end
