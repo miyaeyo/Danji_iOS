@@ -16,7 +16,7 @@
     UISearchBar *mSearchBar;
     __weak IBOutlet UITableView *mTableView;
     NSArray *mPopularContentsList;
-    NSString *mPopularContentsTitle;
+    NSString *mSearchQuery;
 }
 
 
@@ -39,12 +39,19 @@
     mSearchBar = nil;
     mTableView = nil;
     mPopularContentsList = nil;
-    mPopularContentsTitle = nil;
+    mSearchQuery = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     [self setupSearchBar];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [mSearchBar removeFromSuperview];
 }
 
 
@@ -52,7 +59,7 @@
 
 - (void)popularContentsCell:(DJPopularContentsCell *)cell didContentsTapped:(NSString *)title
 {
-    mPopularContentsTitle = title;
+    mSearchQuery = title;
     [self performSegueWithIdentifier:@"popularContents" sender:self];
 }
 
@@ -61,12 +68,10 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    [mSearchBar removeFromSuperview];
-    
     if ([[segue identifier] isEqualToString:@"popularContents"])
     {
         id navigationBar = [segue destinationViewController];
-        [navigationBar setTitle:[NSString stringWithFormat:@"검색: %@", mPopularContentsTitle]];
+        [navigationBar setTitle:[NSString stringWithFormat:@"검색: %@", mSearchQuery]];
     }
     
 }
@@ -79,30 +84,6 @@
     NSLog(@"text did begin editing");
     [self performSegueWithIdentifier:@"searchDetail" sender:self];
     
-}
-
-- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
-{
-    NSLog(@"search bar text did end editting");
-}
-
-- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
-{
-    NSLog(@"search bar text did change");
-    
-}
-
-- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
-{
-    //검색어 관련된 contents보여주는 view present
-    
-    NSLog(@"search bar search button clicked");
-}
-
-- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
-{
-    // pop 자동검색어 view
-    NSLog(@"search bar cancel button clicked");
 }
 
 

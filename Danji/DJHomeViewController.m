@@ -117,15 +117,9 @@
 
 - (void)contentsManager:(DJContentsManager *)aContentsManager didFinishMakeAContents:(DJContents *)aContents
 {
-    DJContents *contents = [DJContents contentsWithImage:[aContents image]
-                                                    body:[aContents body]
-                                               reference:[aContents reference]
-                                               likeCount:[aContents likeCount]];
-    
-    [mContentsList addObject:contents];
+    [mContentsList addObject:aContents];
 
     [[self tableView] reloadData];
-   
 }
 
 

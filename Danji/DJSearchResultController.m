@@ -79,12 +79,7 @@
 
 - (void)contentsManager:(DJContentsManager *)aContentsManager didFinishMakeAContents:(DJContents *)aContents
 {
-    DJContents *contents = [DJContents contentsWithImage:[aContents image]
-                                                    body:[aContents body]
-                                               reference:[aContents reference]
-                                               likeCount:[aContents likeCount]];
-    
-    [mContentsList addObject:contents];
+    [mContentsList addObject:aContents];
     [[self tableView] reloadData];
 }
 
@@ -100,8 +95,11 @@
 
 - (void)setupViewAttribute
 {
-    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithRed:0.98 green:0.95 blue:0.84 alpha:1]}];
+    id navigationBar = [[self navigationController] navigationBar];
+    [navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithRed:0.98 green:0.95 blue:0.84 alpha:1]}];
+    
     [[self tableView] setBackgroundColor:[UIColor whiteColor]];
+    [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     [[self tableView] setDelegate:self];
     [[self tableView] setDataSource:self];
 }
@@ -110,9 +108,8 @@
 {
     DJContentsManager *contentsManager = [[DJContentsManager alloc] init];
     [contentsManager setDelegate:self];
-    [contentsManager contentsFromParseDBWithQuery:mQuery];
+    [contentsManager contentsFromParseDBWithTitleQuery:mQuery];
 }
-
 
 
 @end

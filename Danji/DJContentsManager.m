@@ -21,7 +21,8 @@
 
 - (void)contentsFromParseDB
 {
-    @autoreleasepool {
+    @autoreleasepool
+    {
         
         PFQuery *query = [Danji query];
         [query orderByDescending:@"createdAt"];
@@ -39,9 +40,10 @@
 }
 
 
-- (void)contentsFromParseDBWithQuery:(NSString *)aQuery
+- (void)contentsFromParseDBWithTitleQuery:(NSString *)aQuery
 {
-    @autoreleasepool {
+    @autoreleasepool
+    {
         
         PFQuery *query = [Danji query];
         [query whereKey:@"Title" containsString:aQuery];
@@ -57,9 +59,27 @@
              [self setupContentsWithContentsList:results];
          }];
     }
+}
 
-    
-    
+
+- (void)contentsFromParseDBWithBodyQuery:(NSString *)aQuery
+{
+    @autoreleasepool
+    {
+        PFQuery *query = [Danji query];
+        [query whereKey:@"ContentsBody" containsString:aQuery];
+        [query orderByDescending:@"createdAt"];
+        [query findObjectsInBackgroundWithBlock:^(NSArray *results, NSError *error)
+         {
+             if (error)
+             {
+                 NSLog(@"Error: %@ %@", error, [error userInfo]);
+                 return;
+             }
+             
+             [self setupContentsWithContentsList:results];
+         }];
+    }
 }
 
 

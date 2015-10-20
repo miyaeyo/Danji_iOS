@@ -24,6 +24,8 @@
 		9EE1506B1BCF78EF0034258E /* DJContentsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EE1506A1BCF78EF0034258E /* DJContentsManager.m */; };
 		9EE150741BD3F73C0034258E /* DJSearchResultController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EE150731BD3F73C0034258E /* DJSearchResultController.m */; };
 		9EE150861BD498EC0034258E /* DJPopularContentsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EE150851BD498EC0034258E /* DJPopularContentsCell.m */; };
+		9EE1508A1BD62A9D0034258E /* DJSearchingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EE150891BD62A9D0034258E /* DJSearchingViewController.m */; };
+		9EE150901BD639A40034258E /* DJSearchingViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EE1508F1BD639A40034258E /* DJSearchingViewCell.m */; };
 		9EE2B26C1BC5063F003B929E /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EE2B26B1BC5063F003B929E /* Bolts.framework */; };
 		9EE2B26E1BC5064F003B929E /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EE2B26D1BC5064F003B929E /* Parse.framework */; };
 		9EE2B2701BC50754003B929E /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EE2B26F1BC50754003B929E /* AudioToolbox.framework */; };
@@ -84,6 +86,10 @@
 		9EE150731BD3F73C0034258E /* DJSearchResultController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJSearchResultController.m; sourceTree = "<group>"; };
 		9EE150841BD498EC0034258E /* DJPopularContentsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DJPopularContentsCell.h; sourceTree = "<group>"; };
 		9EE150851BD498EC0034258E /* DJPopularContentsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJPopularContentsCell.m; sourceTree = "<group>"; };
+		9EE150881BD62A9D0034258E /* DJSearchingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DJSearchingViewController.h; sourceTree = "<group>"; };
+		9EE150891BD62A9D0034258E /* DJSearchingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJSearchingViewController.m; sourceTree = "<group>"; };
+		9EE1508E1BD639A40034258E /* DJSearchingViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DJSearchingViewCell.h; sourceTree = "<group>"; };
+		9EE1508F1BD639A40034258E /* DJSearchingViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJSearchingViewCell.m; sourceTree = "<group>"; };
 		9EE2B26B1BC5063F003B929E /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		9EE2B26D1BC5064F003B929E /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		9EE2B26F1BC50754003B929E /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -222,6 +228,8 @@
 				9EE150651BCE02540034258E /* DJContentsViewCell.m */,
 				9EE150841BD498EC0034258E /* DJPopularContentsCell.h */,
 				9EE150851BD498EC0034258E /* DJPopularContentsCell.m */,
+				9EE1508E1BD639A40034258E /* DJSearchingViewCell.h */,
+				9EE1508F1BD639A40034258E /* DJSearchingViewCell.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -262,10 +270,20 @@
 				9E4E43321BC1763C006FB05E /* DJHomeViewController.m */,
 				9E4E43341BC1764B006FB05E /* DJSearchViewController.h */,
 				9E4E43351BC1764B006FB05E /* DJSearchViewController.m */,
-				9EE150721BD3F73C0034258E /* DJSearchResultController.h */,
-				9EE150731BD3F73C0034258E /* DJSearchResultController.m */,
+				9EE150871BD62A480034258E /* Search */,
 			);
 			name = Main;
+			sourceTree = "<group>";
+		};
+		9EE150871BD62A480034258E /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				9EE150721BD3F73C0034258E /* DJSearchResultController.h */,
+				9EE150731BD3F73C0034258E /* DJSearchResultController.m */,
+				9EE150881BD62A9D0034258E /* DJSearchingViewController.h */,
+				9EE150891BD62A9D0034258E /* DJSearchingViewController.m */,
+			);
+			name = Search;
 			sourceTree = "<group>";
 		};
 		9EE2B2831BC509FE003B929E /* Frameworks */ = {
@@ -400,8 +418,10 @@
 				9E96149F1BCBA9CD00D14B1E /* DJSignupViewController.m in Sources */,
 				9E4E43081BC11A40006FB05E /* AppDelegate.m in Sources */,
 				9E4E43051BC11A40006FB05E /* main.m in Sources */,
+				9EE1508A1BD62A9D0034258E /* DJSearchingViewController.m in Sources */,
 				9EE150631BCDFF660034258E /* Danji.m in Sources */,
 				9E4E43331BC1763C006FB05E /* DJHomeViewController.m in Sources */,
+				9EE150901BD639A40034258E /* DJSearchingViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

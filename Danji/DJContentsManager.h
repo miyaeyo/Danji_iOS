@@ -25,6 +25,7 @@
 @property (nonatomic, weak) id<DJContentsDelegate> delegate;
 
 - (void)contentsFromParseDB;
-- (void)contentsFromParseDBWithQuery:(NSString *)aQuery;
+- (void)contentsFromParseDBWithTitleQuery:(NSString *)aQuery;
+- (void)contentsFromParseDBWithBodyQuery:(NSString *)aQuery;
 
 @end
