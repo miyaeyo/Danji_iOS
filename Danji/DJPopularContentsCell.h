@@ -7,23 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Danji.h"
-
-
-@class DJPopularContentsCell;
-
-@protocol DJPopularContentsDelegate <NSObject>
-
-@required
-- (void)popularContentsCell:(DJPopularContentsCell *)cell didContentsTapped:(NSString *)title;
-
-@end
+#import "DJContents.h"
 
 
 @interface DJPopularContentsCell : UITableViewCell
 
-@property (nonatomic, weak) id<DJPopularContentsDelegate> delegate;
-
-- (void)inputData:(Danji *)danji withRank:(NSInteger)rank;
+- (void)inputData:(DJContents *)contents withRank:(NSInteger)rank;
 
 @end

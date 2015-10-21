@@ -27,7 +27,7 @@
 {
     [super viewDidLoad];
     
-    [self setupViewAttribute];
+    [self setupViewAttributes];
     [self setupContentsManager];
     [self setupPickerView];
     
@@ -109,7 +109,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 100;
+    return 200;
 }
 
 
@@ -125,7 +125,7 @@
 
 #pragma mark - setup
 
-- (void)setupViewAttribute
+- (void)setupViewAttributes
 {
     [[[self tabBarController] tabBar] setTintColor:[UIColor whiteColor]];
     [[self tableView] setBackgroundColor:[UIColor whiteColor]];

@@ -6,27 +6,23 @@
 //  Copyright (c) 2015년 miyaeyo. All rights reserved.
 //
 
-#import "DJSearchResultController.h"
+#import "DJSearchDetailViewController.h"
 #import "DJContentsViewCell.h"
 
 
-@implementation DJSearchResultController
+@implementation DJSearchDetailViewController
 {
-    NSString *mQuery;
-    DJContentsViewCell          *mCell;
-    NSMutableArray              *mContentsList;
-    
+    DJContentsViewCell  *mCell;
+    DJContents          *mContents;
 }
+
+@synthesize contents = mContents;
+
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    [self setupQuery];
     [self setupViewAttribute];
-    [self setupContentsManager];
-    
-    mContentsList = [[NSMutableArray alloc] init];
     
 }
 
@@ -34,9 +30,8 @@
 {
     [super didReceiveMemoryWarning];
     
-    mQuery = nil;
     mCell = nil;
-    mContentsList = nil;
+    mContents = nil;
 }
 
 
@@ -44,13 +39,13 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [mContentsList count];
+    return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     mCell = [[self tableView] dequeueReusableCellWithIdentifier:@"searchResult"];
-    [mCell inputContents:[mContentsList objectAtIndex:[indexPath row]]];
+    [mCell inputContents:mContents];
     
     return mCell;
 }
@@ -61,7 +56,7 @@
     {
         mCell = [[self tableView] dequeueReusableCellWithIdentifier:@"searchResult"];
     }
-    [mCell inputContents:[mContentsList objectAtIndex:[indexPath row]]];
+    [mCell inputContents:mContents];
     [mCell layoutIfNeeded];
     
     CGFloat height = [[mCell contentView] systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
@@ -75,40 +70,18 @@
 }
 
 
-#pragma mark - contents manager delegate
-
-- (void)contentsManager:(DJContentsManager *)aContentsManager didFinishMakeAContents:(DJContents *)aContents
-{
-    [mContentsList addObject:aContents];
-    [[self tableView] reloadData];
-}
-
-
 #pragma mark - setup
-
-- (void)setupQuery
-{
-    NSString *title = [[[self navigationController] topViewController] title];
-    NSArray *tempQuery = [title componentsSeparatedByString:@"검색: "];
-    mQuery = [tempQuery objectAtIndex:1];
-}
 
 - (void)setupViewAttribute
 {
     id navigationBar = [[self navigationController] navigationBar];
     [navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithRed:0.98 green:0.95 blue:0.84 alpha:1]}];
     
+    [self setTitle:[mContents reference]];
     [[self tableView] setBackgroundColor:[UIColor whiteColor]];
     [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     [[self tableView] setDelegate:self];
     [[self tableView] setDataSource:self];
-}
-
-- (void)setupContentsManager
-{
-    DJContentsManager *contentsManager = [[DJContentsManager alloc] init];
-    [contentsManager setDelegate:self];
-    [contentsManager contentsFromParseDBWithTitleQuery:mQuery];
 }
 
 

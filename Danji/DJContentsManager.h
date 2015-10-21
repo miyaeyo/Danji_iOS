@@ -17,6 +17,9 @@
 @required
 - (void)contentsManager:(DJContentsManager *)aContentsManager didFinishMakeAContents:(DJContents *)aContents;
 
+@optional
+- (void)didFinishMakeAllContentsByContentsManager:(DJContentsManager *)aContentsManager;
+
 @end
 
 
@@ -27,5 +30,6 @@
 - (void)contentsFromParseDB;
 - (void)contentsFromParseDBWithTitleQuery:(NSString *)aQuery;
 - (void)contentsFromParseDBWithBodyQuery:(NSString *)aQuery;
+- (void)contentsFromParseDBWithLikeCount:(NSInteger)count;
 
 @end

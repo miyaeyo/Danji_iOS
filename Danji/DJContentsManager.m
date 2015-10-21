@@ -57,6 +57,8 @@
              }
              
              [self setupContentsWithContentsList:results];
+             [mDelegate didFinishMakeAllContentsByContentsManager:self];
+             
          }];
     }
 }
@@ -78,8 +80,31 @@
              }
              
              [self setupContentsWithContentsList:results];
+             [mDelegate didFinishMakeAllContentsByContentsManager:self];
          }];
     }
+}
+
+- (void)contentsFromParseDBWithLikeCount:(NSInteger)count
+{
+    @autoreleasepool
+    {
+        PFQuery *query = [Danji query];
+        [query orderByDescending:@"LikeCount"];
+        [query setLimit:count];
+        
+        [query findObjectsInBackgroundWithBlock:^(NSArray *results, NSError *error)
+         {
+             if (error)
+             {
+                 NSLog(@"Error: %@ %@", error, [error userInfo]);
+                 return;
+             }
+             [self setupContentsWithContentsList:results];             
+        }];
+
+    }
+    
 }
 
 
@@ -99,14 +124,16 @@
             }
             else
             {
-                reference = [NSString stringWithFormat:@"%@, %@", [danji Creator], [danji Title]];
+                reference = [NSString stringWithFormat:@"%@ - %@", [danji Title], [danji Creator]];
             }
             
             NSInteger likeCount = [danji LikeCount];
+            NSString *category = [danji Category];
             DJContents *contents = [DJContents contentsWithImage:image
                                                             body:body
                                                        reference:reference
-                                                       likeCount:likeCount];
+                                                       likeCount:likeCount
+                                                        category:category];
             
             [mDelegate contentsManager:self didFinishMakeAContents:contents];
         }

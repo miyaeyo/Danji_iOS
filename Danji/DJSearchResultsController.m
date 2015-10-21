@@ -6,20 +6,22 @@
 //  Copyright (c) 2015년 miyaeyo. All rights reserved.
 //
 
-#import "DJSearchingViewController.h"
+#import "DJSearchResultsController.h"
 #import "DJContents.h"
-#import "DJSearchingViewCell.h"
+#import "DJSearchResultsCell.h"
 #import "DJContentsManager.h"
+#import "DJSearchDetailViewController.h"
 
 
-@implementation DJSearchingViewController
+@implementation DJSearchResultsController
 {
     UISearchBar         *mSearchBar;
-    DJSearchingViewCell *mCell;
+    DJSearchResultsCell *mCell;
     NSMutableArray      *mContentsList;
-    NSString            *mSearchQuery;
-    
+    NSInteger           mSelectedIndex;
+    NSString            *mSearchText;
 }
+
 
 
 #pragma mark - view
@@ -27,9 +29,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self setupSearchBar];
-    [[self tableView] setBackgroundColor:[UIColor colorWithRed:0.98 green:0.95 blue:0.84 alpha:1]];
-    [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    
+    [self setupViewAttributes];
     
     mContentsList = [[NSMutableArray alloc] init];
 }
@@ -37,6 +38,17 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+    
+    mSearchBar = nil;
+    mCell = nil;
+    mContentsList = nil;
+    mSearchText = nil;
+    
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self setupSearchBar];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -54,12 +66,30 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    DJSearchingViewCell *cell = [[self tableView] dequeueReusableCellWithIdentifier:@"searchList"];
+    mCell = [[self tableView] dequeueReusableCellWithIdentifier:@"searchList"];
     DJContents *contents = [mContentsList objectAtIndex:[indexPath row]];
     
-    [cell inputTitle:[contents reference] body:[contents body]];
+    [mCell inputTitle:[contents reference] body:[contents body] category:[contents category]];
     
-    return cell;
+    return mCell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    mSelectedIndex = [indexPath row];
+    [self performSegueWithIdentifier:@"search" sender:self];
+}
+
+#pragma mark - navigation
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([[segue identifier] isEqualToString:@"search"])
+    {
+        id destinationController = [segue destinationViewController];
+        [destinationController setContents:[mContentsList objectAtIndex:mSelectedIndex]];
+    }
+    
 }
 
 
@@ -67,7 +97,7 @@
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
-    mSearchQuery = searchText;
+    mSearchText = searchText;
     if ([searchText isEqualToString:@""])
     {
         [mContentsList removeAllObjects];
@@ -80,8 +110,8 @@
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
     [mContentsList removeAllObjects];
-    [self setupContentsManager];
     [[self tableView] reloadData];
+    [self setupContentsManager];
 }
 
 
@@ -100,12 +130,24 @@
     if (mark == 0)
     {
         [mContentsList addObject:aContents];
-        [[self tableView] reloadData];
     }
+}
+
+- (void)didFinishMakeAllContentsByContentsManager:(DJContentsManager *)aContentsManager
+{
+    [[self tableView] reloadData];
 }
 
 
 #pragma mark - setup
+
+- (void)setupViewAttributes
+{
+    [[self tableView] setDataSource:self];
+    [[self tableView] setDelegate:self];
+    [[self tableView] setBackgroundColor:[UIColor colorWithRed:0.98 green:0.95 blue:0.84 alpha:1]];
+    [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+}
 
 - (void)setupSearchBar
 {
@@ -124,8 +166,8 @@
 - (void)setupContentsManager
 {
     DJContentsManager *contentsManager = [[DJContentsManager alloc] init];
-    [contentsManager contentsFromParseDBWithBodyQuery:mSearchQuery];
-    [contentsManager contentsFromParseDBWithTitleQuery:mSearchQuery];
+    [contentsManager contentsFromParseDBWithBodyQuery:mSearchText];
+    [contentsManager contentsFromParseDBWithTitleQuery:mSearchText];
     [contentsManager setDelegate:self];
 }
 

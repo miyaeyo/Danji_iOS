@@ -14,12 +14,15 @@
     NSString  *mBody;
     NSString  *mReference;
     NSInteger mLikeCount;
+    NSString  *mCategory;
+    
 }
 
 @synthesize image = mImage;
 @synthesize body = mBody;
 @synthesize reference = mReference;
 @synthesize likeCount = mLikeCount;
+@synthesize category = mCategory;
 
 
 #pragma mark - init
@@ -29,14 +32,16 @@
                              body:(NSString *)body
                         reference:(NSString *)reference
                         likeCount:(NSInteger)likeCount
+                         category:(NSString *)category
 {
-    return [[self alloc] initWithImage:image body:body reference:reference likeCount:likeCount];
+    return [[self alloc] initWithImage:image body:body reference:reference likeCount:likeCount category:category];
 }
 
 - (instancetype)initWithImage:(PFFile *)image
                          body:(NSString *)body
                     reference:(NSString *)reference
                     likeCount:(NSInteger)likeCount
+                     category:(NSString *)category
 {
     self = [super init];
     
@@ -46,6 +51,7 @@
         mBody = body;
         mReference = reference;
         mLikeCount = likeCount;
+        mCategory = category;
     }
     
     return self;

@@ -7,16 +7,16 @@
 //
 
 #import "DJSearchViewController.h"
-#import <Parse/Parse.h>
-#import "Danji.h"
+#import "DJPopularContentsCell.h"
+
 
 
 @implementation DJSearchViewController
 {
     UISearchBar *mSearchBar;
     __weak IBOutlet UITableView *mTableView;
-    NSArray *mPopularContentsList;
-    NSString *mSearchQuery;
+    NSMutableArray *mPopularContentsList;
+    NSInteger mSelectedIndex;
 }
 
 
@@ -29,6 +29,8 @@
     [mTableView setDelegate:self];
     [mTableView setDataSource:self];
     
+    mPopularContentsList = [[NSMutableArray alloc] init];
+    
     [self setupPopularContentsList];
 }
 
@@ -39,7 +41,6 @@
     mSearchBar = nil;
     mTableView = nil;
     mPopularContentsList = nil;
-    mSearchQuery = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -55,35 +56,24 @@
 }
 
 
-#pragma mark - popular contents delegate
+#pragma mark - contents delegate
 
-- (void)popularContentsCell:(DJPopularContentsCell *)cell didContentsTapped:(NSString *)title
+- (void)contentsManager:(DJContentsManager *)aContentsManager didFinishMakeAContents:(DJContents *)aContents
 {
-    mSearchQuery = title;
-    [self performSegueWithIdentifier:@"popularContents" sender:self];
-}
-
-
-#pragma mark - navigation
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if ([[segue identifier] isEqualToString:@"popularContents"])
+    [mPopularContentsList addObject:aContents];
+    if ([mPopularContentsList count] == 5)
     {
-        id navigationBar = [segue destinationViewController];
-        [navigationBar setTitle:[NSString stringWithFormat:@"검색: %@", mSearchQuery]];
+        [mTableView reloadData];
     }
-    
 }
+
 
 
 #pragma mark - searchBar
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
 {
-    NSLog(@"text did begin editing");
-    [self performSegueWithIdentifier:@"searchDetail" sender:self];
-    
+    [self performSegueWithIdentifier:@"searchDetail" sender:self];    
 }
 
 
@@ -97,12 +87,30 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     DJPopularContentsCell *cell = [mTableView dequeueReusableCellWithIdentifier:@"popularCell"];
-    [cell setDelegate:self];
-    
     [cell inputData:[mPopularContentsList objectAtIndex:[indexPath row]]
            withRank:[indexPath row] + 1];
     
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    mSelectedIndex = [indexPath row];
+    [self performSegueWithIdentifier:@"popularContents" sender:self];
+}
+
+
+#pragma mark - navigation
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([[segue identifier] isEqualToString:@"popularContents"])
+    {
+        id destinationController = [segue destinationViewController];
+        [destinationController setContents:[mPopularContentsList objectAtIndex:mSelectedIndex]];
+        
+    }
+    
 }
 
 
@@ -124,19 +132,10 @@
 
 - (void)setupPopularContentsList
 {
-    PFQuery *query = [Danji query];
-    [query orderByDescending:@"LikeCount"];
-    [query setLimit:5];
-    
-    [query findObjectsInBackgroundWithBlock:^(NSArray *results, NSError *error)
-    {
-        mPopularContentsList = [NSArray arrayWithArray:results];
-        [mTableView reloadData];
-    }];
-    
+    DJContentsManager *contentsManager = [[DJContentsManager alloc] init];
+    [contentsManager setDelegate:self];
+    [contentsManager contentsFromParseDBWithLikeCount:5];
 }
-
-
 
 
 @end

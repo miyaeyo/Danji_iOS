@@ -18,12 +18,14 @@
 @property (nonatomic, readonly) NSString  *body;
 @property (nonatomic, readonly) NSString  *reference;
 @property (nonatomic, readonly) NSInteger likeCount;
+@property (nonatomic, readonly) NSString  *category;
 
 
 + (instancetype)contentsWithImage:(PFFile *)image
                              body:(NSString *)body
                         reference:(NSString *)reference
-                        likeCount:(NSInteger)likeCount;
+                        likeCount:(NSInteger)likeCount
+                         category:(NSString *)category;
 
 
 @end

@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DJPopularContentsCell.h"
+#import "DJContentsManager.h"
 
-@interface DJSearchViewController : UIViewController <UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate, DJPopularContentsDelegate>
+@interface DJSearchViewController : UIViewController <UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate, DJContentsDelegate>
 
 @end

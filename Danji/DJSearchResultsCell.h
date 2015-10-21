@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DJSearchingViewCell : UITableViewCell
+@interface DJSearchResultsCell : UITableViewCell
 
-- (void)inputTitle:(NSString *)title body:(NSString *)body;
+- (void)inputTitle:(NSString *)title body:(NSString *)body category:(NSString *)category;
 
 
 @end

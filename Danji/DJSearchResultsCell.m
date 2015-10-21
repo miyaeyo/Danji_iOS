@@ -1,31 +1,30 @@
 //
-//  DJPopularContentsCell.m
+//  DJSearchingViewCell.m
 //  Danji
 //
-//  Created by miyaeyo on 2015. 10. 19..
+//  Created by miyaeyo on 2015. 10. 20..
 //  Copyright (c) 2015년 miyaeyo. All rights reserved.
 //
 
-#import "DJPopularContentsCell.h"
+#import "DJSearchResultsCell.h"
 
-@implementation DJPopularContentsCell
+@implementation DJSearchResultsCell
 {
-    __weak IBOutlet UILabel *mRank;
-    __weak IBOutlet UIImageView *mIcon;
+    __weak IBOutlet UIImageView *mCategory;
     __weak IBOutlet UILabel *mTitle;
+    __weak IBOutlet UILabel *mBody;
 }
 
 
-- (void)inputData:(DJContents *)contents withRank:(NSInteger)rank
+- (void)inputTitle:(NSString *)title body:(NSString *)body category:(NSString *)category
 {
-    [mRank setText:[NSString stringWithFormat:@"%ld", rank]];
-    [mIcon setImage:[self imageForIcon:[contents category]]];
-    NSString *title = [[[contents reference] componentsSeparatedByString:@" - "] objectAtIndex:0];
     [mTitle setText:title];
+    [mBody setText:body];
+    [mCategory setImage:[self imageForCategory:category]];
 }
 
 
-- (UIImage *)imageForIcon:(NSString *)name
+- (UIImage *)imageForCategory:(NSString *)category
 {
     NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:
                                 [UIImage imageNamed:@"music"], @"music",
@@ -35,8 +34,7 @@
                                 [UIImage imageNamed:@"poem"], @"poem",
                                 [UIImage imageNamed:@"book"], @"book", nil];
     
-    return [dictionary objectForKey:name];
+    return [dictionary objectForKey:category];
 }
-
 
 @end

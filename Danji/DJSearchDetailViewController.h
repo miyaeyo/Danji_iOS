@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DJContentsManager.h"
+//#import "DJContentsManager.h"
+#import "DJContents.h"
 
-@interface DJSearchResultController : UITableViewController <DJContentsDelegate>
 
+@interface DJSearchDetailViewController : UITableViewController
+
+@property (nonatomic, strong) DJContents *contents;
 
 @end
