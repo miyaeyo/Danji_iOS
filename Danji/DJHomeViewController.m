@@ -82,11 +82,14 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    NSLog(@"number of rows in section");
+
     return [mContentsList count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSLog(@"cell for index path");
     mCell = [[self tableView] dequeueReusableCellWithIdentifier:@"contentsCell"];
     [mCell inputContents:[mContentsList objectAtIndex:[indexPath row]]];
     
@@ -95,6 +98,8 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSLog(@"height for row at index path");
+    
     if (!mCell)
     {
         mCell = [[self tableView] dequeueReusableCellWithIdentifier:@"contentsCell"];
@@ -109,6 +114,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSLog(@"estimated height for row at index path");
     return 200;
 }
 

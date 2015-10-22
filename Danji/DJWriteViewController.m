@@ -11,10 +11,14 @@
 
 @implementation DJWriteViewController
 {
-    __weak IBOutlet UITextField *mInputFormPicker;
-    __weak IBOutlet UITextField *mCategoryPicker;
-    NSArray                     *mInputForms;
-    NSArray                     *mCategories;
+    __weak IBOutlet UITextField      *mInputFormPicker;
+    __weak IBOutlet UITextField      *mCategoryPicker;
+    NSArray                          *mInputForms;
+    NSArray                          *mCategories;
+    __weak IBOutlet UITextField      *mTitle;
+    __weak IBOutlet UITextField      *mCreator;
+    __weak IBOutlet UICollectionView *mThumnailCollection;
+    __weak IBOutlet UILabel          *mBody;
 }
 
 
@@ -23,6 +27,10 @@
     [super viewDidLoad];
     
     [self setupPickerView];
+    
+    UITapGestureRecognizer *writeTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(writeLabelTapped:)];
+    [mBody addGestureRecognizer:writeTapGesture];
+    
 }
 
 
@@ -37,18 +45,58 @@
 }
 
 
+#pragma mark - navigation
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([[segue identifier] isEqualToString:@"writeDialog"])
+    {
+        [[segue destinationViewController] setDialogDelegate:self];
+    }
+    else if([[segue identifier] isEqualToString:@"writhParagraph"])
+    {
+        [[segue destinationViewController] setParagraphDelegate:self];
+    }
+}
+
+
 #pragma mark - action
 
 
 - (IBAction)cancelButtonTapped:(id)sender
 {
-    //cancel
 }
 
 
 - (IBAction)doneButtonTapped:(id)sender
 {
     //done
+}
+
+- (IBAction)writeLabelTapped:(id)sender
+{
+    if ([[mInputFormPicker text] isEqualToString:@"dialog"])
+    {
+        [self performSegueWithIdentifier:@"writeDialog" sender:self];
+
+    }
+    else if([[mInputFormPicker text] isEqualToString:@"paragraph"])
+    {
+        [self performSegueWithIdentifier:@"writhParagraph" sender:self];
+    }
+}
+
+
+#pragma mark - write delegate
+
+- (void)dialogeWriteController:(DJDialogWriteController *)controller didFinishWriteDialog:(NSArray *)dialogs
+{
+    
+}
+
+- (void)paragraphWriteController:(DJParagraphWriteController *)controller didFinishWriteParagraph:(NSString *)paragraph
+{
+    
 }
 
 

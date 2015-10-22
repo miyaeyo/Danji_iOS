@@ -130,12 +130,8 @@
     if (mark == 0)
     {
         [mContentsList addObject:aContents];
+        [[self tableView] reloadData];
     }
-}
-
-- (void)didFinishMakeAllContentsByContentsManager:(DJContentsManager *)aContentsManager
-{
-    [[self tableView] reloadData];
 }
 
 

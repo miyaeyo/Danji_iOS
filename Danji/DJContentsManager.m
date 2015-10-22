@@ -57,7 +57,6 @@
              }
              
              [self setupContentsWithContentsList:results];
-             [mDelegate didFinishMakeAllContentsByContentsManager:self];
              
          }];
     }
@@ -80,7 +79,6 @@
              }
              
              [self setupContentsWithContentsList:results];
-             [mDelegate didFinishMakeAllContentsByContentsManager:self];
          }];
     }
 }

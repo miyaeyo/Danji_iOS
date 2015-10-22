@@ -17,9 +17,6 @@
 @required
 - (void)contentsManager:(DJContentsManager *)aContentsManager didFinishMakeAContents:(DJContents *)aContents;
 
-@optional
-- (void)didFinishMakeAllContentsByContentsManager:(DJContentsManager *)aContentsManager;
-
 @end
 
 
