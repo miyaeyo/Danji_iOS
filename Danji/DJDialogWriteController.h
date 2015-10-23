@@ -14,7 +14,7 @@
 @protocol DJDialogWriteDelegate <NSObject>
 
 @required
-- (void)dialogeWriteController:(DJDialogWriteController *)controller didFinishWriteDialog:(NSArray *)dialogs;
+- (void)dialogeWriteController:(DJDialogWriteController *)controller didFinishWriteCharacter:(NSArray *)caracters dialog:(NSArray *)dialogs;
 
 @end
 

@@ -7,6 +7,7 @@
 //
 
 #import "DJWriteViewController.h"
+@import MobileCoreServices;
 
 
 @implementation DJWriteViewController
@@ -19,6 +20,9 @@
     __weak IBOutlet UITextField      *mCreator;
     __weak IBOutlet UICollectionView *mThumnailCollection;
     __weak IBOutlet UILabel          *mBody;
+    NSMutableArray                   *mImages;
+    NSInteger                        mImageCount;
+    
 }
 
 
@@ -30,6 +34,10 @@
     
     UITapGestureRecognizer *writeTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(writeLabelTapped:)];
     [mBody addGestureRecognizer:writeTapGesture];
+    [mThumnailCollection setDelegate:self];
+    [mThumnailCollection setDataSource:self];
+    mImages = [[NSMutableArray alloc] initWithCapacity:5];
+    mImageCount = 0;
     
 }
 
@@ -62,11 +70,10 @@
 
 #pragma mark - action
 
-
 - (IBAction)cancelButtonTapped:(id)sender
 {
+    
 }
-
 
 - (IBAction)doneButtonTapped:(id)sender
 {
@@ -86,10 +93,121 @@
     }
 }
 
+- (IBAction)cameraButtonTapped:(id)sender
+{
+    [self startCameraControllerFromViewController:self usingDelegate:self];
+}
+
+- (IBAction)galleryButtonTapped:(id)sender
+{
+    [self startGalleryControllerFromViewController:self usingDelegate:self];
+}
+
+
+#pragma mark - image control
+
+- (BOOL)startCameraControllerFromViewController:(UIViewController *)controller usingDelegate:(id<UIImagePickerControllerDelegate, UINavigationControllerDelegate>) delegate
+{
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] == NO || delegate == nil || controller == nil)
+    {
+        return NO;
+    }
+    
+    UIImagePickerController *cameraUI = [[UIImagePickerController alloc] init];
+    [cameraUI setSourceType:UIImagePickerControllerSourceTypeCamera];
+    
+    [cameraUI setMediaTypes:[UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypeCamera]];
+    [cameraUI setAllowsEditing:NO];
+    [cameraUI setDelegate:delegate];
+    
+    [controller presentViewController:cameraUI animated:YES completion:NULL];
+    
+    return YES;
+}
+
+- (BOOL)startGalleryControllerFromViewController:(UIViewController *)controller usingDelegate:(id<UIImagePickerControllerDelegate, UINavigationControllerDelegate>) delegate
+{
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary] == NO || delegate == nil || controller == nil)
+    {
+        return NO;
+    }
+    
+    UIImagePickerController *mediaUI = [[UIImagePickerController alloc] init];
+    [mediaUI setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+    
+    //[mediaUI setMediaTypes:[UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypePhotoLibrary]];
+    
+    [mediaUI setMediaTypes:[[NSArray alloc] initWithObjects:(NSString *)kUTTypeImage, nil]];
+    [mediaUI setAllowsEditing:NO];
+    [mediaUI setDelegate:delegate];
+    
+    
+    [controller presentViewController:mediaUI animated:YES completion:NULL];
+    
+    
+    return YES;
+}
+
+- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
+{
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
+    UIImage *originalImage, *editedImage, *imageToUse;
+    mImageCount++;
+    
+    if (mImageCount >5)
+    {
+        [[[UIAlertView alloc] initWithTitle:@"Notice"
+                                    message:@"You can select maximum 5 photos"
+                                   delegate:nil
+                          cancelButtonTitle:@"OK"
+                          otherButtonTitles:nil, nil] show];
+        [mImages removeLastObject];
+        return;
+    }
+
+    if (CFStringCompare((CFStringRef) mediaType, kUTTypeImage, 0) == kCFCompareEqualTo)
+    {
+        editedImage = (UIImage *)[info objectForKey:UIImagePickerControllerEditedImage];
+        originalImage = (UIImage *)[info objectForKey:UIImagePickerControllerOriginalImage];
+        
+        if (editedImage)
+        {
+            imageToUse = editedImage;
+        }
+        else
+        {
+            imageToUse = originalImage;
+        }
+        [mImages addObject:imageToUse];
+        NSLog(@"%lu", (unsigned long)[mImages count]);
+        NSLog(@"%@", imageToUse);
+    }
+}
+
+
+#pragma mark - collection view delegate
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return [mImages count];
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    UICollectionViewCell *cell = [mThumnailCollection dequeueReusableCellWithReuseIdentifier:@"thumbnail" forIndexPath:indexPath];
+    [cell setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"photo"]]];
+    
+    return cell;
+}
+
 
 #pragma mark - write delegate
 
-- (void)dialogeWriteController:(DJDialogWriteController *)controller didFinishWriteDialog:(NSArray *)dialogs
+- (void)dialogeWriteController:(DJDialogWriteController *)controller didFinishWriteCharacter:(NSArray *)caracters dialog:(NSArray *)dialogs
 {
     
 }
