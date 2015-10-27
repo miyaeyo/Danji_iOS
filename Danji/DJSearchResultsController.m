@@ -95,6 +95,7 @@
 
 #pragma mark - search bar delegate
 
+// reload data시점을 다시 생각해 볼 것
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
     mSearchText = searchText;
@@ -116,6 +117,8 @@
 
 
 #pragma mark - contents manager delegate
+
+// DJContents manager로 부터 array를 넘겨 받는 형식으로 바꿀것.
 
 - (void)contentsManager:(DJContentsManager *)aContentsManager didFinishMakeAContents:(DJContents *)aContents
 {
@@ -159,8 +162,9 @@
     [navBar addSubview:mSearchBar];
 }
 
-- (void)setupContentsManager
+- (void)setupContentsManager// method명 모호
 {
+    //contentsManager를 singleton으로 만들것
     DJContentsManager *contentsManager = [[DJContentsManager alloc] init];
     [contentsManager contentsFromParseDBWithBodyQuery:mSearchText];
     [contentsManager contentsFromParseDBWithTitleQuery:mSearchText];

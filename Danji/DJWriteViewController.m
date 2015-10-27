@@ -100,7 +100,8 @@
 
 - (IBAction)galleryButtonTapped:(id)sender
 {
-    [self startGalleryControllerFromViewController:self usingDelegate:self];
+    //[self startGalleryControllerFromViewController:self usingDelegate:self];
+    [self performSegueWithIdentifier:@"openGallery" sender:self];
 }
 
 
@@ -123,69 +124,6 @@
     [controller presentViewController:cameraUI animated:YES completion:NULL];
     
     return YES;
-}
-
-- (BOOL)startGalleryControllerFromViewController:(UIViewController *)controller usingDelegate:(id<UIImagePickerControllerDelegate, UINavigationControllerDelegate>) delegate
-{
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary] == NO || delegate == nil || controller == nil)
-    {
-        return NO;
-    }
-    
-    UIImagePickerController *mediaUI = [[UIImagePickerController alloc] init];
-    [mediaUI setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
-    
-    //[mediaUI setMediaTypes:[UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypePhotoLibrary]];
-    
-    [mediaUI setMediaTypes:[[NSArray alloc] initWithObjects:(NSString *)kUTTypeImage, nil]];
-    [mediaUI setAllowsEditing:NO];
-    [mediaUI setDelegate:delegate];
-    
-    
-    [controller presentViewController:mediaUI animated:YES completion:NULL];
-    
-    
-    return YES;
-}
-
-- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
-{
-}
-
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
-{
-    NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
-    UIImage *originalImage, *editedImage, *imageToUse;
-    mImageCount++;
-    
-    if (mImageCount >5)
-    {
-        [[[UIAlertView alloc] initWithTitle:@"Notice"
-                                    message:@"You can select maximum 5 photos"
-                                   delegate:nil
-                          cancelButtonTitle:@"OK"
-                          otherButtonTitles:nil, nil] show];
-        [mImages removeLastObject];
-        return;
-    }
-
-    if (CFStringCompare((CFStringRef) mediaType, kUTTypeImage, 0) == kCFCompareEqualTo)
-    {
-        editedImage = (UIImage *)[info objectForKey:UIImagePickerControllerEditedImage];
-        originalImage = (UIImage *)[info objectForKey:UIImagePickerControllerOriginalImage];
-        
-        if (editedImage)
-        {
-            imageToUse = editedImage;
-        }
-        else
-        {
-            imageToUse = originalImage;
-        }
-        [mImages addObject:imageToUse];
-        NSLog(@"%lu", (unsigned long)[mImages count]);
-        NSLog(@"%@", imageToUse);
-    }
 }
 
 
@@ -292,3 +230,70 @@
 
 
 @end
+
+/*
+ - (BOOL)startGalleryControllerFromViewController:(UIViewController *)controller usingDelegate:(id<UIImagePickerControllerDelegate, UINavigationControllerDelegate>) delegate
+ {
+ if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary] == NO || delegate == nil || controller == nil)
+ {
+ return NO;
+ }
+ 
+ UIImagePickerController *mediaUI = [[UIImagePickerController alloc] init];
+ [mediaUI setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+ 
+ //[mediaUI setMediaTypes:[UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypePhotoLibrary]];
+ 
+ [mediaUI setMediaTypes:[[NSArray alloc] initWithObjects:(NSString *)kUTTypeImage, nil]];
+ [mediaUI setAllowsEditing:NO];
+ [mediaUI setDelegate:delegate];
+ 
+ 
+ [controller presentViewController:mediaUI animated:YES completion:NULL];
+ 
+ 
+ return YES;
+ }
+ 
+ - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+ {
+ NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
+ UIImage *originalImage, *editedImage, *imageToUse;
+ mImageCount++;
+ 
+ 
+ 
+ 
+ if (mImageCount >5)
+ {
+ [[[UIAlertView alloc] initWithTitle:@"Notice"
+ message:@"You can select maximum 5 photos"
+ delegate:nil
+ cancelButtonTitle:@"OK"
+ otherButtonTitles:nil, nil] show];
+ [mImages removeLastObject];
+ return;
+ }
+ 
+ if (CFStringCompare((CFStringRef) mediaType, kUTTypeImage, 0) == kCFCompareEqualTo)
+ {
+ editedImage = (UIImage *)[info objectForKey:UIImagePickerControllerEditedImage];
+ originalImage = (UIImage *)[info objectForKey:UIImagePickerControllerOriginalImage];
+ 
+ if (editedImage)
+ {
+ imageToUse = editedImage;
+ }
+ else
+ {
+ imageToUse = originalImage;
+ }
+ [mImages addObject:imageToUse];
+ NSLog(@"%lu", (unsigned long)[mImages count]);
+ NSLog(@"%@", imageToUse);
+ }
+ 
+ [[picker parentViewController] dismissViewControllerAnimated:YES completion:NULL];
+ }
+ */
+

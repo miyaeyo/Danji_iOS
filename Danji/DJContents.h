@@ -11,7 +11,7 @@
 #import <Parse/Parse.h>
 
 
-@interface DJContents : NSOperation
+@interface DJContents : NSObject
 
 
 @property (nonatomic, readonly) PFFile    *image;

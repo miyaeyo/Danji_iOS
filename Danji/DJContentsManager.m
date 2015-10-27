@@ -108,6 +108,7 @@
 
 - (void)setupContentsWithContentsList:(NSArray *)aContentsList
 {
+    //Danji랑 DJContents 합치기
     for (Danji *danji in aContentsList)
     {
         @autoreleasepool
