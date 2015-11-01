@@ -100,7 +100,6 @@
 
 - (IBAction)galleryButtonTapped:(id)sender
 {
-    //[self startGalleryControllerFromViewController:self usingDelegate:self];
     [self performSegueWithIdentifier:@"openGallery" sender:self];
 }
 

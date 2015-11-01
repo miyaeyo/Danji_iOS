@@ -25,12 +25,12 @@
 
 @interface DJAsset : NSObject
 
-@property (nonatomic, strong) ALAsset *asset;
-@property (nonatomic, weak) id<DJAssetDelegate> delegate;
 @property (nonatomic, assign) BOOL selected;
-@property (nonatomic, assign) NSInteger index;
+@property (nonatomic, weak) id<DJAssetDelegate> delegate;
+@property (nonatomic, readonly) NSInteger index;
+@property (nonatomic, readonly) ALAsset *asset;
 
-- (id)initWithAsset:(DJAsset *)asset;
+- (id)initWithAsset:(ALAsset *)asset;
 - (NSComparisonResult)compareWithIndex:(DJAsset *)asset;
 
 @end

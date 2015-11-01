@@ -7,13 +7,14 @@
 //
 
 #import "DJAlbumPickerController.h"
+#import "DJAssetPicker.h"
 
 @implementation DJAlbumPickerController
 {
     ALAssetsLibrary                     *mLibrary;
-    NSMutableArray                      *mAssetGroup;
-    NSArray                             *mMediaTypes;
+    NSMutableArray                      *mAssetGroups;
     __weak id<DJAssetSelectionDelegate> mDelegate;
+    NSUInteger                          mIndexForSegue;
 }
 
 @synthesize delegate = mDelegate;
@@ -26,7 +27,7 @@
     [super viewDidLoad];
     [self setupViewAttributes];
     
-    mAssetGroup = [[NSMutableArray alloc] init];
+    mAssetGroups = [[NSMutableArray alloc] init];
     mLibrary = [[ALAssetsLibrary alloc] init];
     
     [[self tableView] setDataSource:self];
@@ -42,15 +43,16 @@
     [super didReceiveMemoryWarning];
     
     mLibrary = nil;
-    mAssetGroup = nil;
-    mMediaTypes = nil;
+    mAssetGroups = nil;
     mDelegate = nil;
+    mIndexForSegue = NULL;
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableView) name:ALAssetsLibraryChangedNotification object:nil];
-    [[self tableView] reloadData];
+    
+    [self reloadTableView];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -67,14 +69,14 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [mAssetGroup count];
+    return [mAssetGroups count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"albumCell"];
     
-    ALAssetsGroup *assetGroup = [mAssetGroup objectAtIndex:[indexPath row]];
+    ALAssetsGroup *assetGroup = [mAssetGroups objectAtIndex:[indexPath row]];
     [assetGroup setAssetsFilter:[ALAssetsFilter allPhotos]];
     NSInteger assetCount = [assetGroup numberOfAssets];
     
@@ -89,7 +91,21 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    mIndexForSegue = [indexPath row];
+    [self performSegueWithIdentifier:@"openAlbum" sender:self];
+}
+
+
+#pragma mark - navigation
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([[segue identifier] isEqualToString:@"openAlbum"])
+    {
+        id destController = [[[segue destinationViewController] viewControllers] objectAtIndex:0];
+        [destController setDelegate:self];
+        [destController setAssetGroup:[mAssetGroups objectAtIndex:mIndexForSegue]];
+    }
 }
 
 
@@ -109,6 +125,7 @@
 {
     [mDelegate selectedAssets:assets];
 }
+
 
 #pragma mark action
 
@@ -145,11 +162,11 @@
                 
                 if ([[sGroupPropertyName lowercaseString] isEqualToString:@"camera roll"] && nType == ALAssetsGroupSavedPhotos)
                 {
-                    [mAssetGroup insertObject:group atIndex:0];
+                    [mAssetGroups insertObject:group atIndex:0];
                 }
                 else
                 {
-                    [mAssetGroup addObject:group];
+                    [mAssetGroups addObject:group];
                 }
                 
                 [self performSelectorOnMainThread:@selector(reloadTableView) withObject:nil waitUntilDone:YES];
