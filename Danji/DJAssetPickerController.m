@@ -101,8 +101,8 @@ static NSString * const reuseIdentifier = @"photoCell";
     }
     else if([asset selected] && mSelectionCount >= mMaxSelectionCount)
     {
-        [[[UIAlertView alloc] initWithTitle:@"Over maximun selection count"
-                                    message:[NSString stringWithFormat:@"You can select %ld photos", mMaxSelectionCount]
+        [[[UIAlertView alloc] initWithTitle:@"Over maximun selection"
+                                    message:[NSString stringWithFormat:@"You can select maximun %ld photos", mMaxSelectionCount]
                                    delegate:nil
                           cancelButtonTitle:@"OK"
                           otherButtonTitles:nil, nil] show];

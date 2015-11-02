@@ -43,7 +43,7 @@
     
     mLibrary = nil;
     mAssetGroups = nil;
-   // mDelegate = nil;
+    mDelegate = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated

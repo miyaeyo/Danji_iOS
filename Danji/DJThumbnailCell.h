@@ -8,8 +8,24 @@
 
 #import <UIKit/UIKit.h>
 
+@class DJThumbnailCell;
+
+@protocol DJThumbnailCellDelegate <NSObject>
+
+@required
+- (void)thumbnailCellDidDeleted:(DJThumbnailCell *)cell;
+
+@end
+
+
+
 @interface DJThumbnailCell : UICollectionViewCell
 
+@property (nonatomic) NSInteger index;
+@property (nonatomic, weak) id<DJThumbnailCellDelegate> delegate;
+
 - (void)setupThumbnail:(UIImage *)image;
+
+
 
 @end

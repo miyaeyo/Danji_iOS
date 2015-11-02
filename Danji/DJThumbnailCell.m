@@ -10,8 +10,14 @@
 
 @implementation DJThumbnailCell
 {
-    __weak IBOutlet UIImageView *mThumbnailView;
+    __weak IBOutlet UIImageView         *mThumbnailView;
+    NSInteger                           mIndex;
+    __weak id<DJThumbnailCellDelegate>  mDelegate;
 }
+
+@synthesize index = mIndex;
+@synthesize delegate = mDelegate;
+
 
 - (void)setupThumbnail:(UIImage *)image
 {
@@ -24,6 +30,11 @@
     UIGraphicsEndImageContext();
     
     [mThumbnailView setImage:resized];
+}
+
+- (IBAction)deleteButtonTapped:(id)sender
+{
+    [mDelegate thumbnailCellDidDeleted:self];
 }
 
 @end

@@ -700,7 +700,7 @@
                                 </connections>
                             </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="l21-13-rjK">
-                                <rect key="frame" x="12" y="438" width="303" height="65"/>
+                                <rect key="frame" x="8" y="435" width="305" height="69"/>
                                 <color key="backgroundColor" red="0.99215686270000003" green="0.94901960780000005" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="lP7-X3-5jF">
                                     <size key="itemSize" width="51" height="52"/>
@@ -719,6 +719,15 @@
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uUg-x7-xX8">
                                                     <rect key="frame" x="0.0" y="0.0" width="51" height="52"/>
                                                 </imageView>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CcJ-J4-Xog">
+                                                    <rect key="frame" x="33" y="3" width="15" height="15"/>
+                                                    <state key="normal" image="cancel">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="deleteButtonTapped:" destination="LWv-iP-xO9" eventType="touchUpInside" id="p13-Yi-HVd"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
@@ -767,7 +776,7 @@
                         <outlet property="mCategoryPicker" destination="dSk-jS-bTB" id="p4x-Ne-vZl"/>
                         <outlet property="mCreator" destination="68x-Ha-Yd6" id="kXd-sv-uNF"/>
                         <outlet property="mInputFormPicker" destination="ic7-M1-JJm" id="FUD-2U-1HG"/>
-                        <outlet property="mThumnailCollection" destination="l21-13-rjK" id="b7Y-P9-leW"/>
+                        <outlet property="mThumnailCollectionView" destination="l21-13-rjK" id="gIP-TP-NGJ"/>
                         <outlet property="mTitle" destination="e72-J6-MSx" id="QKZ-hb-szF"/>
                         <segue destination="sl3-7E-hcv" kind="show" identifier="writeDialog" id="lOy-KO-PZv"/>
                         <segue destination="xYn-eL-xYj" kind="show" identifier="writhParagraph" id="Kad-9n-SuX"/>
@@ -790,9 +799,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="Ul6-nd-XqZ">
-                                <rect key="frame" x="7" y="64" width="306" height="568"/>
+                                <rect key="frame" x="7" y="14" width="306" height="618"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
@@ -1184,6 +1192,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="cancel" width="25" height="25"/>
         <image name="danji.png" width="48" height="48"/>
         <image name="home" width="24" height="24"/>
         <image name="launch.png" width="180" height="164"/>

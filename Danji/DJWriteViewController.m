@@ -7,7 +7,7 @@
 //
 
 #import "DJWriteViewController.h"
-#import "DJThumbnailCell.h"
+
 
 @import MobileCoreServices;
 
@@ -16,14 +16,15 @@
 {
     __weak IBOutlet UITextField      *mInputFormPicker;
     __weak IBOutlet UITextField      *mCategoryPicker;
-    NSArray                          *mInputForms;
-    NSArray                          *mCategories;
     __weak IBOutlet UITextField      *mTitle;
     __weak IBOutlet UITextField      *mCreator;
-    __weak IBOutlet UICollectionView *mThumnailCollection;
+    __weak IBOutlet UICollectionView *mThumnailCollectionView;
     __weak IBOutlet UILabel          *mBody;
+    
     NSArray                          *mImages;
     NSInteger                        mImageCount;
+    NSArray                          *mInputForms;
+    NSArray                          *mCategories;
     
 }
 
@@ -36,8 +37,8 @@
     
     UITapGestureRecognizer *writeTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(writeLabelTapped:)];
     [mBody addGestureRecognizer:writeTapGesture];
-    [mThumnailCollection setDelegate:self];
-    [mThumnailCollection setDataSource:self];
+    [mThumnailCollectionView setDelegate:self];
+    [mThumnailCollectionView setDataSource:self];
     mImages = [[NSArray alloc] init];
     mImageCount = 0;
     
@@ -143,7 +144,7 @@
     
     mImages = [NSArray arrayWithArray:tempImages];
     
-    [mThumnailCollection reloadData];
+    [mThumnailCollectionView reloadData];
 }
 
 
@@ -156,11 +157,32 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    DJThumbnailCell *cell = [mThumnailCollection dequeueReusableCellWithReuseIdentifier:@"thumbnail" forIndexPath:indexPath];
-    [cell setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"photo"]]];
+    DJThumbnailCell *cell = [mThumnailCollectionView dequeueReusableCellWithReuseIdentifier:@"thumbnail" forIndexPath:indexPath];
     [cell setupThumbnail:[mImages objectAtIndex:[indexPath row]]];
+    [cell setIndex:[indexPath row]];
+    [cell setDelegate:self];
     
     return cell;
+}
+
+- (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    
+    return YES;
+}
+
+
+#pragma mark - thumbnail cell delegate
+
+- (void)thumbnailCellDidDeleted:(DJThumbnailCell *)cell
+{
+    NSMutableArray *tempImages = [[NSMutableArray alloc] init];
+    tempImages = [NSMutableArray arrayWithArray:mImages];
+    [tempImages removeObjectAtIndex:[cell index]];
+    mImages = [NSArray arrayWithArray:tempImages];
+    
+    [mThumnailCollectionView reloadData];
 }
 
 
@@ -251,70 +273,3 @@
 
 
 @end
-
-/*
- - (BOOL)startGalleryControllerFromViewController:(UIViewController *)controller usingDelegate:(id<UIImagePickerControllerDelegate, UINavigationControllerDelegate>) delegate
- {
- if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary] == NO || delegate == nil || controller == nil)
- {
- return NO;
- }
- 
- UIImagePickerController *mediaUI = [[UIImagePickerController alloc] init];
- [mediaUI setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
- 
- //[mediaUI setMediaTypes:[UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypePhotoLibrary]];
- 
- [mediaUI setMediaTypes:[[NSArray alloc] initWithObjects:(NSString *)kUTTypeImage, nil]];
- [mediaUI setAllowsEditing:NO];
- [mediaUI setDelegate:delegate];
- 
- 
- [controller presentViewController:mediaUI animated:YES completion:NULL];
- 
- 
- return YES;
- }
- 
- - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
- {
- NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
- UIImage *originalImage, *editedImage, *imageToUse;
- mImageCount++;
- 
- 
- 
- 
- if (mImageCount >5)
- {
- [[[UIAlertView alloc] initWithTitle:@"Notice"
- message:@"You can select maximum 5 photos"
- delegate:nil
- cancelButtonTitle:@"OK"
- otherButtonTitles:nil, nil] show];
- [mImages removeLastObject];
- return;
- }
- 
- if (CFStringCompare((CFStringRef) mediaType, kUTTypeImage, 0) == kCFCompareEqualTo)
- {
- editedImage = (UIImage *)[info objectForKey:UIImagePickerControllerEditedImage];
- originalImage = (UIImage *)[info objectForKey:UIImagePickerControllerOriginalImage];
- 
- if (editedImage)
- {
- imageToUse = editedImage;
- }
- else
- {
- imageToUse = originalImage;
- }
- [mImages addObject:imageToUse];
- NSLog(@"%lu", (unsigned long)[mImages count]);
- NSLog(@"%@", imageToUse);
- }
- 
- [[picker parentViewController] dismissViewControllerAnimated:YES completion:NULL];
- }
- */
-
