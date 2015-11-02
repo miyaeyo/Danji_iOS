@@ -18,13 +18,12 @@
 @required
 
 - (void)DJImagePickerController:(DJImagePickerController *)picker didFinishPickingImages:(NSArray *)images;
-- (void)DJImagePickerControllerDidCancel:(DJImagePickerController *)picker;
 
 @end
 
 
 @interface DJImagePickerController : UINavigationController <DJAssetSelectionDelegate>
 
-@property (nonatomic, weak) id<DJImagePickerControllerDelegate> delegate;
+@property (nonatomic, weak) id<DJImagePickerControllerDelegate> imageDelegate;
 
 @end

@@ -7,7 +7,7 @@
 //
 
 #import "DJAlbumPickerController.h"
-#import "DJAssetPicker.h"
+#import "DJAssetPickerController.h"
 
 @implementation DJAlbumPickerController
 {
@@ -18,7 +18,6 @@
 }
 
 @synthesize delegate = mDelegate;
-
 
 #pragma mark - view
 
@@ -44,8 +43,7 @@
     
     mLibrary = nil;
     mAssetGroups = nil;
-    mDelegate = nil;
-    mIndexForSegue = NULL;
+   // mDelegate = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -108,18 +106,6 @@
     }
 }
 
-
-#pragma mark - asset selection delegate
-
-- (BOOL)shouldSelectAsset:(DJAsset *)asset previousCount:(NSUInteger)previousCount
-{
-    return [mDelegate shouldSelectAsset:asset previousCount:previousCount];
-}
-
-- (BOOL)shouldDeselectAsset:(DJAsset *)asset previousCount:(NSUInteger)previousCount
-{
-    return [mDelegate shouldDeselectAsset:asset previousCount:previousCount];
-}
 
 - (void)selectedAssets:(NSArray *)assets
 {

@@ -11,15 +11,11 @@
 
 #import <Foundation/Foundation.h>
 
-@class DJAsset;
 
 @protocol DJAssetSelectionDelegate <NSObject>
 
 @required
-
 - (void)selectedAssets:(NSArray *)assets;
-- (BOOL)shouldSelectAsset:(DJAsset *)asset previousCount:(NSUInteger)previousCount;
-- (BOOL)shouldDeselectAsset:(DJAsset *)asset previousCount:(NSUInteger)previousCount;
 
 @end
 

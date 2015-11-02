@@ -6,21 +6,27 @@
 //  Copyright (c) 2015년 miyaeyo. All rights reserved.
 //
 
-#import "DJAssetPicker.h"
+#import "DJAssetPickerController.h"
 #import "DJAssetCell.h"
+#import "DJAsset.h"
 
 
-@implementation DJAssetPicker
-{    
+@implementation DJAssetPickerController
+{
     __weak id<DJAssetSelectionDelegate> mDelegate;
     ALAssetsGroup                       *mAssetGroup;
     NSMutableArray                      *mAssets;
+    NSUInteger                          mSelectionCount;
+    NSUInteger                          mMaxSelectionCount;
 }
+
 
 @synthesize delegate = mDelegate;
 @synthesize assetGroup = mAssetGroup;
 
+
 static NSString * const reuseIdentifier = @"photoCell";
+
 
 - (void)viewDidLoad
 {
@@ -30,6 +36,8 @@ static NSString * const reuseIdentifier = @"photoCell";
     [[self collectionView] setDataSource:self];
 
     mAssets = [[NSMutableArray alloc] init];
+    mMaxSelectionCount = 5;
+    mSelectionCount = 0;
     
     [self performSelectorInBackground:@selector(preparePhotos) withObject:nil];
     
@@ -68,47 +76,43 @@ static NSString * const reuseIdentifier = @"photoCell";
     DJAssetCell *cell = [[self collectionView] dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     
     [cell setupAsset:[mAssets objectAtIndex:[indexPath row]]];
-    [cell sizeToFit];
     
     return cell;
 }
 
 
-#pragma mark - asset delegate
+#pragma mark <UICollectionViewDelegate>
 
-- (void)assetSelected:(DJAsset *)asset
+- (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    DJAsset *asset = [mAssets objectAtIndex:[indexPath row]];
+    [asset setSelected:![asset selected]];
     
-}
-
-- (BOOL)shouldSelectAsset:(DJAsset *)asset
-{
-    NSUInteger selectionCount = 0;
-    for (DJAsset *asset in mAssets)
+    UICollectionViewCell *selectedCell = [[self collectionView] cellForItemAtIndexPath:indexPath];
+    
+    if ([asset selected] && mSelectionCount < mMaxSelectionCount)
     {
-        if ([asset selected])
-        {
-            selectionCount++;
-        }
+        mSelectionCount++;
+        UIImageView *overlayView = [[UIImageView alloc] init];
+        [overlayView setFrame:[selectedCell bounds]];
+        [overlayView setImage:[UIImage imageNamed:@"overlay"]];
+        
+        [selectedCell addSubview:overlayView];
+    }
+    else if([asset selected] && mSelectionCount >= mMaxSelectionCount)
+    {
+        [[[UIAlertView alloc] initWithTitle:@"Over maximun selection count"
+                                    message:[NSString stringWithFormat:@"You can select %ld photos", mMaxSelectionCount]
+                                   delegate:nil
+                          cancelButtonTitle:@"OK"
+                          otherButtonTitles:nil, nil] show];
+    }
+    else
+    {
+        mSelectionCount--;
+        [[[selectedCell subviews] objectAtIndex:1] removeFromSuperview];
     }
     
-    BOOL shouldSelect = YES;
-    
-    if ([mDelegate respondsToSelector:@selector(shouldSelectAsset:previousCount:)])
-    {
-        shouldSelect = [mDelegate shouldSelectAsset:asset previousCount:selectionCount];
-    }
-    
-    return shouldSelect;
-}
-
-- (void)assetDeselected:(DJAsset *)asset
-{
-    
-}
-
-- (BOOL)shouldDeselectAsset:(DJAsset *)asset
-{
     return YES;
 }
 
@@ -117,16 +121,18 @@ static NSString * const reuseIdentifier = @"photoCell";
 
 - (IBAction)doneButtonTapped:(id)sender
 {
-    NSMutableArray *selectedPhotos = [[NSMutableArray alloc] init];
-    for (DJAsset *asset in mAssets)
+    [self dismissViewControllerAnimated:YES completion:^
     {
-        if ([asset selected])
+        NSMutableArray *selectedPhotos = [[NSMutableArray alloc] init];
+        for (DJAsset *asset in mAssets)
         {
-            [selectedPhotos addObject:asset];
+            if ([asset selected])
+            {
+                [selectedPhotos addObject:asset];
+            }
         }
-        
         [mDelegate selectedAssets:selectedPhotos];
-    }
+    }];
 }
 
 
@@ -153,8 +159,6 @@ static NSString * const reuseIdentifier = @"photoCell";
             }
             
             DJAsset *asset = [[DJAsset alloc] initWithAsset:result];
-            [asset setDelegate:self];
-            
             [mAssets addObject:asset];
         }];
         
@@ -162,27 +166,5 @@ static NSString * const reuseIdentifier = @"photoCell";
     }
 }
 
-
-#pragma mark <UICollectionViewDelegate>
-
-- (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    return YES;
-}
-
-/*
-// Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-- (BOOL)collectionView:(UICollectionView *)collectionView shouldShowMenuForItemAtIndexPath:(NSIndexPath *)indexPath {
-	return NO;
-}
-
-- (BOOL)collectionView:(UICollectionView *)collectionView canPerformAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
-	return NO;
-}
-
-- (void)collectionView:(UICollectionView *)collectionView performAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
-	
-}
-*/
 
 @end

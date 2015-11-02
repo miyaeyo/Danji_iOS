@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "DJDialogWriteController.h"
 #import "DJParagraphWriteController.h"
+#import "DJImagePickerController.h"
 
-@interface DJWriteViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate, DJDialogWriteDelegate, DJParagraphDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface DJWriteViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate, DJDialogWriteDelegate, DJParagraphDelegate, UICollectionViewDataSource, UICollectionViewDelegate, DJImagePickerControllerDelegate, UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
 @end

@@ -31,7 +31,7 @@
 		9EE1509C1BD88A110034258E /* DJDialogInputCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EE1509B1BD88A110034258E /* DJDialogInputCell.m */; };
 		9EE150A31BDF11560034258E /* DJAlbumPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EE150A21BDF11560034258E /* DJAlbumPickerController.m */; };
 		9EE150A71BDF121B0034258E /* DJAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EE150A61BDF121B0034258E /* DJAsset.m */; };
-		9EE150AE1BE4B2B60034258E /* DJAssetPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EE150AD1BE4B2B60034258E /* DJAssetPicker.m */; };
+		9EE150AE1BE4B2B60034258E /* DJAssetPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EE150AD1BE4B2B60034258E /* DJAssetPickerController.m */; };
 		9EE150B11BE5B6190034258E /* DJAssetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EE150B01BE5B6190034258E /* DJAssetCell.m */; };
 		9EE150B51BE6798C0034258E /* DJImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EE150B41BE6798C0034258E /* DJImagePickerController.m */; };
 		9EE2B26C1BC5063F003B929E /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EE2B26B1BC5063F003B929E /* Bolts.framework */; };
@@ -48,6 +48,7 @@
 		9EE2B2821BC50817003B929E /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EE2B2811BC50817003B929E /* libsqlite3.dylib */; };
 		9EE2B2871BC51E73003B929E /* launch.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EE2B2861BC51E73003B929E /* launch.png */; };
 		9EE2B28C1BCB4CD4003B929E /* DJLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EE2B28B1BCB4CD4003B929E /* DJLoginViewController.m */; };
+		9EEEB2131BE6FF340013F396 /* DJThumbnailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EEEB2121BE6FF340013F396 /* DJThumbnailCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -109,8 +110,8 @@
 		9EE150A51BDF121B0034258E /* DJAsset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DJAsset.h; sourceTree = "<group>"; };
 		9EE150A61BDF121B0034258E /* DJAsset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJAsset.m; sourceTree = "<group>"; };
 		9EE150A81BDF14510034258E /* DJAssetSelectionDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DJAssetSelectionDelegate.h; sourceTree = "<group>"; };
-		9EE150AC1BE4B2B60034258E /* DJAssetPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DJAssetPicker.h; sourceTree = "<group>"; };
-		9EE150AD1BE4B2B60034258E /* DJAssetPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJAssetPicker.m; sourceTree = "<group>"; };
+		9EE150AC1BE4B2B60034258E /* DJAssetPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DJAssetPickerController.h; sourceTree = "<group>"; };
+		9EE150AD1BE4B2B60034258E /* DJAssetPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJAssetPickerController.m; sourceTree = "<group>"; };
 		9EE150AF1BE5B6190034258E /* DJAssetCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DJAssetCell.h; sourceTree = "<group>"; };
 		9EE150B01BE5B6190034258E /* DJAssetCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJAssetCell.m; sourceTree = "<group>"; };
 		9EE150B31BE6798C0034258E /* DJImagePickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DJImagePickerController.h; sourceTree = "<group>"; };
@@ -129,6 +130,8 @@
 		9EE2B2811BC50817003B929E /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		9EE2B2861BC51E73003B929E /* launch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch.png; sourceTree = "<group>"; };
 		9EE2B28B1BCB4CD4003B929E /* DJLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJLoginViewController.m; sourceTree = "<group>"; };
+		9EEEB2111BE6FF340013F396 /* DJThumbnailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DJThumbnailCell.h; sourceTree = "<group>"; };
+		9EEEB2121BE6FF340013F396 /* DJThumbnailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJThumbnailCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -246,6 +249,8 @@
 				9EE1509B1BD88A110034258E /* DJDialogInputCell.m */,
 				9EE150971BD8868C0034258E /* DJParagraphWriteController.h */,
 				9EE150981BD8868C0034258E /* DJParagraphWriteController.m */,
+				9EEEB2111BE6FF340013F396 /* DJThumbnailCell.h */,
+				9EEEB2121BE6FF340013F396 /* DJThumbnailCell.m */,
 			);
 			name = Write;
 			sourceTree = "<group>";
@@ -297,8 +302,8 @@
 				9EE150A81BDF14510034258E /* DJAssetSelectionDelegate.h */,
 				9EE150A51BDF121B0034258E /* DJAsset.h */,
 				9EE150A61BDF121B0034258E /* DJAsset.m */,
-				9EE150AC1BE4B2B60034258E /* DJAssetPicker.h */,
-				9EE150AD1BE4B2B60034258E /* DJAssetPicker.m */,
+				9EE150AC1BE4B2B60034258E /* DJAssetPickerController.h */,
+				9EE150AD1BE4B2B60034258E /* DJAssetPickerController.m */,
 				9EE150AF1BE5B6190034258E /* DJAssetCell.h */,
 				9EE150B01BE5B6190034258E /* DJAssetCell.m */,
 				9EE150B31BE6798C0034258E /* DJImagePickerController.h */,
@@ -443,7 +448,7 @@
 			files = (
 				9EE1506B1BCF78EF0034258E /* DJContentsManager.m in Sources */,
 				9EE150961BD885030034258E /* DJDialogWriteController.m in Sources */,
-				9EE150AE1BE4B2B60034258E /* DJAssetPicker.m in Sources */,
+				9EE150AE1BE4B2B60034258E /* DJAssetPickerController.m in Sources */,
 				9EE150A71BDF121B0034258E /* DJAsset.m in Sources */,
 				9EE1509C1BD88A110034258E /* DJDialogInputCell.m in Sources */,
 				9E4E43361BC1764B006FB05E /* DJSearchViewController.m in Sources */,
@@ -463,6 +468,7 @@
 				9EE1508A1BD62A9D0034258E /* DJSearchResultsController.m in Sources */,
 				9EE150631BCDFF660034258E /* Danji.m in Sources */,
 				9E4E43331BC1763C006FB05E /* DJHomeViewController.m in Sources */,
+				9EEEB2131BE6FF340013F396 /* DJThumbnailCell.m in Sources */,
 				9EE150901BD639A40034258E /* DJSearchResultsCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

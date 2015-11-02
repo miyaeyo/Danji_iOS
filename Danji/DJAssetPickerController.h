@@ -11,7 +11,7 @@
 #import "DJAssetSelectionDelegate.h"
 
 
-@interface DJAssetPicker : UICollectionViewController <DJAssetDelegate>
+@interface DJAssetPickerController : UICollectionViewController
 
 @property (nonatomic, weak) id<DJAssetSelectionDelegate> delegate;
 @property (nonatomic, strong) ALAssetsGroup *assetGroup;

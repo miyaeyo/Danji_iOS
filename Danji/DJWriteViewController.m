@@ -7,6 +7,8 @@
 //
 
 #import "DJWriteViewController.h"
+#import "DJThumbnailCell.h"
+
 @import MobileCoreServices;
 
 
@@ -20,7 +22,7 @@
     __weak IBOutlet UITextField      *mCreator;
     __weak IBOutlet UICollectionView *mThumnailCollection;
     __weak IBOutlet UILabel          *mBody;
-    NSMutableArray                   *mImages;
+    NSArray                          *mImages;
     NSInteger                        mImageCount;
     
 }
@@ -36,7 +38,7 @@
     [mBody addGestureRecognizer:writeTapGesture];
     [mThumnailCollection setDelegate:self];
     [mThumnailCollection setDataSource:self];
-    mImages = [[NSMutableArray alloc] initWithCapacity:5];
+    mImages = [[NSArray alloc] init];
     mImageCount = 0;
     
 }
@@ -65,6 +67,11 @@
     {
         [[segue destinationViewController] setParagraphDelegate:self];
     }
+    else if([[segue identifier] isEqualToString:@"openGallery"])
+    {
+        [[segue destinationViewController] setImageDelegate:self];
+    }
+    
 }
 
 
@@ -125,6 +132,20 @@
     return YES;
 }
 
+- (void)DJImagePickerController:(DJImagePickerController *)picker didFinishPickingImages:(NSArray *)images
+{
+    NSMutableArray *tempImages = [[NSMutableArray alloc] init];
+    for(NSDictionary *dictionary in images)
+    {
+        UIImage *image = [dictionary valueForKey:UIImagePickerControllerOriginalImage];
+        [tempImages addObject:image];
+    }
+    
+    mImages = [NSArray arrayWithArray:tempImages];
+    
+    [mThumnailCollection reloadData];
+}
+
 
 #pragma mark - collection view delegate
 
@@ -135,8 +156,9 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    UICollectionViewCell *cell = [mThumnailCollection dequeueReusableCellWithReuseIdentifier:@"thumbnail" forIndexPath:indexPath];
+    DJThumbnailCell *cell = [mThumnailCollection dequeueReusableCellWithReuseIdentifier:@"thumbnail" forIndexPath:indexPath];
     [cell setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"photo"]]];
+    [cell setupThumbnail:[mImages objectAtIndex:[indexPath row]]];
     
     return cell;
 }

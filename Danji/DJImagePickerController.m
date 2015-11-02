@@ -6,7 +6,10 @@
 //  Copyright (c) 2015년 miyaeyo. All rights reserved.
 //
 
+#import <CoreLocation/CoreLocation.h>
+#import <AssetsLibrary/AssetsLibrary.h>
 #import "DJImagePickerController.h"
+#import "DJAsset.h"
 
 
 @implementation DJImagePickerController
@@ -15,11 +18,12 @@
     NSInteger mMaxSelectionCount;
 }
 
-@synthesize delegate = mDelegate;
+@synthesize imageDelegate = mDelegate;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [[[self viewControllers] objectAtIndex:0] setDelegate:self];
     
     mMaxSelectionCount = 5;
 }
@@ -36,37 +40,49 @@
 {
     NSMutableArray *returnImages = [[NSMutableArray alloc] init];
     
-}
-
-- (BOOL)shouldSelectAsset:(DJAsset *)asset previousCount:(NSUInteger)previousCount
-{
-    BOOL shouldSelect = previousCount < mMaxSelectionCount;
-    
-    if (!shouldSelect)
+    for (DJAsset *aAsset in assets)
     {
-        [[[UIAlertView alloc] initWithTitle:@"Over maximun selection count"
-                                    message:[NSString stringWithFormat:@"You can select %ld photos", mMaxSelectionCount]
-                                   delegate:nil
-                          cancelButtonTitle:@"OK"
-                          otherButtonTitles:nil, nil] show];
+        ALAsset *asset = [aAsset asset];
+        
+        id object = [asset valueForProperty:ALAssetPropertyType];
+        if (!object)
+        {
+            continue;
+        }
+        
+        NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] init];
+        CLLocation *location = [asset valueForProperty:ALAssetPropertyLocation];
+        if (location)
+        {
+            [dictionary setObject:location forKey:ALAssetPropertyLocation];
+        }
+        
+        [dictionary setObject:object forKey:UIImagePickerControllerMediaType];
+        
+        ALAssetRepresentation *assetRepresentation = [asset defaultRepresentation];
+        
+        if (assetRepresentation)
+        {
+            CGImageRef imageRef = [assetRepresentation fullScreenImage];
+            UIImage *image = [UIImage imageWithCGImage:imageRef
+                                                 scale:1.0f
+                                           orientation:UIImageOrientationUp];
+            
+            [dictionary setObject:image forKey:UIImagePickerControllerOriginalImage];
+            [dictionary setObject:[[asset valueForProperty:ALAssetPropertyURLs] valueForKey:[[[asset valueForProperty:ALAssetPropertyURLs] allKeys] objectAtIndex:0]]
+                           forKey:UIImagePickerControllerReferenceURL];
+            
+            [returnImages addObject:dictionary];
+        }
     }
     
-    return shouldSelect;
+    if (mDelegate != nil && [mDelegate respondsToSelector:@selector(DJImagePickerController:didFinishPickingImages:)])
+    {
+        [mDelegate performSelector:@selector(DJImagePickerController:didFinishPickingImages:)
+                        withObject:self
+                        withObject:returnImages];
+    }
 }
 
-- (BOOL)shouldDeselectAsset:(DJAsset *)asset previousCount:(NSUInteger)previousCount
-{
-    return YES;
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
