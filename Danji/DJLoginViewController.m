@@ -61,6 +61,12 @@
     [self login];
 }
 
+- (IBAction)backgroundTapped:(id)sender
+{
+    [[self view] endEditing:YES];
+}
+
+
 
 #pragma mark - private
 

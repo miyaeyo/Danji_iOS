@@ -32,7 +32,7 @@
 {
     [self setupImage:[contents image]];
     [mBody setText:[contents body]];
-    [mLikeCount setText:[NSString stringWithFormat:@"%ld", [contents likeCount]]];
+    [mLikeCount setText:[NSString stringWithFormat:@"%ld", (long)[contents likeCount]]];
     [mReference setText:[contents reference]];
     
 }
@@ -44,7 +44,7 @@
 {
     NSInteger likeCount = [[mLikeCount text] integerValue];
     likeCount ++;
-    [mLikeCount setText:[NSString stringWithFormat:@"%ld", likeCount]];
+    [mLikeCount setText:[NSString stringWithFormat:@"%ld", (long)likeCount]];
     //to do: db에 likecount 변동 반영
 }
 

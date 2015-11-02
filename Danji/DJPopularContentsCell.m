@@ -18,7 +18,7 @@
 
 - (void)inputData:(DJContents *)contents withRank:(NSInteger)rank
 {
-    [mRank setText:[NSString stringWithFormat:@"%ld", rank]];
+    [mRank setText:[NSString stringWithFormat:@"%ld", (long)rank]];
     [mIcon setImage:[self imageForIcon:[contents category]]];
     NSString *title = [[[contents reference] componentsSeparatedByString:@" - "] objectAtIndex:0];
     [mTitle setText:title];
