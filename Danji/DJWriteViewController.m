@@ -124,13 +124,45 @@
     UIImagePickerController *cameraUI = [[UIImagePickerController alloc] init];
     [cameraUI setSourceType:UIImagePickerControllerSourceTypeCamera];
     
-    [cameraUI setMediaTypes:[UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypeCamera]];
-    [cameraUI setAllowsEditing:NO];
+    [cameraUI setMediaTypes:[[NSArray alloc] initWithObjects:(NSString *)kUTTypeImage, nil]];
+    [cameraUI setAllowsEditing:YES];
     [cameraUI setDelegate:delegate];
     
     [controller presentViewController:cameraUI animated:YES completion:NULL];
     
     return YES;
+}
+
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    @autoreleasepool
+    {
+        [self dismissViewControllerAnimated:YES completion:NULL];
+    }
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
+{
+    UIImage *originalImage, *editedImage, *imageToSave;
+    
+    editedImage = (UIImage *)[info objectForKey:UIImagePickerControllerEditedImage];
+    originalImage = (UIImage *)[info objectForKey:UIImagePickerControllerOriginalImage];
+    
+    if (editedImage)
+    {
+        imageToSave = editedImage;
+    }
+    else
+    {
+        imageToSave = originalImage;
+    }
+    
+    UIImageWriteToSavedPhotosAlbum(imageToSave, nil, nil, nil);
+    mImages = [NSArray arrayWithObject:imageToSave];
+    [mThumnailCollectionView reloadData];
+
+    [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
 - (void)DJImagePickerController:(DJImagePickerController *)picker didFinishPickingImages:(NSArray *)images

@@ -870,7 +870,7 @@
                     <navigationItem key="navigationItem" title="Select an Album" id="Wsl-b1-64m">
                         <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="lrW-Cv-bDh">
                             <connections>
-                                <action selector="calcelButtonTapped:" destination="mCb-a7-tlT" id="ReM-sx-XgM"/>
+                                <action selector="cancelButtonTapped:" destination="mCb-a7-tlT" id="kCQ-RW-Nbz"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

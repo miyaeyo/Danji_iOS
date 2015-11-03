@@ -78,7 +78,7 @@
     [assetGroup setAssetsFilter:[ALAssetsFilter allPhotos]];
     NSInteger assetCount = [assetGroup numberOfAssets];
     
-    [[cell textLabel] setText:[NSString stringWithFormat:@"%@ (%ldl)", [assetGroup valueForProperty:ALAssetsGroupPropertyName], (long)assetCount]];
+    [[cell textLabel] setText:[NSString stringWithFormat:@"%@ (%ld)", [assetGroup valueForProperty:ALAssetsGroupPropertyName], (long)assetCount]];
     UIImage *albumThumbnail = [UIImage imageWithCGImage:[assetGroup posterImage]];
     albumThumbnail = [self resizeImage:albumThumbnail toNewSize:CGSizeMake(78, 78)];
     [[cell imageView] setImage:albumThumbnail];
@@ -109,13 +109,15 @@
 
 - (void)selectedAssets:(NSArray *)assets
 {
+    [self dismissViewControllerAnimated:YES completion:NULL];
     [mDelegate selectedAssets:assets];
+
 }
 
 
 #pragma mark action
 
-- (IBAction)calcelButtonTapped:(id)sender
+- (IBAction)cancelButtonTapped:(id)sender
 {
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
