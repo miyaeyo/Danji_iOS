@@ -8,8 +8,24 @@
 
 #import <UIKit/UIKit.h>
 
+@class DJDialogInputCell;
 
-@interface DJDialogInputCell : UITableViewCell
+@protocol DJDialogInputCellDelegate <NSObject>
+
+@required
+- (void)dialogInputCellDidDeleted:(DJDialogInputCell *)cell;
+- (void)dialogInputCell:(DJDialogInputCell *)cell didEndEditingCharacter:(NSString *)character;
+- (void)dialogInputCell:(DJDialogInputCell *)cell didEndEditingDialog:(NSString *)dialog;
+
+@end
+
+
+@interface DJDialogInputCell : UITableViewCell <UITextViewDelegate>
+
+@property (nonatomic) NSInteger number;
+@property (weak, nonatomic) IBOutlet UITextField *character;
+@property (weak, nonatomic) IBOutlet UITextView *dialog;
+@property (nonatomic, weak) id<DJDialogInputCellDelegate> delegate;
 
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DJDialogInputCell.h"
 
 
 @class DJDialogWriteController;
@@ -19,7 +20,7 @@
 @end
 
 
-@interface DJDialogWriteController : UITableViewController
+@interface DJDialogWriteController : UITableViewController <DJDialogInputCellDelegate>
 
 @property (nonatomic, weak) UIViewController<DJDialogWriteDelegate> *dialogDelegate;
 

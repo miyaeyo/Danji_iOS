@@ -12,6 +12,7 @@
 @implementation DJParagraphWriteController
 {
     __weak UIViewController<DJParagraphDelegate> *mDelegate;
+    __weak IBOutlet UITextView *mParagraph;
 }
 
 @synthesize paragraphDelegate = mDelegate;
@@ -31,6 +32,7 @@
 
 - (IBAction)doneButtonTapped:(id)sender
 {
+    [mDelegate paragraphWriteController:self didFinishWriteParagraph:[mParagraph text]];
     [[self navigationController] popToViewController:mDelegate animated:YES];
 }
 

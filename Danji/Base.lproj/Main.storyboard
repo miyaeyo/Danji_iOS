@@ -839,6 +839,9 @@
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="mParagraph" destination="Ul6-nd-XqZ" id="0aA-lR-umK"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y29-nw-ZVm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -983,16 +986,13 @@
                                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                             <textInputTraits key="textInputTraits"/>
+                                            <connections>
+                                                <action selector="characterDidEndEditing:" destination="Dee-76-Iia" eventType="editingDidEnd" id="Qz1-IK-jdP"/>
+                                            </connections>
                                         </textField>
                                         <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DCZ-Du-i3H">
                                             <rect key="frame" x="6" y="41" width="307" height="76"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Write" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OnX-LM-NDP">
-                                                    <rect key="frame" x="12" y="8" width="48" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <color key="textColor" red="0.78039215689999997" green="0.78039215689999997" blue="0.80392156859999997" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="Kx7-kn-ae7">
                                                     <rect key="frame" x="8" y="8" width="291" height="60"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1018,7 +1018,10 @@
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="0.99215686270000003" green="0.94901960780000005" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
-                                    <outlet property="mCharacter" destination="MTJ-Yu-fj5" id="AVH-Bl-58u"/>
+                                    <outlet property="character" destination="MTJ-Yu-fj5" id="TKJ-kj-KfT"/>
+                                    <outlet property="dialog" destination="Kx7-kn-ae7" id="iyg-U5-2VE"/>
+                                    <outlet property="mCharacter" destination="MTJ-Yu-fj5" id="ywT-iC-huD"/>
+                                    <outlet property="mDialog" destination="Kx7-kn-ae7" id="HHn-OW-mRj"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

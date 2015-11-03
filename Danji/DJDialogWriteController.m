@@ -7,13 +7,15 @@
 //
 
 #import "DJDialogWriteController.h"
-#import "DJDialogInputCell.h"
+
 
 @implementation DJDialogWriteController
 {
     __weak UIViewController<DJDialogWriteDelegate> *mDelegate;
-    DJDialogInputCell                              *mCell;
     NSInteger                                      mFormCount;
+    NSMutableArray                                 *mCharacter;
+    NSMutableArray                                 *mDialog;
+    
 }
 
 @synthesize dialogDelegate = mDelegate;
@@ -25,6 +27,10 @@
 {
     [super viewDidLoad];
     mFormCount = 1;
+    mCharacter = [[NSMutableArray alloc] init];
+    mDialog = [[NSMutableArray alloc] init];
+    [mCharacter addObject:@""];
+    [mDialog addObject:@""];
 }
 
 - (void)didReceiveMemoryWarning
@@ -37,12 +43,27 @@
 
 - (IBAction)doneButtonTapped:(id)sender
 {
+    [mDelegate dialogeWriteController:self didFinishWriteCharacter:mCharacter dialog:mDialog];
     [[self navigationController] popToViewController:mDelegate animated:YES];
 }
 
 - (IBAction)plusButtonTapped:(id)sender
 {
+    if (mFormCount > 20)
+    {
+        [[[UIAlertView alloc] initWithTitle:@"Over maximun Form Count"
+                                    message:@"You can add max 20 dialog form"
+                                   delegate:nil
+                          cancelButtonTitle:@"OK"
+                          otherButtonTitles:nil, nil] show];
+        return;
+    }
+    
     mFormCount ++;
+    [mCharacter addObject:@""];
+    [mDialog addObject:@""];
+    
+    [[self tableView] reloadData];
 }
 
 
@@ -53,12 +74,37 @@
     return mFormCount;
 }
 
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    mCell = [tableView dequeueReusableCellWithIdentifier:@"dialog" forIndexPath:indexPath];
+    NSLog(@"%ld", [indexPath row]);
+    DJDialogInputCell *cell = [tableView dequeueReusableCellWithIdentifier:@"dialog" forIndexPath:indexPath];
+    [cell setNumber:[indexPath row]];
+    [cell setDelegate:self];
+    [[cell dialog] setDelegate:cell];
+    return cell;
+}
+
+
+#pragma mark - input cell delegate
+
+- (void)dialogInputCellDidDeleted:(DJDialogInputCell *)cell
+{
+    mFormCount--;
+    [cell removeFromSuperview];
     
-    return mCell;
+    [mCharacter removeObjectAtIndex:[cell number]];
+    [mDialog removeObjectAtIndex:[cell number]];
+    [[self tableView] reloadData];
+}
+
+- (void)dialogInputCell:(DJDialogInputCell *)cell didEndEditingCharacter:(NSString *)character
+{
+    [mCharacter replaceObjectAtIndex:[cell number] withObject:character];
+}
+
+- (void)dialogInputCell:(DJDialogInputCell *)cell didEndEditingDialog:(NSString *)dialog
+{
+    [mDialog replaceObjectAtIndex:[cell number] withObject:dialog];
 }
 
 

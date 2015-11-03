@@ -14,7 +14,6 @@
 
 @property (nonatomic, weak) id<DJAssetSelectionDelegate> delegate;
 
-- (IBAction)cancelButtonTapped:(id)sender;
 
 
 @end

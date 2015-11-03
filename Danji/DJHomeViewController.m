@@ -32,6 +32,7 @@
     [self setupPickerView];
     
     mContentsList = [[NSMutableArray alloc] init];
+    [[self tableView] setRowHeight:UITableViewAutomaticDimension];
 }
 
 - (void)didReceiveMemoryWarning

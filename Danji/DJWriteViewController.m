@@ -85,7 +85,18 @@
 
 - (IBAction)doneButtonTapped:(id)sender
 {
-    //done
+    if ([[mTitle text] isEqualToString:@""])
+    {
+        [[[UIAlertView alloc] initWithTitle:@"Title field is empty"
+                                    message:@"Please fill the title field"
+                                   delegate:nil
+                          cancelButtonTitle:@"OK"
+                          otherButtonTitles:nil, nil] show];
+        return;
+    }
+    
+    
+    
 }
 
 - (IBAction)writeLabelTapped:(id)sender
