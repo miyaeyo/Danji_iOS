@@ -8,7 +8,6 @@
 
 #import "DJContentsManager.h"
 #import <Parse/Parse.h>
-#import "Danji.h"
 
 
 @implementation DJContentsManager
@@ -19,12 +18,24 @@
 @synthesize delegate = mDelegate;
 
 
++ (instancetype)sharedContentsManager
+{
+    static DJContentsManager *sharedContentsManager = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^
+    {
+        sharedContentsManager = [[self alloc] init];
+    });
+    
+    return sharedContentsManager;
+}
+
 - (void)contentsFromParseDB
 {
     @autoreleasepool
     {
         
-        PFQuery *query = [Danji query];
+        PFQuery *query = [DJContents query];
         [query orderByDescending:@"createdAt"];
         [query findObjectsInBackgroundWithBlock:^(NSArray *results, NSError *error)
          {
@@ -34,61 +45,19 @@
                  return;
              }
              
-             [self setupContentsWithContentsList:results];
+             [mDelegate contentsManager:self didFinishGetContentsList:results];
         }];
     }
 }
 
 
-- (void)contentsFromParseDBWithTitleQuery:(NSString *)aQuery
-{
-    @autoreleasepool
-    {
-        
-        PFQuery *query = [Danji query];
-        [query whereKey:@"Title" containsString:aQuery];
-        [query orderByDescending:@"createdAt"];
-        [query findObjectsInBackgroundWithBlock:^(NSArray *results, NSError *error)
-         {
-             if (error)
-             {
-                 NSLog(@"Error: %@ %@", error, [error userInfo]);
-                 return;
-             }
-             
-             [self setupContentsWithContentsList:results];
-             
-         }];
-    }
-}
-
-
-- (void)contentsFromParseDBWithBodyQuery:(NSString *)aQuery
-{
-    @autoreleasepool
-    {
-        PFQuery *query = [Danji query];
-        [query whereKey:@"ContentsBody" containsString:aQuery];
-        [query orderByDescending:@"createdAt"];
-        [query findObjectsInBackgroundWithBlock:^(NSArray *results, NSError *error)
-         {
-             if (error)
-             {
-                 NSLog(@"Error: %@ %@", error, [error userInfo]);
-                 return;
-             }
-             
-             [self setupContentsWithContentsList:results];
-         }];
-    }
-}
 
 - (void)contentsFromParseDBWithLikeCount:(NSInteger)count
 {
     @autoreleasepool
     {
-        PFQuery *query = [Danji query];
-        [query orderByDescending:@"LikeCount"];
+        PFQuery *query = [DJContents query];
+        [query orderByDescending:@"likeCount"];
         [query setLimit:count];
         
         [query findObjectsInBackgroundWithBlock:^(NSArray *results, NSError *error)
@@ -98,7 +67,8 @@
                  NSLog(@"Error: %@ %@", error, [error userInfo]);
                  return;
              }
-             [self setupContentsWithContentsList:results];             
+             
+             [mDelegate contentsManager:self didFinishGetContentsList:results];
         }];
 
     }
@@ -106,38 +76,33 @@
 }
 
 
-- (void)setupContentsWithContentsList:(NSArray *)aContentsList
+- (void)contentsFromParseDBWithSearchText:(NSString *)searchText
 {
-    //Danji랑 DJContents 합치기
-    for (Danji *danji in aContentsList)
+    @autoreleasepool
     {
-        @autoreleasepool
-        {
-            PFFile *image = [danji ContentsImage];
-            NSString *body = [danji ContentsBody];
-            NSString *reference;
-            
-            if ([[danji Creator] isEqualToString:@""])
-            {
-                reference = [NSString stringWithString:[danji Title]];
-            }
-            else
-            {
-                reference = [NSString stringWithFormat:@"%@ - %@", [danji Title], [danji Creator]];
-            }
-            
-            NSInteger likeCount = [danji LikeCount];
-            NSString *category = [danji Category];
-            DJContents *contents = [DJContents contentsWithImage:image
-                                                            body:body
-                                                       reference:reference
-                                                       likeCount:likeCount
-                                                        category:category];
-            
-            [mDelegate contentsManager:self didFinishMakeAContents:contents];
-        }
+        
+        PFQuery *titleQuery = [DJContents query];
+        [titleQuery whereKey:@"title" containsString:searchText];
+        
+        PFQuery *bodyQuery = [DJContents query];
+        [bodyQuery whereKey:@"body" containsString:searchText];
+        
+        PFQuery *query = [PFQuery orQueryWithSubqueries:@[titleQuery, bodyQuery]];
+        [query orderByDescending:@"createdAt"];
+        [query findObjectsInBackgroundWithBlock:^(NSArray *results, NSError *error)
+         {
+             if (error)
+             {
+                 NSLog(@"Error: %@ %@", error, [error userInfo]);
+                 return;
+             }
+             
+             [mDelegate contentsManager:self didFinishGetContentsList:results];
+             
+         }];
     }
-
 }
 
+
 @end
+

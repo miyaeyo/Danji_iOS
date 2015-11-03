@@ -315,8 +315,8 @@
 		9EE150B21BE675D10034258E /* ContentsModel */ = {
 			isa = PBXGroup;
 			children = (
-				9EE1505F1BCDEFAF0034258E /* DJContents.m */,
 				9EE1505E1BCDEFAF0034258E /* DJContents.h */,
+				9EE1505F1BCDEFAF0034258E /* DJContents.m */,
 				9EE150691BCF78EF0034258E /* DJContentsManager.h */,
 				9EE1506A1BCF78EF0034258E /* DJContentsManager.m */,
 				9EE150611BCDFF660034258E /* Danji.h */,

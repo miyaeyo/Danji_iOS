@@ -7,6 +7,7 @@
 //
 
 #import "DJWriteViewController.h"
+#import "DJContents.h"
 
 
 @import MobileCoreServices;
@@ -25,6 +26,8 @@
     NSInteger                        mImageCount;
     NSArray                          *mInputForms;
     NSArray                          *mCategories;
+    NSArray                          *mCharacters;
+    NSArray                          *mDialogs;
     
 }
 
@@ -95,7 +98,7 @@
         return;
     }
     
-    
+    [self saveParseDB];
     
 }
 
@@ -231,14 +234,24 @@
 
 #pragma mark - write delegate
 
-- (void)dialogeWriteController:(DJDialogWriteController *)controller didFinishWriteCharacter:(NSArray *)caracters dialog:(NSArray *)dialogs
+- (void)dialogeWriteController:(DJDialogWriteController *)controller didFinishWriteCharacter:(NSArray *)characters dialog:(NSArray *)dialogs
 {
+    NSMutableString *tempBody;
     
+    for (int i = 0; i < [characters count]; i++)
+    {
+        [tempBody appendFormat:@" %@: %@\n", [characters objectAtIndex:i], [dialogs objectAtIndex:i]];
+    }
+    
+    [mBody setText:[NSString stringWithString:tempBody]];
+    mCharacters = [NSArray arrayWithArray:characters];
+    mDialogs = [NSArray arrayWithArray:dialogs];
+
 }
 
 - (void)paragraphWriteController:(DJParagraphWriteController *)controller didFinishWriteParagraph:(NSString *)paragraph
 {
-    
+    [mBody setText:paragraph];
 }
 
 
@@ -296,7 +309,7 @@
 }
 
 
-#pragma mark - setup
+#pragma mark - private
 
 
 - (void)setupPickerView
@@ -313,6 +326,36 @@
     [mInputFormPicker setInputView:pickerView];
     [mCategoryPicker setInputView:pickerView];
 }
+
+- (void)saveParseDB
+{
+    DJContents *contents = [DJContents object];
+    [contents setUserName:[[PFUser currentUser] username]];
+    [contents setCategory:[mCategoryPicker text]];
+    [contents setTitle:[mTitle text]];
+    [contents setCreator:[mCreator text]];
+    [contents setBody:[mBody text]];
+    [contents setImage:[self renderingImages:mImages]];
+    if ([[mCreator text] isEqualToString:@""]) {
+        [contents setReference:[mTitle text]];
+    }
+    else
+    {
+        [contents setReference:[NSString stringWithFormat:@"%@ - %@", [mTitle text], [mCreator text]]];
+    }
+    [contents setLikeCount:0];
+    [contents setCharacter:mCharacters];
+    [contents setDialog:mDialogs];
+    
+    [contents saveInBackground];
+}
+
+- (PFFile *)renderingImages:(NSArray *)images
+{
+    return 0;
+}
+
+
 
 
 @end

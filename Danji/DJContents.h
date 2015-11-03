@@ -6,26 +6,31 @@
 //  Copyright (c) 2015년 miyaeyo. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
 
 
-@interface DJContents : NSObject
+@interface DJContents : PFObject <PFSubclassing>
 
+@property (nonatomic, strong) NSString  *userName;
+@property (nonatomic, strong) NSString  *category;
+@property (nonatomic, strong) NSString  *title;
+@property (nonatomic, strong) NSString  *creator;
+@property (nonatomic, strong) PFFile    *image;
+@property (nonatomic, strong) NSString  *body;
+@property (nonatomic, strong) NSString  *reference;
+@property (nonatomic)         NSInteger likeCount;
+@property (nonatomic, strong) NSArray   *character;
+@property (nonatomic, strong) NSArray   *dialog;
 
-@property (nonatomic, readonly) PFFile    *image;
-@property (nonatomic, readonly) NSString  *body;
-@property (nonatomic, readonly) NSString  *reference;
-@property (nonatomic, readonly) NSInteger likeCount;
-@property (nonatomic, readonly) NSString  *category;
-
-
-+ (instancetype)contentsWithImage:(PFFile *)image
-                             body:(NSString *)body
-                        reference:(NSString *)reference
-                        likeCount:(NSInteger)likeCount
-                         category:(NSString *)category;
-
++ (NSString *)parseClassName;
 
 @end
+
+//+ (instancetype)contentsWithImage:(PFFile *)image
+//                             body:(NSString *)body
+//                        reference:(NSString *)reference
+//                        likeCount:(NSInteger)likeCount
+//                         category:(NSString *)category;
+
+
+

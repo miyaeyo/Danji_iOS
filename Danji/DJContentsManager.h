@@ -15,7 +15,7 @@
 @protocol DJContentsDelegate <NSObject>
 
 @required
-- (void)contentsManager:(DJContentsManager *)aContentsManager didFinishMakeAContents:(DJContents *)aContents;
+- (void)contentsManager:(DJContentsManager *)aContentsManager didFinishGetContentsList:(NSArray *)contentsList;
 
 @end
 
@@ -24,9 +24,10 @@
 
 @property (nonatomic, weak) id<DJContentsDelegate> delegate;
 
++ (instancetype)sharedContentsManager;
+
 - (void)contentsFromParseDB;
-- (void)contentsFromParseDBWithTitleQuery:(NSString *)aQuery;
-- (void)contentsFromParseDBWithBodyQuery:(NSString *)aQuery;
 - (void)contentsFromParseDBWithLikeCount:(NSInteger)count;
+- (void)contentsFromParseDBWithSearchText:(NSString *)searchText;
 
 @end

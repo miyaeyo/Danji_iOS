@@ -17,7 +17,7 @@
     __weak IBOutlet UITextField *mCategory;
     NSArray                     *mCategories;
     DJContentsViewCell          *mCell;
-    NSMutableArray              *mContentsList;
+    NSArray              *mContentsList;
 }
 
 
@@ -28,10 +28,9 @@
     [super viewDidLoad];
     
     [self setupViewAttributes];
-    [self setupContentsManager];
+    [self getContentsFromDB];
     [self setupPickerView];
     
-    mContentsList = [[NSMutableArray alloc] init];
     [[self tableView] setRowHeight:UITableViewAutomaticDimension];
 }
 
@@ -122,10 +121,9 @@
 
 #pragma mark - contents delegate
 
-- (void)contentsManager:(DJContentsManager *)aContentsManager didFinishMakeAContents:(DJContents *)aContents
+- (void)contentsManager:(DJContentsManager *)aContentsManager didFinishGetContentsList:(NSArray *)contentsList
 {
-    [mContentsList addObject:aContents];
-
+    mContentsList = [NSArray arrayWithArray:contentsList];
     [[self tableView] reloadData];
 }
 
@@ -140,9 +138,9 @@
     [[self tableView] setDataSource:self];
 }
 
-- (void)setupContentsManager
+- (void)getContentsFromDB
 {
-    DJContentsManager *contentsManager = [[DJContentsManager alloc] init];
+    DJContentsManager *contentsManager = [DJContentsManager sharedContentsManager];
     [contentsManager setDelegate:self];
     [contentsManager contentsFromParseDB];
 }

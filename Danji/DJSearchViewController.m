@@ -15,7 +15,7 @@
 {
     UISearchBar *mSearchBar;
     __weak IBOutlet UITableView *mTableView;
-    NSMutableArray *mPopularContentsList;
+    NSArray *mPopularContentsList;
     NSInteger mSelectedIndex;
 }
 
@@ -29,9 +29,7 @@
     [mTableView setDelegate:self];
     [mTableView setDataSource:self];
     
-    mPopularContentsList = [[NSMutableArray alloc] init];
-    
-    [self setupPopularContentsList];
+    [self findPopularContents];
 }
 
 - (void)didReceiveMemoryWarning
@@ -58,13 +56,12 @@
 
 #pragma mark - contents delegate
 
-- (void)contentsManager:(DJContentsManager *)aContentsManager didFinishMakeAContents:(DJContents *)aContents
+- (void)contentsManager:(DJContentsManager *)aContentsManager didFinishGetContentsList:(NSArray *)contentsList
 {
-    [mPopularContentsList addObject:aContents];
-    if ([mPopularContentsList count] == 5)
-    {
-        [mTableView reloadData];
-    }
+    mPopularContentsList = [NSArray arrayWithArray:contentsList];
+    
+    [mTableView reloadData];
+
 }
 
 
@@ -130,9 +127,9 @@
     [navBar addSubview:mSearchBar];
 }
 
-- (void)setupPopularContentsList
+- (void)findPopularContents
 {
-    DJContentsManager *contentsManager = [[DJContentsManager alloc] init];
+    DJContentsManager *contentsManager = [DJContentsManager sharedContentsManager];
     [contentsManager setDelegate:self];
     [contentsManager contentsFromParseDBWithLikeCount:5];
 }

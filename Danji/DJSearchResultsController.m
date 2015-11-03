@@ -105,36 +105,24 @@
         [[self tableView] reloadData];
         return;
     }
-    [self setupContentsManager];
+    
+    [self searchWithContentsManager];
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
     [mContentsList removeAllObjects];
     [[self tableView] reloadData];
-    [self setupContentsManager];
+    [self searchWithContentsManager];
 }
 
 
 #pragma mark - contents manager delegate
 
-// DJContents manager로 부터 array를 넘겨 받는 형식으로 바꿀것.
-
-- (void)contentsManager:(DJContentsManager *)aContentsManager didFinishMakeAContents:(DJContents *)aContents
+- (void)contentsManager:(DJContentsManager *)aContentsManager didFinishGetContentsList:(NSArray *)contentsList
 {
-    int mark = 0;
-    for (DJContents *contents in mContentsList)
-    {
-        if ([[contents reference] isEqualToString:[aContents reference]])
-        {
-            mark = 1;
-        }
-    }
-    if (mark == 0)
-    {
-        [mContentsList addObject:aContents];
-        [[self tableView] reloadData];
-    }
+    mContentsList = [NSMutableArray arrayWithArray:contentsList];
+    [[self tableView] reloadData];
 }
 
 
@@ -162,12 +150,10 @@
     [navBar addSubview:mSearchBar];
 }
 
-- (void)setupContentsManager// method명 모호
+- (void)searchWithContentsManager
 {
-    //contentsManager를 singleton으로 만들것
-    DJContentsManager *contentsManager = [[DJContentsManager alloc] init];
-    [contentsManager contentsFromParseDBWithBodyQuery:mSearchText];
-    [contentsManager contentsFromParseDBWithTitleQuery:mSearchText];
+    DJContentsManager *contentsManager = [DJContentsManager sharedContentsManager];
+    [contentsManager contentsFromParseDBWithSearchText:mSearchText];
     [contentsManager setDelegate:self];
 }
 
