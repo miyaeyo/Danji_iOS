@@ -65,11 +65,16 @@
 {
     if ([[segue identifier] isEqualToString:@"writeDialog"])
     {
-        [[segue destinationViewController] setDialogDelegate:self];
+        DJDialogWriteController *destination = [segue destinationViewController];
+        [destination setDialogDelegate:self];
+        [destination editingTextWithCharacters:mCharacters dialogs:mDialogs];
     }
     else if([[segue identifier] isEqualToString:@"writhParagraph"])
     {
-        [[segue destinationViewController] setParagraphDelegate:self];
+        DJParagraphWriteController *destination = [segue destinationViewController];
+        [destination setParagraphDelegate:self];
+        [destination setEditingText:[mBody text]];
+        
     }
     else if([[segue identifier] isEqualToString:@"openGallery"])
     {
@@ -83,23 +88,33 @@
 
 - (IBAction)cancelButtonTapped:(id)sender
 {
-    
+    [[[UIAlertView alloc] initWithTitle:@"Cancel"
+                                message:@"Do you really want to quit writing?"
+                               delegate:self
+                      cancelButtonTitle:@"NO"
+                      otherButtonTitles:@"YES", nil] show];
 }
 
 - (IBAction)doneButtonTapped:(id)sender
 {
-    if ([[mTitle text] isEqualToString:@""])
+    if ([[mTitle text] isEqualToString:@""] || [[mInputFormPicker text] isEqualToString:@""] || [[mCategoryPicker text] isEqualToString:@""])
     {
-        [[[UIAlertView alloc] initWithTitle:@"Title field is empty"
-                                    message:@"Please fill the title field"
+        [[[UIAlertView alloc] initWithTitle:@"some fields(title, input form, category) are empty"
+                                    message:@"Please fill the empty fields"
                                    delegate:nil
                           cancelButtonTitle:@"OK"
                           otherButtonTitles:nil, nil] show];
         return;
     }
     
-    [self saveParseDB];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Done"
+                                                    message:@"Do you want to save this contents?"
+                                                   delegate:self
+                                          cancelButtonTitle:@"NO"
+                                          otherButtonTitles:@"YES", nil];
     
+    [alert setTag:100];
+    [alert show];
 }
 
 - (IBAction)writeLabelTapped:(id)sender
@@ -123,6 +138,22 @@
 - (IBAction)galleryButtonTapped:(id)sender
 {
     [self performSegueWithIdentifier:@"openGallery" sender:self];
+}
+
+
+#pragma mark - alert view delegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1)
+    {
+        if ([alertView tag] == 100)
+        {
+            [self saveParseDB];
+        }
+        
+        [self performSegueWithIdentifier:@"complete" sender:self];
+    }
 }
 
 
@@ -236,7 +267,7 @@
 
 - (void)dialogeWriteController:(DJDialogWriteController *)controller didFinishWriteCharacter:(NSArray *)characters dialog:(NSArray *)dialogs
 {
-    NSMutableString *tempBody;
+    NSMutableString *tempBody = [[NSMutableString alloc] init];
     
     for (int i = 0; i < [characters count]; i++)
     {
@@ -335,7 +366,7 @@
     [contents setTitle:[mTitle text]];
     [contents setCreator:[mCreator text]];
     [contents setBody:[mBody text]];
-    [contents setImage:[self renderingImages:mImages]];
+    [contents setImage:[self convertImages:mImages]];
     if ([[mCreator text] isEqualToString:@""]) {
         [contents setReference:[mTitle text]];
     }
@@ -350,9 +381,47 @@
     [contents saveInBackground];
 }
 
-- (PFFile *)renderingImages:(NSArray *)images
+- (PFFile *)convertImages:(NSArray *)images
 {
-    return 0;
+    
+    if ([images count] == 1)
+    {
+        NSData *imageData = UIImagePNGRepresentation([images firstObject]);
+        PFFile *imageFile = [PFFile fileWithData:imageData];
+        
+        return imageFile;
+    }
+    else
+    {
+        CGFloat height = 0.0f;
+        UIImage *firstImage = [images firstObject];
+        CGFloat width = firstImage.size.width;
+        
+        for (UIImage *image in images)
+        {
+            height += image.size.height;
+        }
+        
+        CGSize size = CGSizeMake(width, height);
+        
+        UIGraphicsBeginImageContext(size);
+        
+        CGFloat prevHeight = 0.0f;
+        
+        for (UIImage *image in images)
+        {
+            [image drawInRect:CGRectMake(0, prevHeight, width, image.size.height)];
+            prevHeight += image.size.height;
+        }
+        
+        UIImage *finalImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        
+        NSData *imageData = UIImagePNGRepresentation(finalImage);
+        PFFile *imageFile = [PFFile fileWithData:imageData];
+        return imageFile;
+    }
+    
 }
 
 

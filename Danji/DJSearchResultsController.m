@@ -152,7 +152,7 @@
 
 - (void)searchWithContentsManager
 {
-    DJContentsManager *contentsManager = [DJContentsManager sharedContentsManager];
+    DJContentsManager *contentsManager = [[DJContentsManager alloc] init];
     [contentsManager contentsFromParseDBWithSearchText:mSearchText];
     [contentsManager setDelegate:self];
 }

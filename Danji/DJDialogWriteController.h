@@ -20,8 +20,10 @@
 @end
 
 
-@interface DJDialogWriteController : UITableViewController <DJDialogInputCellDelegate>
+@interface DJDialogWriteController : UITableViewController <DJDialogInputCellDelegate, UIAlertViewDelegate>
 
 @property (nonatomic, weak) UIViewController<DJDialogWriteDelegate> *dialogDelegate;
+
+- (void)editingTextWithCharacters:(NSArray *)characters dialogs:(NSArray *)dialogs;
 
 @end

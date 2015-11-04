@@ -666,24 +666,17 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" indicatorStyle="white" translatesAutoresizingMaskIntoConstraints="NO" id="fbE-Ld-ohQ">
-                                <rect key="frame" x="0.0" y="187" width="320" height="239"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Write" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tV8-bO-co0">
-                                        <rect key="frame" x="18" y="9" width="48" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.7803921568627451" green="0.7803921568627451" blue="0.80392156862745101" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f4E-ED-6Hu">
-                                        <rect key="frame" x="8" y="4" width="304" height="227"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="saH-Go-gd7">
+                                <rect key="frame" x="0.0" y="187" width="320" height="240"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </scrollView>
+                            </view>
+                            <label opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f4E-ED-6Hu">
+                                <rect key="frame" x="8" y="193" width="304" height="227"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3j3-sC-qI0">
                                 <rect key="frame" x="8" y="511" width="141" height="40"/>
                                 <color key="backgroundColor" red="0.8980392157" green="0.68627450980000004" blue="0.66274509800000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -757,7 +750,6 @@
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="ueg-lz-Cao">
                             <connections>
                                 <action selector="cancelButtonTapped:" destination="PMn-lw-gKc" id="1xB-zd-GKv"/>
-                                <segue destination="L0b-fm-6EF" kind="presentation" modalTransitionStyle="crossDissolve" id="LSj-cw-Y4a"/>
                             </connections>
                         </barButtonItem>
                         <view key="titleView" contentMode="scaleToFill" id="jd4-ux-WuR">
@@ -775,7 +767,6 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="oRR-aE-8ev">
                             <connections>
                                 <action selector="doneButtonTapped:" destination="PMn-lw-gKc" id="fgZ-wB-VAJ"/>
-                                <segue destination="L0b-fm-6EF" kind="presentation" modalTransitionStyle="crossDissolve" id="iRr-gH-SCw"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -790,6 +781,7 @@
                         <outlet property="mTitle" destination="e72-J6-MSx" id="QKZ-hb-szF"/>
                         <segue destination="sl3-7E-hcv" kind="show" identifier="writeDialog" id="lOy-KO-PZv"/>
                         <segue destination="xYn-eL-xYj" kind="show" identifier="writhParagraph" id="Kad-9n-SuX"/>
+                        <segue destination="L0b-fm-6EF" kind="presentation" identifier="complete" id="pUH-sk-lcG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j7v-YW-zXZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -987,7 +979,7 @@
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                             <textInputTraits key="textInputTraits"/>
                                             <connections>
-                                                <action selector="characterDidEndEditing:" destination="Dee-76-Iia" eventType="editingDidEnd" id="Qz1-IK-jdP"/>
+                                                <action selector="characterDidChange:" destination="Dee-76-Iia" eventType="editingChanged" id="srb-ab-A2W"/>
                                             </connections>
                                         </textField>
                                         <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DCZ-Du-i3H">
@@ -1218,9 +1210,9 @@
         <image name="write.png" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Nby-nJ-dF2"/>
-        <segue reference="n1A-cF-LnQ"/>
+        <segue reference="pUH-sk-lcG"/>
         <segue reference="NTQ-fp-XM9"/>
+        <segue reference="Nby-nJ-dF2"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>

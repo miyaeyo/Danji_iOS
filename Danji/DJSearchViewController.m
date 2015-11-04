@@ -129,7 +129,7 @@
 
 - (void)findPopularContents
 {
-    DJContentsManager *contentsManager = [DJContentsManager sharedContentsManager];
+    DJContentsManager *contentsManager = [[DJContentsManager alloc] init];
     [contentsManager setDelegate:self];
     [contentsManager contentsFromParseDBWithLikeCount:5];
 }

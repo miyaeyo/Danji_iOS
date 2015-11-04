@@ -140,7 +140,7 @@
 
 - (void)getContentsFromDB
 {
-    DJContentsManager *contentsManager = [DJContentsManager sharedContentsManager];
+    DJContentsManager *contentsManager = [[DJContentsManager alloc] init];
     [contentsManager setDelegate:self];
     [contentsManager contentsFromParseDB];
 }

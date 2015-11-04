@@ -26,15 +26,15 @@
 
 - (IBAction)minusButtonTapped:(id)sender
 {
-    //[mDelegate dialogInputCellDidDeleted:self];
+    [mDelegate dialogInputCellDidDeleted:self];
 }
 
-- (IBAction)characterDidEndEditing:(id)sender
+- (IBAction)characterDidChange:(id)sender
 {
     [mDelegate dialogInputCell:self didEndEditingCharacter:[mCharacter text]];
 }
 
-- (void)textViewDidEndEditing:(UITextView *)textView
+-(void)textViewDidChange:(UITextView *)textView
 {
     [mDelegate dialogInputCell:self didEndEditingDialog:[mDialog text]];
 }
@@ -45,3 +45,15 @@
 }
 
 @end
+
+
+//- (IBAction)characterDidEndEditing:(id)sender
+//{
+//    [mDelegate dialogInputCell:self didEndEditingCharacter:[mCharacter text]];
+//}
+
+//- (void)textViewDidEndEditing:(UITextView *)textView
+//{
+//    [mDelegate dialogInputCell:self didEndEditingDialog:[mDialog text]];
+//}
+

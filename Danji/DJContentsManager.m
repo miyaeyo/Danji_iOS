@@ -18,18 +18,6 @@
 @synthesize delegate = mDelegate;
 
 
-+ (instancetype)sharedContentsManager
-{
-    static DJContentsManager *sharedContentsManager = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^
-    {
-        sharedContentsManager = [[self alloc] init];
-    });
-    
-    return sharedContentsManager;
-}
-
 - (void)contentsFromParseDB
 {
     @autoreleasepool

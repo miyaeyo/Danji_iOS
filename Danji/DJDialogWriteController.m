@@ -26,11 +26,20 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    mFormCount = 1;
-    mCharacter = [[NSMutableArray alloc] init];
-    mDialog = [[NSMutableArray alloc] init];
-    [mCharacter addObject:@""];
-    [mDialog addObject:@""];
+    
+    if (!mCharacter && !mDialog)
+    {
+        mFormCount = 1;
+        mCharacter = [[NSMutableArray alloc] init];
+        mDialog = [[NSMutableArray alloc] init];
+        [mCharacter addObject:@""];
+        [mDialog addObject:@""];
+    }
+    else
+    {
+        mFormCount = [mCharacter count];
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -43,12 +52,25 @@
 
 - (IBAction)doneButtonTapped:(id)sender
 {
-    [mDelegate dialogeWriteController:self didFinishWriteCharacter:mCharacter dialog:mDialog];
-    [[self navigationController] popToViewController:mDelegate animated:YES];
+    [[[UIAlertView alloc] initWithTitle:@"Done"
+                                message:@"Do you complete contents editing?"
+                               delegate:self
+                      cancelButtonTitle:@"NO"
+                      otherButtonTitles:@"YES", nil] show];
 }
 
 - (IBAction)plusButtonTapped:(id)sender
 {
+    if ([[mCharacter objectAtIndex:(mFormCount-1)] isEqualToString:@""] || [[mDialog objectAtIndex:(mFormCount-1)] isEqualToString:@""])
+    {
+        [[[UIAlertView alloc] initWithTitle:@"Missing some field"
+                                    message:@"Please fill the empty field"
+                                   delegate:nil
+                          cancelButtonTitle:@"OK"
+                          otherButtonTitles:nil, nil] show];
+        return;
+    }
+    
     if (mFormCount > 20)
     {
         [[[UIAlertView alloc] initWithTitle:@"Over maximun Form Count"
@@ -59,11 +81,24 @@
         return;
     }
     
+    
     mFormCount ++;
     [mCharacter addObject:@""];
     [mDialog addObject:@""];
     
     [[self tableView] reloadData];
+}
+
+
+#pragma mark - alert view delegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1)
+    {
+        [[self navigationController] popToViewController:mDelegate animated:YES];
+        [mDelegate dialogeWriteController:self didFinishWriteCharacter:mCharacter dialog:mDialog];
+    }
 }
 
 
@@ -81,6 +116,9 @@
     [cell setNumber:[indexPath row]];
     [cell setDelegate:self];
     [[cell dialog] setDelegate:cell];
+    [[cell character] setText:[mCharacter objectAtIndex:[indexPath row]]];
+    [[cell dialog] setText:[mDialog objectAtIndex:[indexPath row]]];
+    
     return cell;
 }
 
@@ -89,11 +127,18 @@
 
 - (void)dialogInputCellDidDeleted:(DJDialogInputCell *)cell
 {
-    mFormCount--;
-    [cell removeFromSuperview];
+    if (mFormCount != 1)
+    {
+        mFormCount--;
+        [mCharacter removeObjectAtIndex:[cell number]];
+        [mDialog removeObjectAtIndex:[cell number]];
+    }
+    else
+    {
+        [mCharacter replaceObjectAtIndex:0 withObject:@""];
+        [mDialog replaceObjectAtIndex:0 withObject:@""];
+    }
     
-    [mCharacter removeObjectAtIndex:[cell number]];
-    [mDialog removeObjectAtIndex:[cell number]];
     [[self tableView] reloadData];
 }
 
@@ -107,6 +152,17 @@
     [mDialog replaceObjectAtIndex:[cell number] withObject:dialog];
 }
 
+
+#pragma mark - edting
+
+-(void)editingTextWithCharacters:(NSArray *)characters dialogs:(NSArray *)dialogs
+{
+    if ([characters count] != 0 && [dialogs count] != 0)
+    {
+        mCharacter = [NSMutableArray arrayWithArray:characters];
+        mDialog = [NSMutableArray arrayWithArray:dialogs];
+    }
+}
 
 
 

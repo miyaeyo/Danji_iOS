@@ -24,8 +24,6 @@
 
 @property (nonatomic, weak) id<DJContentsDelegate> delegate;
 
-+ (instancetype)sharedContentsManager;
-
 - (void)contentsFromParseDB;
 - (void)contentsFromParseDBWithLikeCount:(NSInteger)count;
 - (void)contentsFromParseDBWithSearchText:(NSString *)searchText;

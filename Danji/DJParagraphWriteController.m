@@ -12,14 +12,21 @@
 @implementation DJParagraphWriteController
 {
     __weak UIViewController<DJParagraphDelegate> *mDelegate;
-    __weak IBOutlet UITextView *mParagraph;
+    __weak IBOutlet UITextView                   *mParagraph;
+    NSString                                     *mEditingText;
 }
 
 @synthesize paragraphDelegate = mDelegate;
+@synthesize editingText = mEditingText;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    if (![mEditingText isEqualToString:@""])
+    {
+        [mParagraph setText:mEditingText];
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning
