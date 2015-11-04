@@ -25,6 +25,7 @@
 @property (nonatomic) NSInteger number;
 @property (weak, nonatomic) IBOutlet UITextField *character;
 @property (weak, nonatomic) IBOutlet UITextView *dialog;
+@property (weak, nonatomic) IBOutlet UILabel *dialogPlaceholder;
 @property (nonatomic, weak) id<DJDialogInputCellDelegate> delegate;
 
 

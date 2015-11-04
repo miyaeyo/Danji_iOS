@@ -13,6 +13,8 @@
 {
     __weak UIViewController<DJParagraphDelegate> *mDelegate;
     __weak IBOutlet UITextView                   *mParagraph;
+    __weak IBOutlet UILabel                      *mParagraphPlaceholder;
+    
     NSString                                     *mEditingText;
 }
 
@@ -22,8 +24,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [mParagraph setDelegate:self];
+    
     if (![mEditingText isEqualToString:@""])
     {
+        [mParagraphPlaceholder setText:@""];
         [mParagraph setText:mEditingText];
     }
     
@@ -41,6 +46,11 @@
 {
     [mDelegate paragraphWriteController:self didFinishWriteParagraph:[mParagraph text]];
     [[self navigationController] popToViewController:mDelegate animated:YES];
+}
+
+- (void)textViewDidBeginEditing:(UITextView *)textView
+{
+    [mParagraphPlaceholder setText:@""];
 }
 
 /*

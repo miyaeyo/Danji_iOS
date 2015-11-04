@@ -119,6 +119,11 @@
     [[cell character] setText:[mCharacter objectAtIndex:[indexPath row]]];
     [[cell dialog] setText:[mDialog objectAtIndex:[indexPath row]]];
     
+    if (![[mDialog objectAtIndex:[indexPath row]] isEqualToString:@""])
+    {
+        [[cell dialogPlaceholder] setText:@""];
+    }
+    
     return cell;
 }
 

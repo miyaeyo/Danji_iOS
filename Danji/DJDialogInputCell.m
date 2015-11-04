@@ -13,7 +13,10 @@
     __weak id<DJDialogInputCellDelegate> mDelegate;
     __weak IBOutlet UITextField         *mCharacter;
     __weak IBOutlet UITextView          *mDialog;
+    __weak IBOutlet UILabel             *mDialogPlaceholder;
+    
     NSInteger                           mNumber;
+    
 }
 
 @synthesize number = mNumber;
@@ -34,7 +37,12 @@
     [mDelegate dialogInputCell:self didEndEditingCharacter:[mCharacter text]];
 }
 
--(void)textViewDidChange:(UITextView *)textView
+- (void)textViewDidBeginEditing:(UITextView *)textView
+{
+    [mDialogPlaceholder setText:@""];
+}
+
+- (void)textViewDidChange:(UITextView *)textView
 {
     [mDelegate dialogInputCell:self didEndEditingDialog:[mDialog text]];
 }

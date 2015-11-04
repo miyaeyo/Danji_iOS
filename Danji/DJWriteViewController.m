@@ -21,6 +21,7 @@
     __weak IBOutlet UITextField      *mCreator;
     __weak IBOutlet UICollectionView *mThumnailCollectionView;
     __weak IBOutlet UILabel          *mBody;
+    __weak IBOutlet UILabel          *mBodyPlaceholder;
     
     NSArray                          *mImages;
     NSInteger                        mImageCount;
@@ -45,6 +46,15 @@
     mImages = [[NSArray alloc] init];
     mImageCount = 0;
     
+   
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    if (![[mBody text]isEqualToString:@""])
+    {
+        [mBodyPlaceholder setText:@""];
+    }
 }
 
 

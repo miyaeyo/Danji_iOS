@@ -19,7 +19,7 @@
 @end
 
 
-@interface DJParagraphWriteController : UIViewController
+@interface DJParagraphWriteController : UIViewController <UITextViewDelegate>
 
 @property (nonatomic, weak) UIViewController<DJParagraphDelegate> *paragraphDelegate;
 @property (nonatomic, strong) NSString *editingText;
