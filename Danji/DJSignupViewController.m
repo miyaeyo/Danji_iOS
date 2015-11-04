@@ -28,9 +28,12 @@
 {
     [super didReceiveMemoryWarning];
     
-    mUserName = nil;
-    mPassword = nil;
-    mConfirmPassword = nil;
+    if ([self isViewLoaded])
+    {
+        mUserName = nil;
+        mPassword = nil;
+        mConfirmPassword = nil;
+    }
 }
 
 
@@ -76,7 +79,7 @@
      {
          if (error)
          {
-             [[[UIAlertView alloc] initWithTitle:@"fail to signup"
+             [[[UIAlertView alloc] initWithTitle:@"Fail to signup"
                                          message:@"Username already taken"
                                         delegate:nil
                                cancelButtonTitle:@"OK"
@@ -86,18 +89,16 @@
 
          }
          
-         
-        [[[UIAlertView alloc] initWithTitle:@"success to signup"
+        [[[UIAlertView alloc] initWithTitle:@"Success to signup"
                                     message:@"welcome Danji, login and enjoy Danji"
                                    delegate:nil
                           cancelButtonTitle:@"OK"
                           otherButtonTitles:nil, nil] show];
              
          [PFUser logOut];
-         [self performSegueWithIdentifier:@"signupCompleted" sender:self];
          
+         [self performSegueWithIdentifier:@"signupCompleted" sender:self];
      }];
-    
 }
 
 

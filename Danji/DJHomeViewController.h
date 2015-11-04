@@ -11,7 +11,7 @@
 #import "DJContentsManager.h"
 
 
-@interface DJHomeViewController : UITableViewController <UIPickerViewDataSource, UIPickerViewDelegate, DJContentsDelegate>
+@interface DJHomeViewController : UITableViewController <UIPickerViewDataSource, UIPickerViewDelegate, DJContentsDelegate, UIAlertViewDelegate>
 
 
 @end

@@ -8,6 +8,7 @@
 
 #import "DJWriteViewController.h"
 #import "DJContents.h"
+#import "UIColor+DanjiColor.h"
 
 
 @import MobileCoreServices;
@@ -15,6 +16,7 @@
 
 @implementation DJWriteViewController
 {
+    //storyboard
     __weak IBOutlet UITextField      *mInputFormPicker;
     __weak IBOutlet UITextField      *mCategoryPicker;
     __weak IBOutlet UITextField      *mTitle;
@@ -23,30 +25,23 @@
     __weak IBOutlet UILabel          *mBody;
     __weak IBOutlet UILabel          *mBodyPlaceholder;
     
+
     NSArray                          *mImages;
     NSInteger                        mImageCount;
     NSArray                          *mInputForms;
     NSArray                          *mCategories;
     NSArray                          *mCharacters;
     NSArray                          *mDialogs;
-    
 }
 
+
+#pragma mark - view
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
     [self setupPickerView];
-    
-    UITapGestureRecognizer *writeTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(writeLabelTapped:)];
-    [mBody addGestureRecognizer:writeTapGesture];
-    [mThumnailCollectionView setDelegate:self];
-    [mThumnailCollectionView setDataSource:self];
-    mImages = [[NSArray alloc] init];
-    mImageCount = 0;
-    
-   
+    [self setupWriteRelatedTask];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -57,15 +52,25 @@
     }
 }
 
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     
-    mInputFormPicker = nil;
-    mCategoryPicker = nil;
-    mInputForms = nil;
-    mCategories = nil;
+    if ([self isViewLoaded])
+    {
+        mInputFormPicker = nil;
+        mCategoryPicker = nil;
+        mTitle = nil;
+        mCreator = nil;
+        mThumnailCollectionView = nil;
+        mBody = nil;
+        mBodyPlaceholder = nil;
+        mImages = nil;
+        mInputForms = nil;
+        mCategories = nil;
+        mCharacters = nil;
+        mDialogs = nil;
+    }
 }
 
 
@@ -90,7 +95,6 @@
     {
         [[segue destinationViewController] setImageDelegate:self];
     }
-    
 }
 
 
@@ -109,8 +113,8 @@
 {
     if ([[mTitle text] isEqualToString:@""] || [[mInputFormPicker text] isEqualToString:@""] || [[mCategoryPicker text] isEqualToString:@""])
     {
-        [[[UIAlertView alloc] initWithTitle:@"some fields(title, input form, category) are empty"
-                                    message:@"Please fill the empty fields"
+        [[[UIAlertView alloc] initWithTitle:@"Missing some fields"
+                                    message:@"Please fill the empty fields(title, input form, category).\n Only creator field is optional."
                                    delegate:nil
                           cancelButtonTitle:@"OK"
                           otherButtonTitles:nil, nil] show];
@@ -142,12 +146,17 @@
 
 - (IBAction)cameraButtonTapped:(id)sender
 {
-    [self startCameraControllerFromViewController:self usingDelegate:self];
+    [self startCameraController];
 }
 
 - (IBAction)galleryButtonTapped:(id)sender
 {
     [self performSegueWithIdentifier:@"openGallery" sender:self];
+}
+
+- (IBAction)backgroundTapped:(id)sender
+{
+    [[self view] endEditing:YES];
 }
 
 
@@ -169,25 +178,23 @@
 
 #pragma mark - image control
 
-- (BOOL)startCameraControllerFromViewController:(UIViewController *)controller usingDelegate:(id<UIImagePickerControllerDelegate, UINavigationControllerDelegate>) delegate
+- (BOOL)startCameraController
 {
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] == NO || delegate == nil || controller == nil)
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] == NO)
     {
         return NO;
     }
     
     UIImagePickerController *cameraUI = [[UIImagePickerController alloc] init];
     [cameraUI setSourceType:UIImagePickerControllerSourceTypeCamera];
-    
     [cameraUI setMediaTypes:[[NSArray alloc] initWithObjects:(NSString *)kUTTypeImage, nil]];
     [cameraUI setAllowsEditing:YES];
-    [cameraUI setDelegate:delegate];
+    [cameraUI setDelegate:self];
     
-    [controller presentViewController:cameraUI animated:YES completion:NULL];
+    [self presentViewController:cameraUI animated:YES completion:NULL];
     
     return YES;
 }
-
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
@@ -254,8 +261,6 @@
 
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    
     return YES;
 }
 
@@ -298,12 +303,10 @@
 
 #pragma mark - picker view
 
-
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
     return 2;
 }
-
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
@@ -317,7 +320,6 @@
     }
 }
 
-
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
     if (component == 0)
@@ -329,7 +331,6 @@
         return [mCategories objectAtIndex:row];
     }
 }
-
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
@@ -352,7 +353,6 @@
 
 #pragma mark - private
 
-
 - (void)setupPickerView
 {
     mInputForms = [[NSArray alloc] initWithObjects:@"dialog", @"paragraph", nil];
@@ -362,11 +362,24 @@
     [pickerView setDataSource:self];
     [pickerView setDelegate:self];
     [pickerView setShowsSelectionIndicator:YES];
-    [pickerView setBackgroundColor:[UIColor colorWithRed:0.74 green:0.82 blue:0.8 alpha:1]];
+    [pickerView setBackgroundColor:[UIColor mintColor]];
     
     [mInputFormPicker setInputView:pickerView];
     [mCategoryPicker setInputView:pickerView];
 }
+
+- (void)setupWriteRelatedTask
+{
+    UITapGestureRecognizer *writeTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(writeLabelTapped:)];
+    [mBody addGestureRecognizer:writeTapGesture];
+    
+    [mThumnailCollectionView setDelegate:self];
+    [mThumnailCollectionView setDataSource:self];
+    
+    mImages = [[NSArray alloc] init];
+    mImageCount = 0;
+}
+
 
 - (void)saveParseDB
 {
@@ -393,12 +406,10 @@
 
 - (PFFile *)convertImages:(NSArray *)images
 {
-    
     if ([images count] == 1)
     {
         NSData *imageData = UIImagePNGRepresentation([images firstObject]);
         PFFile *imageFile = [PFFile fileWithData:imageData];
-        
         return imageFile;
     }
     else
@@ -413,17 +424,13 @@
         }
         
         CGSize size = CGSizeMake(width, height);
-        
         UIGraphicsBeginImageContext(size);
-        
         CGFloat prevHeight = 0.0f;
-        
         for (UIImage *image in images)
         {
             [image drawInRect:CGRectMake(0, prevHeight, width, image.size.height)];
             prevHeight += image.size.height;
         }
-        
         UIImage *finalImage = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
         
@@ -433,8 +440,6 @@
     }
     
 }
-
-
 
 
 @end

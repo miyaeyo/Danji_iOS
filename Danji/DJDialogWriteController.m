@@ -111,7 +111,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"%ld", [indexPath row]);
+    NSLog(@"%ld", (long)[indexPath row]);
     DJDialogInputCell *cell = [tableView dequeueReusableCellWithIdentifier:@"dialog" forIndexPath:indexPath];
     [cell setNumber:[indexPath row]];
     [cell setDelegate:self];

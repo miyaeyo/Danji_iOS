@@ -17,7 +17,7 @@
     __weak IBOutlet UITextField *mCategory;
     NSArray                     *mCategories;
     DJContentsViewCell          *mCell;
-    NSArray              *mContentsList;
+    NSArray                     *mContentsList;
 }
 
 
@@ -28,21 +28,26 @@
     [super viewDidLoad];
     
     [self setupViewAttributes];
-    [self getContentsFromDB];
     [self setupPickerView];
     
     [[self tableView] setRowHeight:UITableViewAutomaticDimension];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self getContentsFromDB];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    
-    mCategories = nil;
-    mCategory = nil;
-    mCell = nil;
-    mContentsList = nil;
-    
+    if ([self isViewLoaded])
+    {
+        mCategories = nil;
+        mCategory = nil;
+        mCell = nil;
+        mContentsList = nil;
+    }
 }
 
 
@@ -50,7 +55,22 @@
 
 - (IBAction)logoutButtonTapped:(id)sender
 {
-    [PFUser logOut];
+    [[[UIAlertView alloc] initWithTitle:@"Logout"
+                                message:@"Do you want to logout Danji?"
+                               delegate:self cancelButtonTitle:@"NO"
+                      otherButtonTitles:@"YES", nil] show];
+}
+
+
+#pragma mark - aler view delegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1)
+    {
+        [PFUser logOut];
+        [self performSegueWithIdentifier:@"logout" sender:self];
+    }
 }
 
 
@@ -82,14 +102,11 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSLog(@"number of rows in section");
-
     return [mContentsList count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"cell for index path");
     mCell = [[self tableView] dequeueReusableCellWithIdentifier:@"contentsCell"];
     [mCell inputContents:[mContentsList objectAtIndex:[indexPath row]]];
     
@@ -98,24 +115,22 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"height for row at index path");
-    
-    if (!mCell)
-    {
-        mCell = [[self tableView] dequeueReusableCellWithIdentifier:@"contentsCell"];
-    }
-    [mCell inputContents:[mContentsList objectAtIndex:[indexPath row]]];
+//    if (!mCell)
+//    {
+//        mCell = [[self tableView] dequeueReusableCellWithIdentifier:@"contentsCell"];
+//    }
+//    [mCell inputContents:[mContentsList objectAtIndex:[indexPath row]]];
     [mCell layoutIfNeeded];
+    [mCell layoutSubviews];
     
-    CGFloat height = [[mCell contentView] systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
-    
+    CGFloat height = [mCell systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+    NSLog(@"%ld height : %lf", [indexPath row],height);
     return height + 1;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"estimated height for row at index path");
-    return 200;
+    return 700;
 }
 
 
@@ -161,26 +176,3 @@
 
 @end
 
-
-
-
-//- (void)setupNavigationBar
-//{
-//    UINavigationBar *navBar = [[self navigationController] navigationBar];
-//    UIView *titleView = [[UIView alloc] initWithFrame:[navBar bounds]];
-//
-//    UIImageView *appIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"danji.png"]];
-//    [appIcon setFrame:CGRectMake(0, 0, [appIcon bounds].size.width, [navBar bounds].size.height)];
-//
-//    UILabel *title = [[UILabel alloc] initWithFrame:[navBar bounds]];
-//    [title setTextAlignment:NSTextAlignmentCenter];
-//    [title setTextColor:[UIColor colorWithRed:0.98 green:0.95 blue:0.84 alpha:1]];
-//    [title setFont:[UIFont boldSystemFontOfSize:20.0]];
-//    [title setText:@"DANJI"];
-//
-//    [titleView addSubview:appIcon];
-//    [titleView addSubview:title];
-//
-//    [[navBar topItem] setTitleView:titleView];
-//
-//}

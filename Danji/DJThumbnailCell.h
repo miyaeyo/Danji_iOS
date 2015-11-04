@@ -26,6 +26,4 @@
 
 - (void)setupThumbnail:(UIImage *)image;
 
-
-
 @end

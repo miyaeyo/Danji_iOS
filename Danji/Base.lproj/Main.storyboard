@@ -584,7 +584,6 @@
                                 </state>
                                 <connections>
                                     <action selector="logoutButtonTapped:" destination="qIM-EP-lkZ" eventType="touchUpInside" id="JIy-d6-y7a"/>
-                                    <segue destination="STo-Eb-bCJ" kind="presentation" modalTransitionStyle="crossDissolve" id="VXl-wu-qgd"/>
                                 </connections>
                             </button>
                         </barButtonItem>
@@ -614,6 +613,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="mCategory" destination="05e-0X-YdT" id="sxB-4d-gFy"/>
+                        <segue destination="STo-Eb-bCJ" kind="presentation" identifier="logout" modalTransitionStyle="crossDissolve" id="Hbo-bP-cNO"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x8p-4c-FXk" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -628,7 +628,7 @@
                         <viewControllerLayoutGuide type="top" id="I5R-3c-Hgv"/>
                         <viewControllerLayoutGuide type="bottom" id="8nZ-AB-RRJ"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="xjB-8I-eqh">
+                    <view key="view" contentMode="scaleToFill" id="xjB-8I-eqh" customClass="UIControl">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -749,6 +749,9 @@
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="0.99215686270000003" green="0.94901960780000005" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
+                        <connections>
+                            <action selector="backgroundTapped:" destination="PMn-lw-gKc" eventType="valueChanged" id="kEX-HR-N6E"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="exH-lb-OeI">
                         <nil key="title"/>
@@ -778,8 +781,8 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
-                        <outlet property="mBody" destination="f4E-ED-6Hu" id="sMP-Gb-9K9"/>
-                        <outlet property="mBodyPlaceholder" destination="X1K-Sa-49i" id="qWG-eT-MjJ"/>
+                        <outlet property="mBody" destination="f4E-ED-6Hu" id="xJ2-Iv-7UD"/>
+                        <outlet property="mBodyPlaceholder" destination="X1K-Sa-49i" id="Pc7-zc-3er"/>
                         <outlet property="mCategoryPicker" destination="dSk-jS-bTB" id="p4x-Ne-vZl"/>
                         <outlet property="mCreator" destination="68x-Ha-Yd6" id="kXd-sv-uNF"/>
                         <outlet property="mInputFormPicker" destination="ic7-M1-JJm" id="FUD-2U-1HG"/>
@@ -787,7 +790,7 @@
                         <outlet property="mTitle" destination="e72-J6-MSx" id="QKZ-hb-szF"/>
                         <segue destination="sl3-7E-hcv" kind="show" identifier="writeDialog" id="lOy-KO-PZv"/>
                         <segue destination="xYn-eL-xYj" kind="show" identifier="writhParagraph" id="Kad-9n-SuX"/>
-                        <segue destination="L0b-fm-6EF" kind="presentation" identifier="complete" id="pUH-sk-lcG"/>
+                        <segue destination="L0b-fm-6EF" kind="presentation" identifier="complete" modalTransitionStyle="crossDissolve" id="pUH-sk-lcG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j7v-YW-zXZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -940,7 +943,7 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" title="Select Photos" id="CtW-hV-vrm">
-                        <barButtonItem key="rightBarButtonItem" title="Item" systemItem="done" id="iFs-4U-etO">
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="iFs-4U-etO">
                             <connections>
                                 <action selector="doneButtonTapped:" destination="34c-9H-PVa" id="l1d-P5-I3o"/>
                             </connections>
@@ -1152,7 +1155,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oTv-UM-SOI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2958" y="-685"/>
+            <point key="canvasLocation" x="-2954" y="-707"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="BFe-mH-L8S">
@@ -1231,9 +1234,9 @@
         <image name="write.png" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="Nby-nJ-dF2"/>
         <segue reference="pUH-sk-lcG"/>
         <segue reference="NTQ-fp-XM9"/>
-        <segue reference="Nby-nJ-dF2"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>

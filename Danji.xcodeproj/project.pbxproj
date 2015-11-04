@@ -18,6 +18,7 @@
 		9E4E43481BC2794C006FB05E /* danji.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E4E43461BC2794B006FB05E /* danji.png */; };
 		9E96149C1BCB9C0900D14B1E /* DJWriteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E96149B1BCB9C0900D14B1E /* DJWriteViewController.m */; };
 		9E96149F1BCBA9CD00D14B1E /* DJSignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E96149E1BCBA9CD00D14B1E /* DJSignupViewController.m */; };
+		9ECBCBDE1BEA002F00EFA360 /* UIColor+DanjiColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ECBCBDD1BEA002F00EFA360 /* UIColor+DanjiColor.m */; };
 		9EE150601BCDEFAF0034258E /* DJContents.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EE1505F1BCDEFAF0034258E /* DJContents.m */; };
 		9EE150631BCDFF660034258E /* Danji.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EE150621BCDFF660034258E /* Danji.m */; };
 		9EE150661BCE02540034258E /* DJContentsViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EE150651BCE02540034258E /* DJContentsViewCell.m */; };
@@ -83,6 +84,8 @@
 		9E96149B1BCB9C0900D14B1E /* DJWriteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJWriteViewController.m; sourceTree = "<group>"; };
 		9E96149D1BCBA9CD00D14B1E /* DJSignupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DJSignupViewController.h; sourceTree = "<group>"; };
 		9E96149E1BCBA9CD00D14B1E /* DJSignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJSignupViewController.m; sourceTree = "<group>"; };
+		9ECBCBDC1BEA002F00EFA360 /* UIColor+DanjiColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+DanjiColor.h"; sourceTree = "<group>"; };
+		9ECBCBDD1BEA002F00EFA360 /* UIColor+DanjiColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+DanjiColor.m"; sourceTree = "<group>"; };
 		9EE1505E1BCDEFAF0034258E /* DJContents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DJContents.h; sourceTree = "<group>"; };
 		9EE1505F1BCDEFAF0034258E /* DJContents.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJContents.m; sourceTree = "<group>"; };
 		9EE150611BCDFF660034258E /* Danji.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Danji.h; sourceTree = "<group>"; };
@@ -167,7 +170,7 @@
 		9E4E42F61BC11A40006FB05E = {
 			isa = PBXGroup;
 			children = (
-				9EE2B2831BC509FE003B929E /* Frameworks */,
+				9ED767021BEA0C9B00C8EA10 /* Frameworks */,
 				9E4E43011BC11A40006FB05E /* Danji */,
 				9E4E431B1BC11A40006FB05E /* DanjiTests */,
 				9E4E43001BC11A40006FB05E /* Products */,
@@ -188,6 +191,8 @@
 			children = (
 				9E4E43061BC11A40006FB05E /* AppDelegate.h */,
 				9E4E43071BC11A40006FB05E /* AppDelegate.m */,
+				9ECBCBDC1BEA002F00EFA360 /* UIColor+DanjiColor.h */,
+				9ECBCBDD1BEA002F00EFA360 /* UIColor+DanjiColor.m */,
 				9E4E43451BC25920006FB05E /* Images */,
 				9EDDD6C11BC3AF78002DB4B2 /* Login */,
 				9EDDD6C21BC3AFBC002DB4B2 /* Main */,
@@ -243,16 +248,51 @@
 			children = (
 				9E96149A1BCB9C0900D14B1E /* DJWriteViewController.h */,
 				9E96149B1BCB9C0900D14B1E /* DJWriteViewController.m */,
+				9EEEB2111BE6FF340013F396 /* DJThumbnailCell.h */,
+				9EEEB2121BE6FF340013F396 /* DJThumbnailCell.m */,
+				9ECBCBD81BE9F92A00EFA360 /* Paragraph */,
+				9ECBCBD71BE9F91300EFA360 /* Dialog */,
+			);
+			name = Write;
+			sourceTree = "<group>";
+		};
+		9ECBCBD71BE9F91300EFA360 /* Dialog */ = {
+			isa = PBXGroup;
+			children = (
 				9EE150941BD885030034258E /* DJDialogWriteController.h */,
 				9EE150951BD885030034258E /* DJDialogWriteController.m */,
 				9EE1509A1BD88A110034258E /* DJDialogInputCell.h */,
 				9EE1509B1BD88A110034258E /* DJDialogInputCell.m */,
+			);
+			name = Dialog;
+			sourceTree = "<group>";
+		};
+		9ECBCBD81BE9F92A00EFA360 /* Paragraph */ = {
+			isa = PBXGroup;
+			children = (
 				9EE150971BD8868C0034258E /* DJParagraphWriteController.h */,
 				9EE150981BD8868C0034258E /* DJParagraphWriteController.m */,
-				9EEEB2111BE6FF340013F396 /* DJThumbnailCell.h */,
-				9EEEB2121BE6FF340013F396 /* DJThumbnailCell.m */,
 			);
-			name = Write;
+			name = Paragraph;
+			sourceTree = "<group>";
+		};
+		9ED767021BEA0C9B00C8EA10 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9EE2B2811BC50817003B929E /* libsqlite3.dylib */,
+				9EE2B27F1BC507CC003B929E /* libz.dylib */,
+				9EE2B27D1BC507BC003B929E /* SystemConfiguration.framework */,
+				9EE2B27B1BC507AD003B929E /* StoreKit.framework */,
+				9EE2B2791BC507A2003B929E /* Security.framework */,
+				9EE2B2771BC50796003B929E /* QuartzCore.framework */,
+				9EE2B2751BC50789003B929E /* CoreLocation.framework */,
+				9EE2B2731BC50781003B929E /* CoreGraphics.framework */,
+				9EE2B2711BC50770003B929E /* CFNetwork.framework */,
+				9EE2B26F1BC50754003B929E /* AudioToolbox.framework */,
+				9EE2B26D1BC5064F003B929E /* Parse.framework */,
+				9EE2B26B1BC5063F003B929E /* Bolts.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		9EDDD6C11BC3AF78002DB4B2 /* Login */ = {
@@ -323,25 +363,6 @@
 				9EE150621BCDFF660034258E /* Danji.m */,
 			);
 			name = ContentsModel;
-			sourceTree = "<group>";
-		};
-		9EE2B2831BC509FE003B929E /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				9EE2B2811BC50817003B929E /* libsqlite3.dylib */,
-				9EE2B27F1BC507CC003B929E /* libz.dylib */,
-				9EE2B27D1BC507BC003B929E /* SystemConfiguration.framework */,
-				9EE2B27B1BC507AD003B929E /* StoreKit.framework */,
-				9EE2B2791BC507A2003B929E /* Security.framework */,
-				9EE2B2771BC50796003B929E /* QuartzCore.framework */,
-				9EE2B2751BC50789003B929E /* CoreLocation.framework */,
-				9EE2B2731BC50781003B929E /* CoreGraphics.framework */,
-				9EE2B2711BC50770003B929E /* CFNetwork.framework */,
-				9EE2B26F1BC50754003B929E /* AudioToolbox.framework */,
-				9EE2B26D1BC5064F003B929E /* Parse.framework */,
-				9EE2B26B1BC5063F003B929E /* Bolts.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -454,6 +475,7 @@
 				9EE1509C1BD88A110034258E /* DJDialogInputCell.m in Sources */,
 				9E4E43361BC1764B006FB05E /* DJSearchViewController.m in Sources */,
 				9EE150991BD8868C0034258E /* DJParagraphWriteController.m in Sources */,
+				9ECBCBDE1BEA002F00EFA360 /* UIColor+DanjiColor.m in Sources */,
 				9EE150661BCE02540034258E /* DJContentsViewCell.m in Sources */,
 				9EE150A31BDF11560034258E /* DJAlbumPickerController.m in Sources */,
 				9EE150B51BE6798C0034258E /* DJImagePickerController.m in Sources */,

@@ -28,8 +28,11 @@
 {
     [super didReceiveMemoryWarning];
     
-    mUserName = nil;
-    mPassword = nil;
+    if ([self isViewLoaded])
+    {
+        mUserName = nil;
+        mPassword = nil;
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -65,7 +68,6 @@
 {
     [[self view] endEditing:YES];
 }
-
 
 
 #pragma mark - private
