@@ -109,22 +109,17 @@
 {
     mCell = [[self tableView] dequeueReusableCellWithIdentifier:@"contentsCell"];
     [mCell inputContents:[mContentsList objectAtIndex:[indexPath row]]];
+    [[mCell contentView] sizeToFit];
     
     return mCell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    if (!mCell)
-//    {
-//        mCell = [[self tableView] dequeueReusableCellWithIdentifier:@"contentsCell"];
-//    }
-//    [mCell inputContents:[mContentsList objectAtIndex:[indexPath row]]];
-    [mCell layoutIfNeeded];
-    [mCell layoutSubviews];
-    
+    [mCell setNeedsLayout];
     CGFloat height = [mCell systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
-    NSLog(@"%ld height : %lf", [indexPath row],height);
+    [mCell sizeToFit];
+    NSLog(@"%ld height : %lf", (long)[indexPath row],height);
     return height + 1;
 }
 

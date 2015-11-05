@@ -14,6 +14,9 @@
 {
     __weak IBOutlet UITextField *mUserName;
     __weak IBOutlet UITextField *mPassword;
+    IBOutlet UIScrollView       *mScrollView;
+    __weak          UITextField *mActiveField;
+    
 }
 
 
@@ -22,6 +25,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self registerForKeyboardNotifications];
+    [mUserName setDelegate:self];
+    [mPassword setDelegate:self];
+    
+    UITapGestureRecognizer *backgroundTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(backgroundTapped:)];
+    [mScrollView addGestureRecognizer:backgroundTapGesture];
 }
 
 - (void)didReceiveMemoryWarning
@@ -32,6 +41,7 @@
     {
         mUserName = nil;
         mPassword = nil;
+        mScrollView = nil;
     }
 }
 
@@ -43,6 +53,12 @@
     {
         [self performSegueWithIdentifier:@"startDanji" sender:self];
     }
+    
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 
@@ -50,6 +66,8 @@
 
 - (IBAction)loginButtonTapped:(id)sender
 {
+    [[self view] endEditing:YES];
+    
     if ([[mUserName text] length] == 0 || [[mPassword text] length] == 0)
     {
         [[[UIAlertView alloc] initWithTitle:@"Missing information"
@@ -67,6 +85,61 @@
 - (IBAction)backgroundTapped:(id)sender
 {
     [[self view] endEditing:YES];
+}
+
+
+#pragma mark - keyboard
+
+- (void)registerForKeyboardNotifications
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardDidShow:)
+                                                 name:UIKeyboardDidShowNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHide:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
+}
+
+- (void)keyboardDidShow:(NSNotification *)notification
+{
+    NSDictionary *info = [notification userInfo];
+    CGSize keyboardSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    UIEdgeInsets insets =UIEdgeInsetsMake(0, 0, keyboardSize.height, 0);
+    [mScrollView setContentInset:insets];
+    [mScrollView setScrollIndicatorInsets:insets];
+    
+    CGRect rect = [self view].frame;
+    rect.size.height -= (keyboardSize.height + 10);
+    
+    CGPoint activeFieldEndPoint = CGPointMake([mActiveField frame].origin.x, [mActiveField frame].origin.y + [mActiveField frame].size.height);
+    
+    if (!CGRectContainsPoint(rect, activeFieldEndPoint))
+    {
+        CGPoint scrollPoint = CGPointMake(0, rect.size.height - [mActiveField frame].origin.y + 10);
+        [mScrollView setContentOffset:scrollPoint animated:YES];
+    }
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification
+{
+    UIEdgeInsets insets = UIEdgeInsetsZero;
+    [mScrollView setContentInset:insets];
+    [mScrollView setScrollIndicatorInsets:insets];
+}
+
+
+#pragma mark - text field delegate
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    mActiveField = textField;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    mActiveField = nil;
 }
 
 
@@ -94,6 +167,10 @@
      }];
 
 }
+
+
+
+
 
 
 @end

@@ -77,7 +77,7 @@
     id navigationBar = [[self navigationController] navigationBar];
     [navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithRed:0.98 green:0.95 blue:0.84 alpha:1]}];
     
-    [self setTitle:[mContents reference]];
+    [self setTitle:[mContents title]];
     [[self tableView] setBackgroundColor:[UIColor whiteColor]];
     [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     [[self tableView] setDelegate:self];

@@ -10,6 +10,6 @@
 #import <Parse/Parse.h>
 
 
-@interface DJLoginViewController : UIViewController
+@interface DJLoginViewController : UIViewController <UITextFieldDelegate>
 
 @end

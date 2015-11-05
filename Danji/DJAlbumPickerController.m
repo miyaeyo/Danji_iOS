@@ -12,7 +12,7 @@
 @implementation DJAlbumPickerController
 {
     ALAssetsLibrary                     *mLibrary;
-    NSMutableArray                      *mAssetGroups;
+    NSArray                             *mAssetGroups;
     __weak id<DJAssetSelectionDelegate> mDelegate;
     NSUInteger                          mIndexForSegue;
 }
@@ -26,7 +26,7 @@
     [super viewDidLoad];
     [self setupViewAttributes];
     
-    mAssetGroups = [[NSMutableArray alloc] init];
+    mAssetGroups = [[NSArray alloc] init];
     mLibrary = [[ALAssetsLibrary alloc] init];
     
     [[self tableView] setDataSource:self];
@@ -41,9 +41,13 @@
 {
     [super didReceiveMemoryWarning];
     
-    mLibrary = nil;
-    mAssetGroups = nil;
-    mDelegate = nil;
+    if ([self isViewLoaded])
+    {
+        mLibrary = nil;
+        mAssetGroups = nil;
+        mDelegate = nil;
+    }
+  
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -59,6 +63,11 @@
 }
 
 #pragma mark - table view
+
+- (void)setupAssetGroups:(NSArray *)assetGroups
+{
+    mAssetGroups = assetGroups;
+}
 
 - (void)reloadTableView
 {
@@ -146,17 +155,18 @@
                 }
                 
                 NSString *sGroupPropertyName = (NSString *)[group valueForProperty:ALAssetsGroupPropertyName];
-                NSUInteger nType = [[group valueForProperty:ALAssetsGroupPropertyType] intValue];
+                NSUInteger assetType = [[group valueForProperty:ALAssetsGroupPropertyType] intValue];
+                NSMutableArray *assetGroups = [[NSMutableArray alloc] init];
                 
-                if ([[sGroupPropertyName lowercaseString] isEqualToString:@"camera roll"] && nType == ALAssetsGroupSavedPhotos)
+                if ([[sGroupPropertyName lowercaseString] isEqualToString:@"camera roll"] && assetType == ALAssetsGroupSavedPhotos)
                 {
-                    [mAssetGroups insertObject:group atIndex:0];
+                    [assetGroups insertObject:group atIndex:0];
                 }
                 else
                 {
-                    [mAssetGroups addObject:group];
+                    [assetGroups addObject:group];
                 }
-                
+                [self performSelectorOnMainThread:@selector(setupAssetGroups:) withObject:assetGroups waitUntilDone:YES];
                 [self performSelectorOnMainThread:@selector(reloadTableView) withObject:nil waitUntilDone:YES];
                 
             };
@@ -179,10 +189,9 @@
                                       cancelButtonTitle:@"OK"
                                       otherButtonTitles:nil, nil] show];
                 }
-                
-                [[self navigationItem] setTitle:nil];
                 NSLog(@"%@", [error description]);
             };
+            
             [mLibrary enumerateGroupsWithTypes:ALAssetsGroupAll usingBlock:assetGroupEnumerator failureBlock:assetGroupEnumeratorFailure];
         }
     });

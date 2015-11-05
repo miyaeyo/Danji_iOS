@@ -10,6 +10,6 @@
 #import <Parse/Parse.h>
 
 
-@interface DJSignupViewController : UIViewController
+@interface DJSignupViewController : UIViewController <UITextFieldDelegate>
 
 @end
