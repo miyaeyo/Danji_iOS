@@ -53,15 +53,3 @@
 }
 
 @end
-
-
-//- (IBAction)characterDidEndEditing:(id)sender
-//{
-//    [mDelegate dialogInputCell:self didEndEditingCharacter:[mCharacter text]];
-//}
-
-//- (void)textViewDidEndEditing:(UITextView *)textView
-//{
-//    [mDelegate dialogInputCell:self didEndEditingDialog:[mDialog text]];
-//}
-

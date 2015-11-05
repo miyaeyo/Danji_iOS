@@ -25,7 +25,6 @@
     __weak IBOutlet UILabel          *mBody;
     __weak IBOutlet UILabel          *mBodyPlaceholder;
     
-
     NSArray                          *mImages;
     NSInteger                        mImageCount;
     NSArray                          *mInputForms;
@@ -133,7 +132,15 @@
 
 - (IBAction)writeLabelTapped:(id)sender
 {
-    if ([[mInputFormPicker text] isEqualToString:@"dialog"])
+    [[self view] endEditing:YES];
+    if ([[mInputFormPicker text] isEqualToString:@""])
+    {
+        [[[UIAlertView alloc] initWithTitle:@"Missing input form and category field"
+                                    message:@"Please select input form and categry"
+                                   delegate:nil cancelButtonTitle:@"OK"
+                          otherButtonTitles:nil, nil] show];
+    }
+    else if ([[mInputFormPicker text] isEqualToString:@"dialog"])
     {
         [self performSegueWithIdentifier:@"writeDialog" sender:self];
 
