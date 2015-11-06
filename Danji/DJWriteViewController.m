@@ -402,7 +402,7 @@
     }
     else
     {
-        [contents setReference:[NSString stringWithFormat:@"%@ - %@", [mTitle text], [mCreator text]]];
+        [contents setReference:[NSString stringWithFormat:@"%@ - %@ 中", [mTitle text], [mCreator text]]];
     }
     [contents setLikeCount:0];
     [contents setCharacter:mCharacters];
