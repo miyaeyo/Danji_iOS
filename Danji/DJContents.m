@@ -20,7 +20,8 @@
 @dynamic likeCount;
 @dynamic character;
 @dynamic dialog;
-
+@dynamic imageHeight;
+@dynamic imageWidth;
 
 + (void)load
 {

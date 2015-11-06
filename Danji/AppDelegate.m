@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import <Parse/Parse.h>
-#import "Danji.h"
+#import "DJContents.h"
 
 
 @implementation AppDelegate
@@ -18,7 +18,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [Parse enableLocalDatastore];
-    [Danji registerSubclass];
+    [DJContents registerSubclass];
     [Parse setApplicationId:@"9bsJRraxnOoVjbhqsCjA35Gb4OMc29jzwcuZCKRq"
                   clientKey:@"A3ydVgCH2c8QKwLUEmUS36fMprzVingTwDuMVyGb"];
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];

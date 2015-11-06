@@ -18,6 +18,8 @@
 @synthesize delegate = mDelegate;
 
 
+#pragma mark - contents from parse db
+
 - (void)contentsFromParseDB
 {
     @autoreleasepool
@@ -89,6 +91,26 @@
              
          }];
     }
+}
+
+
+#pragma mark - save
+
+- (void)saveContentsToParseDB:(DJContents *)contents
+{
+    [contents saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error)
+    {
+        if (succeeded)
+        {
+            NSLog(@"save succeeded");
+        }
+        else
+        {
+            NSLog(@"Error: %@", [error description]);
+        }
+        
+    }];
+    
 }
 
 

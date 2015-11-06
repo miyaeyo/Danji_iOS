@@ -11,9 +11,19 @@
 
 @implementation UIColor (DanjiColor)
 
-+ (UIColor *)mintColor
++ (UIColor *)DJMintColor
 {
     return [UIColor colorWithRed:0.49 green:0.74 blue:0.73 alpha:1];
+}
+
++ (UIColor *)DJPinkColor
+{
+    return [UIColor colorWithRed:0.9 green:0.69 blue:0.66 alpha:1];
+}
+
++ (UIColor *)DJBrownColor
+{
+    return [UIColor colorWithRed:0.55 green:0.44 blue:0.42 alpha:1];
 }
 
 @end

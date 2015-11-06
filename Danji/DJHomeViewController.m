@@ -16,8 +16,9 @@
 {
     __weak IBOutlet UITextField *mCategory;
     NSArray                     *mCategories;
-    DJContentsViewCell          *mCell;
     NSArray                     *mContentsList;
+    DJContentsManager           *mContentsManager;
+    
 }
 
 
@@ -29,6 +30,7 @@
     
     [self setupViewAttributes];
     [self setupPickerView];
+    
     
     [[self tableView] setRowHeight:UITableViewAutomaticDimension];
 }
@@ -45,7 +47,6 @@
     {
         mCategories = nil;
         mCategory = nil;
-        mCell = nil;
         mContentsList = nil;
     }
 }
@@ -107,20 +108,30 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    mCell = [[self tableView] dequeueReusableCellWithIdentifier:@"contentsCell"];
-    [mCell inputContents:[mContentsList objectAtIndex:[indexPath row]]];
-    [[mCell contentView] sizeToFit];
+    DJContentsViewCell *cell = [[self tableView] dequeueReusableCellWithIdentifier:@"contentsCell"];
+    [cell inputContents:[mContentsList objectAtIndex:[indexPath row]]];
     
-    return mCell;
+    return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [mCell setNeedsLayout];
-    CGFloat height = [mCell systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
-    [mCell sizeToFit];
-    NSLog(@"%ld height : %lf", (long)[indexPath row],height);
-    return height + 1;
+    
+    CGSize screenSize = [[UIScreen mainScreen] bounds].size;
+    DJContents *cellContents = [mContentsList objectAtIndex:[indexPath row]];
+    CGFloat imageHeight = [cellContents imageHeight] * screenSize.width / [cellContents imageWidth];
+    UILabel *body = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, screenSize.width - 10, 0)];
+    [body setText:[cellContents body]];
+    [body sizeToFit];
+    CGFloat bodyHeight = [body bounds].size.height;
+    NSLog(@"- %ld image: %lf body: %lf", [indexPath row], imageHeight, bodyHeight);
+    
+    CGFloat height = imageHeight + bodyHeight + 50;
+    //CGFloat height = [cell height];
+    //CGFloat height = [cell systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+
+    NSLog(@"- %ld height : %lf", (long)[indexPath row], height);
+    return height + 5;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -150,12 +161,12 @@
 
 - (void)getContentsFromDB
 {
-    DJContentsManager *contentsManager = [[DJContentsManager alloc] init];
-    [contentsManager setDelegate:self];
-    [contentsManager contentsFromParseDB];
+    mContentsManager = [[DJContentsManager alloc] init];
+    [mContentsManager setDelegate:self];
+    [mContentsManager contentsFromParseDB];
 }
 
-- (void)setupPickerView
+- (void)setupPickerView // category class로 빼기
 {
     mCategories = [[NSArray alloc] initWithObjects: @"TOTAL", @"MOVIE", @"DRAMA", @"BOOK", @"POEM", @"MUSIC", @"CARTOON", nil];
     

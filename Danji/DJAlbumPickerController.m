@@ -110,7 +110,7 @@
     if ([[segue identifier] isEqualToString:@"openAlbum"])
     {
         id destController = [segue destinationViewController];
-        [destController setDelegate:self];
+        [destController setPickerDelegate:self];
         [destController setAssetGroup:[mAssetGroups objectAtIndex:mIndexForSegue]];
     }
 }

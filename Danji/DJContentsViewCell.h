@@ -13,5 +13,6 @@
 @interface DJContentsViewCell : UITableViewCell
 
 - (void)inputContents:(DJContents *)contents;
+- (CGFloat)height;
 
 @end

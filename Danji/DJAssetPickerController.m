@@ -21,7 +21,7 @@
 }
 
 
-@synthesize delegate = mDelegate;
+@synthesize pickerDelegate = mDelegate;
 @synthesize assetGroup = mAssetGroup;
 
 
