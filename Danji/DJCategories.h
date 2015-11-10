@@ -8,7 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Categories : NSObject
+@interface DJCategories : NSObject
 
-
+- (NSUInteger)count;
+- (NSString *)categoryAtIndex:(NSUInteger)index;
 @end

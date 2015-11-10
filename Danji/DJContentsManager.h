@@ -14,7 +14,7 @@
 
 @protocol DJContentsDelegate <NSObject>
 
-@required
+@optional
 - (void)contentsManager:(DJContentsManager *)aContentsManager didFinishGetContentsList:(NSArray *)contentsList;
 
 @end

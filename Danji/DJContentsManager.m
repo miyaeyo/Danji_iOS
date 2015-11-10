@@ -29,13 +29,14 @@
         [query orderByDescending:@"createdAt"];
         [query findObjectsInBackgroundWithBlock:^(NSArray *results, NSError *error)
          {
-             if (error)
+             if (!error)
+             {
+                 [mDelegate contentsManager:self didFinishGetContentsList:results];
+             }
+             else
              {
                  NSLog(@"Error: %@ %@", error, [error userInfo]);
-                 return;
              }
-             
-             [mDelegate contentsManager:self didFinishGetContentsList:results];
         }];
     }
 }
@@ -52,13 +53,14 @@
         
         [query findObjectsInBackgroundWithBlock:^(NSArray *results, NSError *error)
          {
-             if (error)
+             if (!error)
+             {
+                 [mDelegate contentsManager:self didFinishGetContentsList:results];
+             }
+             else
              {
                  NSLog(@"Error: %@ %@", error, [error userInfo]);
-                 return;
              }
-             
-             [mDelegate contentsManager:self didFinishGetContentsList:results];
         }];
 
     }
@@ -81,14 +83,14 @@
         [query orderByDescending:@"createdAt"];
         [query findObjectsInBackgroundWithBlock:^(NSArray *results, NSError *error)
          {
-             if (error)
+             if (!error)
+             {
+                 [mDelegate contentsManager:self didFinishGetContentsList:results];
+             }
+             else
              {
                  NSLog(@"Error: %@ %@", error, [error userInfo]);
-                 return;
              }
-             
-             [mDelegate contentsManager:self didFinishGetContentsList:results];
-             
          }];
     }
 }
