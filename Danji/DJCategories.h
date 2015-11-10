@@ -10,6 +10,7 @@
 
 @interface DJCategories : NSObject
 
-- (NSUInteger)count;
-- (NSString *)categoryAtIndex:(NSUInteger)index;
+- (NSArray *)categoriesForMain;
+- (NSArray *)categoriesForWrite;
+
 @end

@@ -11,14 +11,14 @@
 
 @implementation DJDialogWriteController
 {
-    __weak UIViewController<DJDialogWriteDelegate> *mDelegate;
+   // __weak UIViewController<DJDialogWriteDelegate> *mDelegate;
     NSInteger                                      mFormCount;
     NSMutableArray                                 *mCharacter;
     NSMutableArray                                 *mDialog;
     
 }
 
-@synthesize dialogDelegate = mDelegate;
+//@synthesize dialogDelegate = mDelegate;
 
 
 #pragma mark - view
@@ -96,8 +96,8 @@
 {
     if (buttonIndex == 1)
     {
-        [[self navigationController] popToViewController:mDelegate animated:YES];
-        [mDelegate dialogeWriteController:self didFinishWriteCharacter:mCharacter dialog:mDialog];
+       // [[self navigationController] popToViewController:mDelegate animated:YES];
+       // [mDelegate dialogeWriteController:self didFinishWriteCharacter:mCharacter dialog:mDialog];
     }
 }
 

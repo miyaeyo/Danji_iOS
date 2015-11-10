@@ -580,9 +580,6 @@
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="0.99215686270000003" green="0.94901960780000005" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
-                        <connections>
-                            <action selector="backgroundTapped:" destination="PMn-lw-gKc" eventType="valueChanged" id="kEX-HR-N6E"/>
-                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="exH-lb-OeI">
                         <nil key="title"/>
@@ -612,8 +609,6 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
-                        <outlet property="mBody" destination="f4E-ED-6Hu" id="xJ2-Iv-7UD"/>
-                        <outlet property="mBodyPlaceholder" destination="X1K-Sa-49i" id="Pc7-zc-3er"/>
                         <outlet property="mCategoryPicker" destination="dSk-jS-bTB" id="p4x-Ne-vZl"/>
                         <outlet property="mCreator" destination="68x-Ha-Yd6" id="kXd-sv-uNF"/>
                         <outlet property="mInputFormPicker" destination="ic7-M1-JJm" id="FUD-2U-1HG"/>
@@ -628,10 +623,10 @@
             </objects>
             <point key="canvasLocation" x="-809" y="12"/>
         </scene>
-        <!--Paragraph Write Controller-->
+        <!--View Controller-->
         <scene sceneID="wu5-ez-5ih">
             <objects>
-                <viewController id="xYn-eL-xYj" customClass="DJParagraphWriteController" sceneMemberID="viewController">
+                <viewController id="xYn-eL-xYj" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="zat-9R-k8Z"/>
                         <viewControllerLayoutGuide type="bottom" id="nWU-Qr-tV9"/>
@@ -780,10 +775,10 @@
             </objects>
             <point key="canvasLocation" x="57" y="690"/>
         </scene>
-        <!--Dialog Write Controller-->
+        <!--Table View Controller-->
         <scene sceneID="gE6-Vm-FDc">
             <objects>
-                <tableViewController id="sl3-7E-hcv" customClass="DJDialogWriteController" sceneMemberID="viewController">
+                <tableViewController id="sl3-7E-hcv" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="151" sectionHeaderHeight="22" sectionFooterHeight="22" id="HTt-jj-3dJ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -11,12 +11,12 @@
 
 @implementation DJParagraphWriteController
 {
-    __weak UIViewController<DJParagraphDelegate> *mDelegate;
+    //__weak UIViewController<DJParagraphDelegate> *mDelegate;
     __weak IBOutlet UITextView                   *mParagraph;
     NSString                                     *mEditingText;
 }
 
-@synthesize paragraphDelegate = mDelegate;
+//@synthesize paragraphDelegate = mDelegate;
 @synthesize editingText = mEditingText;
 
 - (void)viewDidLoad
@@ -31,7 +31,7 @@
     
     if ([self isViewLoaded])
     {
-        mDelegate = nil;
+        //mDelegate = nil;
         mParagraph = nil;
         mEditingText = nil;
     }
@@ -51,8 +51,8 @@
 
 - (IBAction)doneButtonTapped:(id)sender
 {
-    [mDelegate paragraphWriteController:self didFinishWriteParagraph:[mParagraph text]];
-    [[self navigationController] popToViewController:mDelegate animated:YES];
+    //[mDelegate paragraphWriteController:self didFinishWriteParagraph:[mParagraph text]];
+    //[[self navigationController] popToViewController:mDelegate animated:YES];
 }
 
 

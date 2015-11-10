@@ -13,7 +13,7 @@
 #import "DJThumbnailCell.h"
 
 
-@interface DJWriteViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate, DJDialogWriteDelegate, DJParagraphDelegate, UICollectionViewDataSource, UICollectionViewDelegate, DJImagePickerControllerDelegate, UIImagePickerControllerDelegate, DJThumbnailCellDelegate, UIAlertViewDelegate>
+@interface DJWriteViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, DJImagePickerControllerDelegate, UIImagePickerControllerDelegate, DJThumbnailCellDelegate, UIAlertViewDelegate>
 
 
 @end
