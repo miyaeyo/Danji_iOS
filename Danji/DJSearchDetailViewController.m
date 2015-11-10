@@ -12,7 +12,6 @@
 
 @implementation DJSearchDetailViewController
 {
-    DJContentsViewCell  *mCell;
     DJContents          *mContents;
 }
 
@@ -30,7 +29,6 @@
 {
     [super didReceiveMemoryWarning];
     
-    mCell = nil;
     mContents = nil;
 }
 
@@ -44,22 +42,15 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    mCell = [[self tableView] dequeueReusableCellWithIdentifier:@"searchResult"];
-    [mCell inputContents:mContents];
+    DJContentsViewCell  *cell = [[self tableView] dequeueReusableCellWithIdentifier:@"searchResult"];
+    [cell inputContents:mContents];
     
-    return mCell;
+    return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (!mCell)
-    {
-        mCell = [[self tableView] dequeueReusableCellWithIdentifier:@"searchResult"];
-    }
-    [mCell inputContents:mContents];
-    [mCell layoutIfNeeded];
-    
-    CGFloat height = [[mCell contentView] systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+    CGFloat height = [self estimateCellHeightWithContents:mContents];
     
     return height + 1;
 }
@@ -83,6 +74,26 @@
     [[self tableView] setDelegate:self];
     [[self tableView] setDataSource:self];
 }
+
+- (CGFloat)estimateCellHeightWithContents:(DJContents *)contents
+{
+    CGSize screenSize = [[UIScreen mainScreen] bounds].size;
+    CGFloat imageHeight = [contents imageHeight] * screenSize.width / [contents imageWidth];
+    UILabel *body = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, screenSize.width - 20, 0)];
+    [body setNumberOfLines:0];
+    [body setLineBreakMode:NSLineBreakByWordWrapping];
+    [body setText:[contents body]];
+    [body setFont:[UIFont systemFontOfSize:13]];
+    [body sizeToFit];
+    CGFloat bodyHeight = [body bounds].size.height;
+    
+    return imageHeight + bodyHeight + 50;
+}
+
+
+
+
+
 
 
 @end

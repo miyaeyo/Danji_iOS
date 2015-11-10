@@ -14,7 +14,7 @@
 
 @protocol DJContentsDelegate <NSObject>
 
-@required
+@optional
 - (void)contentsManager:(DJContentsManager *)aContentsManager didFinishGetContentsList:(NSArray *)contentsList;
 
 @end
@@ -27,5 +27,6 @@
 - (void)contentsFromParseDB;
 - (void)contentsFromParseDBWithLikeCount:(NSInteger)count;
 - (void)contentsFromParseDBWithSearchText:(NSString *)searchText;
+- (void)saveContentsToParseDB:(DJContents *)contents;
 
 @end

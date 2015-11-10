@@ -24,11 +24,12 @@
     __weak IBOutlet UICollectionView *mThumnailCollectionView;
     __weak IBOutlet UILabel          *mBody;
     __weak IBOutlet UILabel          *mBodyPlaceholder;
+
+    NSArray                          *mInputForms;
+    NSArray                          *mCategories;
     
     NSArray                          *mImages;
     NSInteger                        mImageCount;
-    NSArray                          *mInputForms;
-    NSArray                          *mCategories;
     NSArray                          *mCharacters;
     NSArray                          *mDialogs;
 }
@@ -369,7 +370,7 @@
     [pickerView setDataSource:self];
     [pickerView setDelegate:self];
     [pickerView setShowsSelectionIndicator:YES];
-    [pickerView setBackgroundColor:[UIColor mintColor]];
+    [pickerView setBackgroundColor:[UIColor DJMintColor]];
     
     [mInputFormPicker setInputView:pickerView];
     [mCategoryPicker setInputView:pickerView];
@@ -396,7 +397,7 @@
     [contents setTitle:[mTitle text]];
     [contents setCreator:[mCreator text]];
     [contents setBody:[mBody text]];
-    [contents setImage:[self convertImages:mImages]];
+    [contents setImage:[self convertImages]];
     if ([[mCreator text] isEqualToString:@""]) {
         [contents setReference:[mTitle text]];
     }
@@ -407,35 +408,29 @@
     [contents setLikeCount:0];
     [contents setCharacter:mCharacters];
     [contents setDialog:mDialogs];
+    [contents setImageHeight:[self imageSize].height];
+    [contents setImageWidth:[self imageSize].width];
     
     [contents saveInBackground];
 }
 
-- (PFFile *)convertImages:(NSArray *)images
+- (PFFile *)convertImages
 {
-    if ([images count] == 1)
+    if ([mImages count] == 1)
     {
-        NSData *imageData = UIImagePNGRepresentation([images firstObject]);
+        NSData *imageData = UIImagePNGRepresentation([mImages firstObject]);
         PFFile *imageFile = [PFFile fileWithData:imageData];
         return imageFile;
     }
     else
     {
-        CGFloat height = 0.0f;
-        UIImage *firstImage = [images firstObject];
-        CGFloat width = firstImage.size.width;
+        CGSize mergeSize = [self imageSize];
         
-        for (UIImage *image in images)
-        {
-            height += image.size.height;
-        }
-        
-        CGSize size = CGSizeMake(width, height);
-        UIGraphicsBeginImageContext(size);
+        UIGraphicsBeginImageContext(mergeSize);
         CGFloat prevHeight = 0.0f;
-        for (UIImage *image in images)
+        for (UIImage *image in mImages)
         {
-            [image drawInRect:CGRectMake(0, prevHeight, width, image.size.height)];
+            [image drawInRect:CGRectMake(0, prevHeight, mergeSize.width, image.size.height)];
             prevHeight += image.size.height;
         }
         UIImage *finalImage = UIGraphicsGetImageFromCurrentImageContext();
@@ -446,6 +441,27 @@
         return imageFile;
     }
     
+}
+
+- (CGSize)imageSize
+{
+    if ([mImages count] == 1)
+    {
+        return [[mImages firstObject] bounds].size;
+    }
+    else
+    {
+        CGFloat height = 0.0f;
+        UIImage *firstImage = [mImages firstObject];
+        CGFloat width = firstImage.size.width;
+        
+        for (UIImage *image in mImages)
+        {
+            height += image.size.height;
+        }
+        
+        return CGSizeMake(width, height);
+    }
 }
 
 

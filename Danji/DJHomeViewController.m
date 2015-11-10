@@ -10,14 +10,16 @@
 #import "DJContentsViewCell.h"
 #import "DJContentsManager.h"
 #import "DJContents.h"
+#import "DJCategories.h"
 
 
 @implementation DJHomeViewController
 {
     __weak IBOutlet UITextField *mCategory;
-    NSArray                     *mCategories;
-    DJContentsViewCell          *mCell;
+    DJCategories                *mCategories;
     NSArray                     *mContentsList;
+    DJContentsManager           *mContentsManager;
+    
 }
 
 
@@ -29,6 +31,7 @@
     
     [self setupViewAttributes];
     [self setupPickerView];
+    
     
     [[self tableView] setRowHeight:UITableViewAutomaticDimension];
 }
@@ -45,7 +48,6 @@
     {
         mCategories = nil;
         mCategory = nil;
-        mCell = nil;
         mContentsList = nil;
     }
 }
@@ -88,12 +90,12 @@
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    return [mCategories objectAtIndex:row];
+    return [mCategories categoryAtIndex:row];
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    [mCategory setText:[mCategories objectAtIndex:row]];
+    [mCategory setText:[mCategories categoryAtIndex:row]];
     [[self view] endEditing:YES];
 }
 
@@ -107,20 +109,17 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    mCell = [[self tableView] dequeueReusableCellWithIdentifier:@"contentsCell"];
-    [mCell inputContents:[mContentsList objectAtIndex:[indexPath row]]];
-    [[mCell contentView] sizeToFit];
+    DJContentsViewCell *cell = [[self tableView] dequeueReusableCellWithIdentifier:@"contentsCell"];
+    [cell inputContents:[mContentsList objectAtIndex:[indexPath row]]];
     
-    return mCell;
+    return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [mCell setNeedsLayout];
-    CGFloat height = [mCell systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
-    [mCell sizeToFit];
-    NSLog(@"%ld height : %lf", (long)[indexPath row],height);
-    return height + 1;
+    CGFloat height = [self estimateCellHeightWithContents:[mContentsList objectAtIndex:[indexPath row]]];
+    
+    return height + 5;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -150,15 +149,13 @@
 
 - (void)getContentsFromDB
 {
-    DJContentsManager *contentsManager = [[DJContentsManager alloc] init];
-    [contentsManager setDelegate:self];
-    [contentsManager contentsFromParseDB];
+    mContentsManager = [[DJContentsManager alloc] init];
+    [mContentsManager setDelegate:self];
+    [mContentsManager contentsFromParseDB];
 }
 
 - (void)setupPickerView
 {
-    mCategories = [[NSArray alloc] initWithObjects: @"TOTAL", @"MOVIE", @"DRAMA", @"BOOK", @"POEM", @"MUSIC", @"CARTOON", nil];
-    
     UIPickerView *pickerView = [[UIPickerView alloc] init];
     [pickerView setDataSource:self];
     [pickerView setDelegate:self];
@@ -167,6 +164,25 @@
     
     [mCategory setInputView:pickerView];
 }
+
+
+#pragma mark - private
+
+- (CGFloat)estimateCellHeightWithContents:(DJContents *)contents
+{
+    CGSize screenSize = [[UIScreen mainScreen] bounds].size;
+    CGFloat imageHeight = [contents imageHeight] * screenSize.width / [contents imageWidth];
+    UILabel *body = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, screenSize.width - 20, 0)];
+    [body setNumberOfLines:0];
+    [body setLineBreakMode:NSLineBreakByWordWrapping];
+    [body setText:[contents body]];
+    [body setFont:[UIFont systemFontOfSize:13]];
+    [body sizeToFit];
+    CGFloat bodyHeight = [body bounds].size.height;
+    
+    return imageHeight + bodyHeight + 50;
+}
+
 
 
 @end

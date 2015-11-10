@@ -13,7 +13,7 @@
 
 @interface DJAssetPickerController : UICollectionViewController
 
-@property (nonatomic, weak) id<DJAssetSelectionDelegate> delegate;
+@property (nonatomic, weak) id<DJAssetSelectionDelegate> pickerDelegate;
 @property (nonatomic, strong) ALAssetsGroup *assetGroup;
 
 - (void)setAssets:(NSArray *)assets;

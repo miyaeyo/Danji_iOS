@@ -19,8 +19,8 @@
 		9E96149C1BCB9C0900D14B1E /* DJWriteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E96149B1BCB9C0900D14B1E /* DJWriteViewController.m */; };
 		9E96149F1BCBA9CD00D14B1E /* DJSignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E96149E1BCBA9CD00D14B1E /* DJSignupViewController.m */; };
 		9ECBCBDE1BEA002F00EFA360 /* UIColor+DanjiColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ECBCBDD1BEA002F00EFA360 /* UIColor+DanjiColor.m */; };
+		9ED767051BECA69400C8EA10 /* DJCategories.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ED767041BECA69400C8EA10 /* DJCategories.m */; };
 		9EE150601BCDEFAF0034258E /* DJContents.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EE1505F1BCDEFAF0034258E /* DJContents.m */; };
-		9EE150631BCDFF660034258E /* Danji.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EE150621BCDFF660034258E /* Danji.m */; };
 		9EE150661BCE02540034258E /* DJContentsViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EE150651BCE02540034258E /* DJContentsViewCell.m */; };
 		9EE1506B1BCF78EF0034258E /* DJContentsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EE1506A1BCF78EF0034258E /* DJContentsManager.m */; };
 		9EE150741BD3F73C0034258E /* DJSearchDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EE150731BD3F73C0034258E /* DJSearchDetailViewController.m */; };
@@ -86,10 +86,10 @@
 		9E96149E1BCBA9CD00D14B1E /* DJSignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJSignupViewController.m; sourceTree = "<group>"; };
 		9ECBCBDC1BEA002F00EFA360 /* UIColor+DanjiColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+DanjiColor.h"; sourceTree = "<group>"; };
 		9ECBCBDD1BEA002F00EFA360 /* UIColor+DanjiColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+DanjiColor.m"; sourceTree = "<group>"; };
+		9ED767031BECA69400C8EA10 /* DJCategories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DJCategories.h; sourceTree = "<group>"; };
+		9ED767041BECA69400C8EA10 /* DJCategories.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJCategories.m; sourceTree = "<group>"; };
 		9EE1505E1BCDEFAF0034258E /* DJContents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DJContents.h; sourceTree = "<group>"; };
 		9EE1505F1BCDEFAF0034258E /* DJContents.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJContents.m; sourceTree = "<group>"; };
-		9EE150611BCDFF660034258E /* Danji.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Danji.h; sourceTree = "<group>"; };
-		9EE150621BCDFF660034258E /* Danji.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Danji.m; sourceTree = "<group>"; };
 		9EE150641BCE02540034258E /* DJContentsViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DJContentsViewCell.h; sourceTree = "<group>"; };
 		9EE150651BCE02540034258E /* DJContentsViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJContentsViewCell.m; sourceTree = "<group>"; };
 		9EE150691BCF78EF0034258E /* DJContentsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DJContentsManager.h; sourceTree = "<group>"; };
@@ -313,6 +313,8 @@
 				9E4E43321BC1763C006FB05E /* DJHomeViewController.m */,
 				9EE150641BCE02540034258E /* DJContentsViewCell.h */,
 				9EE150651BCE02540034258E /* DJContentsViewCell.m */,
+				9ED767031BECA69400C8EA10 /* DJCategories.h */,
+				9ED767041BECA69400C8EA10 /* DJCategories.m */,
 			);
 			name = Main;
 			sourceTree = "<group>";
@@ -359,8 +361,6 @@
 				9EE1505F1BCDEFAF0034258E /* DJContents.m */,
 				9EE150691BCF78EF0034258E /* DJContentsManager.h */,
 				9EE1506A1BCF78EF0034258E /* DJContentsManager.m */,
-				9EE150611BCDFF660034258E /* Danji.h */,
-				9EE150621BCDFF660034258E /* Danji.m */,
 			);
 			name = ContentsModel;
 			sourceTree = "<group>";
@@ -489,7 +489,7 @@
 				9E4E43081BC11A40006FB05E /* AppDelegate.m in Sources */,
 				9E4E43051BC11A40006FB05E /* main.m in Sources */,
 				9EE1508A1BD62A9D0034258E /* DJSearchResultsController.m in Sources */,
-				9EE150631BCDFF660034258E /* Danji.m in Sources */,
+				9ED767051BECA69400C8EA10 /* DJCategories.m in Sources */,
 				9E4E43331BC1763C006FB05E /* DJHomeViewController.m in Sources */,
 				9EEEB2131BE6FF340013F396 /* DJThumbnailCell.m in Sources */,
 				9EE150901BD639A40034258E /* DJSearchResultsCell.m in Sources */,

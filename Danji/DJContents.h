@@ -21,16 +21,11 @@
 @property (nonatomic)         NSInteger likeCount;
 @property (nonatomic, strong) NSArray   *character;
 @property (nonatomic, strong) NSArray   *dialog;
+@property (nonatomic)         CGFloat   imageHeight;
+@property (nonatomic)         CGFloat   imageWidth;
 
 + (NSString *)parseClassName;
 
 @end
-
-//+ (instancetype)contentsWithImage:(PFFile *)image
-//                             body:(NSString *)body
-//                        reference:(NSString *)reference
-//                        likeCount:(NSInteger)likeCount
-//                         category:(NSString *)category;
-
 
 

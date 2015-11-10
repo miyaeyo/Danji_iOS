@@ -11,6 +11,8 @@
 
 @interface UIColor (DanjiColor)
 
-+ (UIColor *)mintColor;
++ (UIColor *)DJMintColor;
++ (UIColor *)DJPinkColor;
++ (UIColor *)DJBrownColor;
 
 @end
