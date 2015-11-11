@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9E1AFA041BF1E7680034EE94 /* DJInputForms.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E1AFA031BF1E7680034EE94 /* DJInputForms.m */; };
 		9E4E43051BC11A40006FB05E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E4E43041BC11A40006FB05E /* main.m */; };
 		9E4E43081BC11A40006FB05E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E4E43071BC11A40006FB05E /* AppDelegate.m */; };
 		9E4E430E1BC11A40006FB05E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E4E430C1BC11A40006FB05E /* Main.storyboard */; };
@@ -63,6 +64,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9E1AFA021BF1E7680034EE94 /* DJInputForms.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DJInputForms.h; sourceTree = "<group>"; };
+		9E1AFA031BF1E7680034EE94 /* DJInputForms.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJInputForms.m; sourceTree = "<group>"; };
 		9E4E42FF1BC11A40006FB05E /* Danji.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Danji.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E4E43031BC11A40006FB05E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9E4E43041BC11A40006FB05E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -167,6 +170,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9E1AFA011BF1E7390034EE94 /* PickerModel */ = {
+			isa = PBXGroup;
+			children = (
+				9ED767031BECA69400C8EA10 /* DJCategories.h */,
+				9ED767041BECA69400C8EA10 /* DJCategories.m */,
+				9E1AFA021BF1E7680034EE94 /* DJInputForms.h */,
+				9E1AFA031BF1E7680034EE94 /* DJInputForms.m */,
+			);
+			name = PickerModel;
+			sourceTree = "<group>";
+		};
 		9E4E42F61BC11A40006FB05E = {
 			isa = PBXGroup;
 			children = (
@@ -198,6 +212,7 @@
 				9EDDD6C21BC3AFBC002DB4B2 /* Main */,
 				9EE150871BD62A480034258E /* Search */,
 				9E9614991BCB9BCD00D14B1E /* Write */,
+				9E1AFA011BF1E7390034EE94 /* PickerModel */,
 				9EE150A01BDF0A010034258E /* ImagePicker */,
 				9EE150B21BE675D10034258E /* ContentsModel */,
 				9E4E430C1BC11A40006FB05E /* Main.storyboard */,
@@ -313,8 +328,6 @@
 				9E4E43321BC1763C006FB05E /* DJHomeViewController.m */,
 				9EE150641BCE02540034258E /* DJContentsViewCell.h */,
 				9EE150651BCE02540034258E /* DJContentsViewCell.m */,
-				9ED767031BECA69400C8EA10 /* DJCategories.h */,
-				9ED767041BECA69400C8EA10 /* DJCategories.m */,
 			);
 			name = Main;
 			sourceTree = "<group>";
@@ -474,6 +487,7 @@
 				9EE150A71BDF121B0034258E /* DJAsset.m in Sources */,
 				9EE1509C1BD88A110034258E /* DJDialogInputCell.m in Sources */,
 				9E4E43361BC1764B006FB05E /* DJSearchViewController.m in Sources */,
+				9E1AFA041BF1E7680034EE94 /* DJInputForms.m in Sources */,
 				9EE150991BD8868C0034258E /* DJParagraphWriteController.m in Sources */,
 				9ECBCBDE1BEA002F00EFA360 /* UIColor+DanjiColor.m in Sources */,
 				9EE150661BCE02540034258E /* DJContentsViewCell.m in Sources */,

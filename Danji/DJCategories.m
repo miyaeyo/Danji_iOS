@@ -9,34 +9,15 @@
 #import "DJCategories.h"
 
 @implementation DJCategories
-{
-    NSArray *mCategories;
-}
 
-
-- (instancetype)init
+- (NSArray *)categoriesForMain
 {
-    self = [super init];
+   return [NSArray arrayWithObjects:@"TOTAL", @"MOVIE", @"DRAMA", @"BOOK", @"POEM", @"MUSIC", @"CARTOON", nil];
     
-    if (self)
-    {
-        mCategories = [[NSArray alloc] initWithObjects:@"TOTAL", @"MOVIE", @"DRAMA", @"BOOK", @"POEM", @"MUSIC", @"CARTOON", nil];
-    }
-    
-    return self;
 }
 
-
-- (NSUInteger)count
+- (NSArray *)categoriesForWrite
 {
-    return [mCategories count];
+    return [NSArray arrayWithObjects:@"movie", @"drama", @"book", @"poem", @"music", @"cartoon", nil];
 }
-
-- (NSString *)categoryAtIndex:(NSUInteger)index
-{
-    return [mCategories objectAtIndex:index];
-}
-
-
-
 @end

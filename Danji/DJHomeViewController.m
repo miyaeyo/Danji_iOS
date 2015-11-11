@@ -16,7 +16,6 @@
 @implementation DJHomeViewController
 {
     __weak IBOutlet UITextField *mCategory;
-    DJCategories                *mCategories;
     NSArray                     *mContentsList;
     DJContentsManager           *mContentsManager;
     
@@ -46,7 +45,6 @@
     [super didReceiveMemoryWarning];
     if ([self isViewLoaded])
     {
-        mCategories = nil;
         mCategory = nil;
         mContentsList = nil;
     }
@@ -85,17 +83,20 @@
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-    return [mCategories count];
+    DJCategories *categories = [[DJCategories alloc] init];
+    return [[categories categoriesForMain] count];
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    return [mCategories categoryAtIndex:row];
+    DJCategories *categories = [[DJCategories alloc] init];
+    return [[categories categoriesForMain] objectAtIndex:row];
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    [mCategory setText:[mCategories categoryAtIndex:row]];
+    DJCategories *categories = [[DJCategories alloc] init];
+    [mCategory setText:[[categories categoriesForMain] objectAtIndex:row]];
     [[self view] endEditing:YES];
 }
 

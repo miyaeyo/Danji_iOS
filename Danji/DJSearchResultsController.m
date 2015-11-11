@@ -11,6 +11,7 @@
 #import "DJSearchResultsCell.h"
 #import "DJContentsManager.h"
 #import "DJSearchDetailViewController.h"
+#import "UIColor+DanjiColor.h"
 
 
 @implementation DJSearchResultsController
@@ -49,6 +50,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [self setupSearchBar];
+    [mSearchBar becomeFirstResponder];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -95,7 +97,6 @@
 
 #pragma mark - search bar delegate
 
-// reload data시점을 다시 생각해 볼 것
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
     mSearchText = searchText;
@@ -111,9 +112,7 @@
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
-    [mContentsList removeAllObjects];
-    [[self tableView] reloadData];
-    [self searchWithContentsManager];
+    [mSearchBar endEditing:YES];
 }
 
 
@@ -132,7 +131,7 @@
 {
     [[self tableView] setDataSource:self];
     [[self tableView] setDelegate:self];
-    [[self tableView] setBackgroundColor:[UIColor colorWithRed:0.98 green:0.95 blue:0.84 alpha:1]];
+    [[self tableView] setBackgroundColor:[UIColor DJIvoryColor]];
     [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
 }
 
@@ -144,7 +143,7 @@
     
     mSearchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(80, 0, width - 20, height)];
     [mSearchBar setTranslucent:YES];
-    [mSearchBar setBarTintColor:[UIColor colorWithRed:0.85 green:0.96 blue:0.9 alpha:1]];
+    [mSearchBar setBarTintColor:[UIColor DJMintColor]];
     [mSearchBar setDelegate:self];
     
     [navBar addSubview:mSearchBar];

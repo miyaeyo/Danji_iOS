@@ -14,5 +14,6 @@
 + (UIColor *)DJMintColor;
 + (UIColor *)DJPinkColor;
 + (UIColor *)DJBrownColor;
++ (UIColor *)DJIvoryColor;
 
 @end

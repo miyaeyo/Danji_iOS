@@ -26,4 +26,9 @@
     return [UIColor colorWithRed:0.55 green:0.44 blue:0.42 alpha:1];
 }
 
++ (UIColor *)DJIvoryColor
+{
+    return [UIColor colorWithRed:0.99 green:0.95 blue:0.82 alpha:1];
+}
+
 @end

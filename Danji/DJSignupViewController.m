@@ -166,15 +166,7 @@
              return;
 
          }
-         
-        [[[UIAlertView alloc] initWithTitle:@"Success to signup"
-                                    message:@"welcome Danji, login and enjoy Danji"
-                                   delegate:nil
-                          cancelButtonTitle:@"OK"
-                          otherButtonTitles:nil, nil] show];
-             
-         [PFUser logOut];
-         
+                  
          [self performSegueWithIdentifier:@"signupCompleted" sender:self];
      }];
 }

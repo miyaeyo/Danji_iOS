@@ -9,6 +9,8 @@
 #import "DJWriteViewController.h"
 #import "DJContents.h"
 #import "UIColor+DanjiColor.h"
+#import "DJCategories.h"
+#import "DJInputForms.h"
 
 
 @import MobileCoreServices;
@@ -24,9 +26,6 @@
     __weak IBOutlet UICollectionView *mThumnailCollectionView;
     __weak IBOutlet UILabel          *mBody;
     __weak IBOutlet UILabel          *mBodyPlaceholder;
-
-    NSArray                          *mInputForms;
-    NSArray                          *mCategories;
     
     NSArray                          *mImages;
     NSInteger                        mImageCount;
@@ -66,8 +65,6 @@
         mBody = nil;
         mBodyPlaceholder = nil;
         mImages = nil;
-        mInputForms = nil;
-        mCategories = nil;
         mCharacters = nil;
         mDialogs = nil;
     }
@@ -91,7 +88,7 @@
         [destination setEditingText:[mBody text]];
         
     }
-    else if([[segue identifier] isEqualToString:@"openGallery"])
+    if([[segue identifier] isEqualToString:@"openGallery"])
     {
         [[segue destinationViewController] setImageDelegate:self];
     }
@@ -313,45 +310,55 @@
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
-    return 2;
+    return 1;
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-    if (component == 0)
+    if ([pickerView tag] == 0)
     {
-        return [mInputForms count];
+        DJInputForms *inputForms = [[DJInputForms alloc] init];
+        return [inputForms count];
     }
-    else
+    else if([pickerView tag] == 1)
     {
-        return [mCategories count];
+        DJCategories *categories = [[DJCategories alloc] init];
+        return [[categories categoriesForWrite] count];
     }
+    
+    return 0;
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    if (component == 0)
+    if ([pickerView tag] == 0)
     {
-        return [mInputForms objectAtIndex:row];
+        DJInputForms *inputForms = [[DJInputForms alloc] init];
+        return [inputForms inputFormAtIndex:row];
     }
-    else
+    else if([pickerView tag] == 1)
     {
-        return [mCategories objectAtIndex:row];
+        DJCategories *categories = [[DJCategories alloc] init];
+        return [[categories categoriesForWrite] objectAtIndex:row];
     }
+    
+    return 0;
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    if (component == 0)
+    if ([pickerView tag] == 0)
     {
-        [mInputFormPicker setText:[mInputForms objectAtIndex:row]];
+        DJInputForms *inputForms = [[DJInputForms alloc] init];
+        [mInputFormPicker setText:[inputForms inputFormAtIndex:row]];
     }
-    else
+    else if([pickerView tag] == 1)
     {
-        [mCategoryPicker setText:[mCategories objectAtIndex:row]];
+        DJCategories *categories = [[DJCategories alloc] init];
+        [mCategoryPicker setText:[[categories categoriesForWrite] objectAtIndex:row]];
     }
     
-    if (![[mInputFormPicker text] isEqualToString:@""] && ![[mCategoryPicker text] isEqualToString:@""])
+    if (![[mInputFormPicker text] isEqualToString:@""] || ![[mCategoryPicker text] isEqualToString:@""])
     {
         [[self view] endEditing:YES];
     }
@@ -363,17 +370,23 @@
 
 - (void)setupPickerView
 {
-    mInputForms = [[NSArray alloc] initWithObjects:@"dialog", @"paragraph", nil];
-    mCategories = [[NSArray alloc] initWithObjects:@"movie", @"drama", @"book", @"poem", @"music", @"cartoon", nil];
+    UIPickerView *inputFormPickerView = [self makePickerViewWithTag:0];
+    [mInputFormPicker setInputView:inputFormPickerView];
     
+    UIPickerView *categoryPickerView = [self makePickerViewWithTag:1];
+    [mCategoryPicker setInputView:categoryPickerView];
+}
+
+- (UIPickerView *)makePickerViewWithTag:(NSUInteger)tag
+{
     UIPickerView *pickerView = [[UIPickerView alloc] init];
     [pickerView setDataSource:self];
     [pickerView setDelegate:self];
     [pickerView setShowsSelectionIndicator:YES];
+    [pickerView setTag:tag];
     [pickerView setBackgroundColor:[UIColor DJMintColor]];
     
-    [mInputFormPicker setInputView:pickerView];
-    [mCategoryPicker setInputView:pickerView];
+    return pickerView;
 }
 
 - (void)setupWriteRelatedTask
