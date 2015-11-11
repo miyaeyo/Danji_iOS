@@ -24,11 +24,8 @@
     __weak IBOutlet UITextField      *mTitle;
     __weak IBOutlet UITextField      *mCreator;
     __weak IBOutlet UICollectionView *mThumnailCollectionView;
-//    __weak IBOutlet UILabel          *mBody;
-//    __weak IBOutlet UILabel          *mBodyPlaceholder;
-
-//    NSArray                          *mInputForms;
-//    NSArray                          *mCategories;
+    __weak IBOutlet UILabel          *mBody;
+    __weak IBOutlet UILabel          *mBodyPlaceholder;
     
     NSArray                          *mImages;
     NSInteger                        mImageCount;
@@ -46,13 +43,13 @@
     [self setupWriteRelatedTask];
 }
 
-//- (void)viewWillAppear:(BOOL)animated
-//{
-//    if (![[mBody text]isEqualToString:@""])
-//    {
-//        [mBodyPlaceholder setText:@""];
-//    }
-//}
+- (void)viewWillAppear:(BOOL)animated
+{
+    if (![[mBody text]isEqualToString:@""])
+    {
+        [mBodyPlaceholder setText:@""];
+    }
+}
 
 - (void)didReceiveMemoryWarning
 {
@@ -65,8 +62,8 @@
         mTitle = nil;
         mCreator = nil;
         mThumnailCollectionView = nil;
-//        mBody = nil;
-//        mBodyPlaceholder = nil;
+        mBody = nil;
+        mBodyPlaceholder = nil;
         mImages = nil;
         mCharacters = nil;
         mDialogs = nil;
@@ -78,19 +75,19 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-//    if ([[segue identifier] isEqualToString:@"writeDialog"])
-//    {
-//        DJDialogWriteController *destination = [segue destinationViewController];
-//        [destination setDialogDelegate:self];
-//        [destination editingTextWithCharacters:mCharacters dialogs:mDialogs];
-//    }
-//    else if([[segue identifier] isEqualToString:@"writhParagraph"])
-//    {
-//        DJParagraphWriteController *destination = [segue destinationViewController];
-//        [destination setParagraphDelegate:self];
-//        [destination setEditingText:[mBody text]];
-//        
-//    }
+    if ([[segue identifier] isEqualToString:@"writeDialog"])
+    {
+        DJDialogWriteController *destination = [segue destinationViewController];
+        [destination setDialogDelegate:self];
+        [destination editingTextWithCharacters:mCharacters dialogs:mDialogs];
+    }
+    else if([[segue identifier] isEqualToString:@"writhParagraph"])
+    {
+        DJParagraphWriteController *destination = [segue destinationViewController];
+        [destination setParagraphDelegate:self];
+        [destination setEditingText:[mBody text]];
+        
+    }
     if([[segue identifier] isEqualToString:@"openGallery"])
     {
         [[segue destinationViewController] setImageDelegate:self];
@@ -288,25 +285,25 @@
 
 #pragma mark - write delegate
 
-//- (void)dialogeWriteController:(DJDialogWriteController *)controller didFinishWriteCharacter:(NSArray *)characters dialog:(NSArray *)dialogs
-//{
-//    NSMutableString *tempBody = [[NSMutableString alloc] init];
-//    
-//    for (int i = 0; i < [characters count]; i++)
-//    {
-//        [tempBody appendFormat:@" %@: %@\n", [characters objectAtIndex:i], [dialogs objectAtIndex:i]];
-//    }
-//    
-//    [mBody setText:[NSString stringWithString:tempBody]];
-//    mCharacters = [NSArray arrayWithArray:characters];
-//    mDialogs = [NSArray arrayWithArray:dialogs];
-//
-//}
-//
-//- (void)paragraphWriteController:(DJParagraphWriteController *)controller didFinishWriteParagraph:(NSString *)paragraph
-//{
-//    [mBody setText:paragraph];
-//}
+- (void)dialogeWriteController:(DJDialogWriteController *)controller didFinishWriteCharacter:(NSArray *)characters dialog:(NSArray *)dialogs
+{
+    NSMutableString *tempBody = [[NSMutableString alloc] init];
+    
+    for (int i = 0; i < [characters count]; i++)
+    {
+        [tempBody appendFormat:@" %@: %@\n", [characters objectAtIndex:i], [dialogs objectAtIndex:i]];
+    }
+    
+    [mBody setText:[NSString stringWithString:tempBody]];
+    mCharacters = [NSArray arrayWithArray:characters];
+    mDialogs = [NSArray arrayWithArray:dialogs];
+
+}
+
+- (void)paragraphWriteController:(DJParagraphWriteController *)controller didFinishWriteParagraph:(NSString *)paragraph
+{
+    [mBody setText:paragraph];
+}
 
 
 #pragma mark - picker view
@@ -373,10 +370,6 @@
 
 - (void)setupPickerView
 {
-//    mInputForms = [[NSArray alloc] initWithObjects:@"dialog", @"paragraph", nil];
-//    mCategories = [[NSArray alloc] initWithObjects:@"movie", @"drama", @"book", @"poem", @"music", @"cartoon", nil];
-//
-    
     UIPickerView *inputFormPickerView = [self makePickerViewWithTag:0];
     [mInputFormPicker setInputView:inputFormPickerView];
     
@@ -398,9 +391,9 @@
 
 - (void)setupWriteRelatedTask
 {
-//    UITapGestureRecognizer *writeTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(writeLabelTapped:)];
-//    [mBody addGestureRecognizer:writeTapGesture];
-//    
+    UITapGestureRecognizer *writeTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(writeLabelTapped:)];
+    [mBody addGestureRecognizer:writeTapGesture];
+    
     [mThumnailCollectionView setDelegate:self];
     [mThumnailCollectionView setDataSource:self];
     
@@ -416,7 +409,7 @@
     [contents setCategory:[mCategoryPicker text]];
     [contents setTitle:[mTitle text]];
     [contents setCreator:[mCreator text]];
-//    [contents setBody:[mBody text]];
+    [contents setBody:[mBody text]];
     [contents setImage:[self convertImages]];
     if ([[mCreator text] isEqualToString:@""]) {
         [contents setReference:[mTitle text]];

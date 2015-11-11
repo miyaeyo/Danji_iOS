@@ -42,12 +42,14 @@
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="user name" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="qCA-Cz-237">
                                 <rect key="frame" x="16" y="254" width="288" height="30"/>
                                 <color key="backgroundColor" red="0.99215686270000003" green="0.94901960780000005" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="0.4941176471" green="0.73725490199999999" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="password" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="laF-Rq-t24">
                                 <rect key="frame" x="16" y="335" width="288" height="30"/>
                                 <color key="backgroundColor" red="0.99215686270000003" green="0.94901960780000005" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="0.4941176471" green="0.73725490199999999" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
@@ -124,18 +126,21 @@
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="user name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nbw-Ot-eP6">
                                 <rect key="frame" x="16" y="180" width="288" height="30"/>
                                 <color key="backgroundColor" red="0.99215686270000003" green="0.94901960780000005" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="0.4941176471" green="0.73725490199999999" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lMQ-FS-bze">
                                 <rect key="frame" x="15" y="247" width="289" height="30"/>
                                 <color key="backgroundColor" red="0.99215686270000003" green="0.94901960780000005" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="0.4941176471" green="0.73725490199999999" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="confirm password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Lku-H6-Ldz">
                                 <rect key="frame" x="15" y="314" width="289" height="30"/>
                                 <color key="backgroundColor" red="0.99215686270000003" green="0.94901960780000005" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="0.4941176471" green="0.73725490199999999" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
@@ -177,7 +182,7 @@
                         <outlet property="mPassword" destination="lMQ-FS-bze" id="Xmj-Wu-Isi"/>
                         <outlet property="mScrollView" destination="zC3-dh-YOL" id="rcs-X5-KwO"/>
                         <outlet property="mUserName" destination="nbw-Ot-eP6" id="UtR-69-tYW"/>
-                        <segue destination="STo-Eb-bCJ" kind="presentation" identifier="signupCompleted" id="Nby-nJ-dF2"/>
+                        <segue destination="L0b-fm-6EF" kind="presentation" identifier="signupCompleted" modalTransitionStyle="crossDissolve" id="Gbh-J8-wgn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pxb-6o-XEa" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -609,6 +614,8 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="mBody" destination="f4E-ED-6Hu" id="kIF-iV-eS1"/>
+                        <outlet property="mBodyPlaceholder" destination="X1K-Sa-49i" id="iBS-hQ-86Y"/>
                         <outlet property="mCategoryPicker" destination="dSk-jS-bTB" id="p4x-Ne-vZl"/>
                         <outlet property="mCreator" destination="68x-Ha-Yd6" id="kXd-sv-uNF"/>
                         <outlet property="mInputFormPicker" destination="ic7-M1-JJm" id="FUD-2U-1HG"/>
@@ -623,10 +630,10 @@
             </objects>
             <point key="canvasLocation" x="-809" y="12"/>
         </scene>
-        <!--View Controller-->
+        <!--Paragraph Write Controller-->
         <scene sceneID="wu5-ez-5ih">
             <objects>
-                <viewController id="xYn-eL-xYj" sceneMemberID="viewController">
+                <viewController id="xYn-eL-xYj" customClass="DJParagraphWriteController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="zat-9R-k8Z"/>
                         <viewControllerLayoutGuide type="bottom" id="nWU-Qr-tV9"/>
@@ -775,10 +782,10 @@
             </objects>
             <point key="canvasLocation" x="57" y="690"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Dialog Write Controller-->
         <scene sceneID="gE6-Vm-FDc">
             <objects>
-                <tableViewController id="sl3-7E-hcv" sceneMemberID="viewController">
+                <tableViewController id="sl3-7E-hcv" customClass="DJDialogWriteController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="151" sectionHeaderHeight="22" sectionFooterHeight="22" id="HTt-jj-3dJ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1031,8 +1038,8 @@
         <image name="write.png" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="S68-OX-NKj"/>
-        <segue reference="pUH-sk-lcG"/>
+        <segue reference="Gbh-J8-wgn"/>
+        <segue reference="1aq-4J-dH9"/>
         <segue reference="NTQ-fp-XM9"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>

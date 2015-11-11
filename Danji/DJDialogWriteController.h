@@ -10,19 +10,19 @@
 #import "DJDialogInputCell.h"
 
 
-//@class DJDialogWriteController;
-//
-//@protocol DJDialogWriteDelegate <NSObject>
-//
-//@required
-//- (void)dialogeWriteController:(DJDialogWriteController *)controller didFinishWriteCharacter:(NSArray *)characters dialog:(NSArray *)dialogs;
-//
-//@end
+@class DJDialogWriteController;
+
+@protocol DJDialogWriteDelegate <NSObject>
+
+@required
+- (void)dialogeWriteController:(DJDialogWriteController *)controller didFinishWriteCharacter:(NSArray *)characters dialog:(NSArray *)dialogs;
+
+@end
 
 
 @interface DJDialogWriteController : UITableViewController <DJDialogInputCellDelegate, UIAlertViewDelegate>
 
-//@property (nonatomic, weak) UIViewController<DJDialogWriteDelegate> *dialogDelegate;
+@property (nonatomic, weak) UIViewController<DJDialogWriteDelegate> *dialogDelegate;
 
 - (void)editingTextWithCharacters:(NSArray *)characters dialogs:(NSArray *)dialogs;
 

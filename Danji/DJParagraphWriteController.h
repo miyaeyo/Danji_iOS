@@ -9,19 +9,19 @@
 #import <UIKit/UIKit.h>
 
 
-//@class DJParagraphWriteController;
-//
-//@protocol DJParagraphDelegate <NSObject>
-//
-//@required
-//- (void)paragraphWriteController:(DJParagraphWriteController *)controller didFinishWriteParagraph:(NSString *)paragraph;
-//
-//@end
+@class DJParagraphWriteController;
+
+@protocol DJParagraphDelegate <NSObject>
+
+@required
+- (void)paragraphWriteController:(DJParagraphWriteController *)controller didFinishWriteParagraph:(NSString *)paragraph;
+
+@end
 
 
 @interface DJParagraphWriteController : UIViewController <UITextViewDelegate>
 
-//@property (nonatomic, weak) UIViewController<DJParagraphDelegate> *paragraphDelegate;
+@property (nonatomic, weak) UIViewController<DJParagraphDelegate> *paragraphDelegate;
 @property (nonatomic, strong) NSString *editingText;
 
 @end
