@@ -20,8 +20,7 @@
 {
     [mRank setText:[NSString stringWithFormat:@"%ld", (long)rank]];
     [mIcon setImage:[self imageForIcon:[contents category]]];
-    NSString *title = [[[contents reference] componentsSeparatedByString:@" - "] objectAtIndex:0];
-    [mTitle setText:title];
+    [mTitle setText:[contents title]];
 }
 
 

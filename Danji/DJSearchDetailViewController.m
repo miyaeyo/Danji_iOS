@@ -57,6 +57,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    //dummy data for estimate height for row
     return 100;
 }
 

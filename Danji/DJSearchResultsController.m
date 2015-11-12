@@ -21,8 +21,23 @@
     NSMutableArray      *mContentsList;
     NSInteger           mSelectedIndex;
     NSString            *mSearchText;
+    
+    BOOL                mSearchBarEditting;
 }
 
+@synthesize searchBarEditting = mSearchBarEditting;
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    
+    if (self)
+    {
+        mSearchBarEditting = NO;
+    }
+    
+    return self;
+}
 
 
 #pragma mark - view
@@ -40,17 +55,24 @@
 {
     [super didReceiveMemoryWarning];
     
-    mSearchBar = nil;
-    mCell = nil;
-    mContentsList = nil;
-    mSearchText = nil;
-    
+    if ([self isViewLoaded])
+    {
+        mSearchBar = nil;
+        mCell = nil;
+        mContentsList = nil;
+        mSearchText = nil;
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [self setupSearchBar];
-    [mSearchBar becomeFirstResponder];
+    
+    if (mSearchBarEditting)
+    {
+        [mSearchBar becomeFirstResponder];
+    }
+    mSearchBarEditting = NO;
 }
 
 - (void)viewWillDisappear:(BOOL)animated

@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <AssetsLibrary/AssetsLibrary.h>
+//#import <AssetsLibrary/AssetsLibrary.h>
+#import <Photos/Photos.h>
 #import "DJAssetSelectionDelegate.h"
 
 @interface DJAlbumPickerController : UITableViewController <DJAssetSelectionDelegate>

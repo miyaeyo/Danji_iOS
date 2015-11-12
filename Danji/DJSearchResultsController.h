@@ -13,4 +13,6 @@
 
 @interface DJSearchResultsController : UITableViewController <UISearchBarDelegate, DJContentsDelegate>
 
+@property (nonatomic) BOOL searchBarEditting;
+
 @end

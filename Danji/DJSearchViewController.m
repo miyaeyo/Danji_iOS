@@ -8,15 +8,16 @@
 
 #import "DJSearchViewController.h"
 #import "DJPopularContentsCell.h"
+#import "DJSearchResultsController.h"
 
 
 
 @implementation DJSearchViewController
 {
-    UISearchBar *mSearchBar;
+    UISearchBar                 *mSearchBar;
     __weak IBOutlet UITableView *mTableView;
-    NSArray *mPopularContentsList;
-    NSInteger mSelectedIndex;
+    NSArray                     *mPopularContentsList;
+    NSInteger                   mSelectedIndex;
 }
 
 
@@ -36,9 +37,12 @@
 {
     [super didReceiveMemoryWarning];
     
-    mSearchBar = nil;
-    mTableView = nil;
-    mPopularContentsList = nil;
+    if ([self isViewLoaded])
+    {
+        mSearchBar = nil;
+        mTableView = nil;
+        mPopularContentsList = nil;
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -63,7 +67,6 @@
     [mTableView reloadData];
 
 }
-
 
 
 #pragma mark - searchBar
@@ -105,7 +108,11 @@
     {
         id destinationController = [segue destinationViewController];
         [destinationController setContents:[mPopularContentsList objectAtIndex:mSelectedIndex]];
-        
+    }
+    else if ([[segue identifier] isEqualToString:@"searchDetail"])
+    {
+        DJSearchResultsController *destinationController = [segue destinationViewController];
+        [destinationController setSearchBarEditting:YES];
     }
     
 }

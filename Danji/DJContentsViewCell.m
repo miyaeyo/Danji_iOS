@@ -76,7 +76,7 @@
     {
         if (succeeded)
         {
-            [mLikeCount setText:[NSString stringWithFormat:@"%ld", [mContents likeCount]]];
+            [mLikeCount setText:[NSString stringWithFormat:@"%ld", (long)[mContents likeCount]]];
             
             if ([mContents likeCount] > 9999)
             {
@@ -179,7 +179,6 @@
 {
     [image getDataInBackgroundWithBlock:^(NSData *data, NSError *error)
      {
-
          if (!error)
          {
              UIImage *original = [UIImage imageWithData:data];
@@ -199,7 +198,6 @@
          {
               NSLog(@"%@ %@", error, [error userInfo]);
          }
-         
      }];
 }
 
