@@ -77,6 +77,7 @@
         if (succeeded)
         {
             [mLikeCount setText:[NSString stringWithFormat:@"%ld", [mContents likeCount]]];
+            
             if ([mContents likeCount] > 9999)
             {
                 [self setNeedsLayout];
@@ -123,16 +124,18 @@
     CGFloat buttonSize = 28;
     CGFloat bottomY = mImageHeight + mBodyHeight + 2 * margin;
     CGFloat likeViewWidth = buttonSize + 45;
-
+    
+    //setup like button
     [mLikeButton setFrame:CGRectMake(0, bottomY, buttonSize, buttonSize)];
     [mLikeButton setImage:[UIImage imageNamed:@"like"] forState:UIControlStateNormal];
     [mLikeButton setBackgroundColor:[UIColor DJPinkColor]];
     [mLikeButton addTarget:self action:@selector(likeButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:mLikeButton];
     
-    
+    //setup like count label
     if ([mContents likeCount] > 9999)
     {
+        //resize like count label
         [mLikeCount sizeToFit];
         CGFloat newWidth = [mLikeCount bounds].size.width + 4;
         [mLikeCount setFrame:CGRectMake(buttonSize, bottomY, newWidth, buttonSize)];
@@ -149,12 +152,24 @@
     [mLikeCount setTextAlignment:NSTextAlignmentCenter];
     [self addSubview:mLikeCount];
     
-    [mReference setFrame:CGRectMake(likeViewWidth + margin / 2, bottomY, screenWidth - likeViewWidth - margin, buttonSize)];
+    //setup reference label
+    NSUInteger numOfLines = 1;
     [mReference setText:[mContents reference]];
-    [mReference setTextColor:[UIColor DJBrownColor]];
     [mReference setFont:[UIFont boldSystemFontOfSize:14]];
+    [mReference sizeToFit];
+    if ([mReference bounds].size.width > (screenWidth - likeViewWidth - margin))
+    {
+        //resize reference label
+        numOfLines = 0;
+        [mReference setFrame:CGRectMake(likeViewWidth + margin / 2, bottomY, screenWidth - likeViewWidth - margin, 1.2 * buttonSize)];
+    }
+    else
+    {
+        [mReference setFrame:CGRectMake(likeViewWidth + margin / 2, bottomY, screenWidth - likeViewWidth - margin, buttonSize)];
+    }
+    [mReference setTextColor:[UIColor DJBrownColor]];
     [mReference setTextAlignment:NSTextAlignmentRight];
-    [mReference setNumberOfLines:0];
+    [mReference setNumberOfLines:numOfLines];
     [mReference setLineBreakMode:NSLineBreakByWordWrapping];
     [self addSubview:mReference];
 }
