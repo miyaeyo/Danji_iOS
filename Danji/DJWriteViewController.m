@@ -425,6 +425,18 @@
     [contents setImageWidth:[self imageSize].width];
     
     [contents saveInBackground];
+    
+//    [contents saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error)
+//    {
+//        if (succeeded)
+//        {
+//            [self performSegueWithIdentifier:@"complete" sender:self];
+//        }
+//        else if (error)
+//        {
+//            NSLog(@"error: %@", [error description]);
+//        }
+//    }];
 }
 
 - (PFFile *)convertImages

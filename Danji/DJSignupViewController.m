@@ -25,10 +25,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     [mUserName setDelegate:self];
     [mPassword setDelegate:self];
     [mConfirmPassword setDelegate:self];
+    
     [self registerForKeyboardNotification];
+    
     UITapGestureRecognizer *backgroundTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(backgroundTapped:)];
     [mScrollView addGestureRecognizer:backgroundTapGesture];
 }
@@ -59,11 +62,9 @@
 {
     if ([[mUserName text] length] != 0 && [[mPassword text] length] != 0 && [[mPassword text] isEqualToString:[mConfirmPassword text]])
     {
-        //to do: id length, password length check
         [self signUp];
-        
     }
-    else if ([[mUserName text] length] == 0 || [[mPassword text] length] == 0)
+    else if ([[mUserName text] isEqualToString:@""] || [[mPassword text] isEqualToString:@""])
     {
         [[[UIAlertView alloc] initWithTitle:@"Missing information"
                                     message:@"Make sure you fill all of the information"
@@ -85,6 +86,68 @@
 - (IBAction)backgroundTapped:(id)sender
 {
     [[self view] endEditing:YES];
+}
+
+
+#pragma mark - text field delegate
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    mActiveField = textField;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    mActiveField = nil;
+    
+    //password length check
+    if ([textField tag] == 1 && [[textField text] length] < 8)
+    {
+        [[[UIAlertView alloc] initWithTitle:@"Check password length"
+                                    message:@"Password must be 8 or more characters"
+                                   delegate:self
+                          cancelButtonTitle:@"OK"
+                          otherButtonTitles:nil, nil] show];
+    }
+    //contirm password check
+    else if([textField tag] == 2)
+    {
+        if (![[textField text] isEqualToString:[mPassword text]])
+        {
+            [[[UIAlertView alloc] initWithTitle:@"Not match password"
+                                        message:@"Check your password"
+                                       delegate:nil
+                              cancelButtonTitle:@"OK"
+                              otherButtonTitles:nil, nil] show];
+        }
+    }
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    //user name length check
+    if([textField tag] == 0 && [[[textField text] stringByAppendingString:string] length] > 10)
+    {
+        [[[UIAlertView alloc] initWithTitle:@"Check user name length"
+                                    message:@"User name must be 10 characters or less"
+                                   delegate:self
+                          cancelButtonTitle:@"OK"
+                          otherButtonTitles:nil, nil] show];
+        return NO;
+    }
+    //when password is too long
+    else if([textField tag] == 1 && [[[textField text] stringByAppendingString:string] length] > 40)
+    {
+        [[[UIAlertView alloc] initWithTitle:@"Password is too long"
+                                    message:@"You can determine other password which is easy to remember"
+                                   delegate:self
+                          cancelButtonTitle:@"OK"
+                          otherButtonTitles:nil, nil] show];
+        
+        return NO;
+    }
+
+    return YES;
 }
 
 
@@ -132,19 +195,6 @@
 }
 
 
-#pragma mark - text field delegate
-
-- (void)textFieldDidBeginEditing:(UITextField *)textField
-{
-    mActiveField = textField;
-}
-
-- (void)textFieldDidEndEditing:(UITextField *)textField
-{
-    mActiveField = nil;
-}
-
-
 #pragma mark - private
 
 - (void)signUp
@@ -155,7 +205,11 @@
     
     [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
      {
-         if (error)
+         if (succeeded)
+         {
+             [self performSegueWithIdentifier:@"signupCompleted" sender:self];
+         }
+         else if (error)
          {
              [[[UIAlertView alloc] initWithTitle:@"Fail to signup"
                                          message:@"Username already taken"
@@ -167,7 +221,6 @@
 
          }
                   
-         [self performSegueWithIdentifier:@"signupCompleted" sender:self];
      }];
 }
 

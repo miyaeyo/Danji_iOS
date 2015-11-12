@@ -38,7 +38,8 @@
 
 - (void)selectedAssets:(NSArray *)assets
 {
-    NSMutableArray *returnImages = [[NSMutableArray alloc] init];
+    NSMutableArray *returnImages = [[NSMutableArray alloc] initWithCapacity:[assets count]];
+    
     
     for (DJAsset *aAsset in assets)
     {

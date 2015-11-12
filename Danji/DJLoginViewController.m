@@ -26,9 +26,11 @@
 {
     [super viewDidLoad];
     [self registerForKeyboardNotifications];
+    
     [mUserName setDelegate:self];
     [mPassword setDelegate:self];
     
+    //for keyboard hide
     UITapGestureRecognizer *backgroundTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(backgroundTapped:)];
     [mScrollView addGestureRecognizer:backgroundTapGesture];
 }
@@ -42,6 +44,7 @@
         mUserName = nil;
         mPassword = nil;
         mScrollView = nil;
+        mActiveField = nil;
     }
 }
 
@@ -66,6 +69,7 @@
 
 - (IBAction)loginButtonTapped:(id)sender
 {
+    //keyboard hide
     [[self view] endEditing:YES];
     
     if ([[mUserName text] length] == 0 || [[mPassword text] length] == 0)
@@ -84,6 +88,7 @@
 
 - (IBAction)backgroundTapped:(id)sender
 {
+    //keyboard hide
     [[self view] endEditing:YES];
 }
 

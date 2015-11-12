@@ -119,7 +119,7 @@
     [self addSubview:mLikeButton];
     
     [mLikeCount setFrame:CGRectMake(buttonSize, bottomY, 45, buttonSize)];
-    [mLikeCount setText:[NSString stringWithFormat:@"%ld", [mContents likeCount]]];
+    [mLikeCount setText:[NSString stringWithFormat:@"%ld", (long)[mContents likeCount]]];
     [mLikeCount setBackgroundColor:[UIColor DJPinkColor]];
     [mLikeCount setTextColor:[UIColor whiteColor]];
     [mLikeCount setFont:[UIFont boldSystemFontOfSize:15]];

@@ -12,6 +12,7 @@
 {
     ALAsset *mAsset;
     BOOL mSelected;
+    
 }
 
 @synthesize selected = mSelected;
