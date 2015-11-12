@@ -27,6 +27,9 @@
 - (void)contentsFromParseDB;
 - (void)contentsFromParseDBWithLikeCount:(NSInteger)count;
 - (void)contentsFromParseDBWithSearchText:(NSString *)searchText;
+- (void)contentsFromParseDBWithCategory:(NSString *)category;
+
 - (void)saveContentsToParseDB:(DJContents *)contents;
+
 
 @end

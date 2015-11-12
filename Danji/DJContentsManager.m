@@ -96,6 +96,28 @@
 }
 
 
+- (void)contentsFromParseDBWithCategory:(NSString *)category
+{
+    @autoreleasepool
+    {
+        PFQuery *query = [DJContents query];
+        [query whereKey:@"category" equalTo:category];
+        [query orderByDescending:@"createdAt"];
+        [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error)
+         {
+             if (!error)
+             {
+                 [mDelegate contentsManager:self didFinishGetContentsList:objects];
+             }
+             else
+             {
+                 NSLog(@"Error: %@ %@", error, [error userInfo]);
+             }
+         }];
+    }
+}
+
+
 #pragma mark - save
 
 - (void)saveContentsToParseDB:(DJContents *)contents

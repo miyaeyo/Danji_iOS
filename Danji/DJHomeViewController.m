@@ -11,6 +11,7 @@
 #import "DJContentsManager.h"
 #import "DJContents.h"
 #import "DJCategories.h"
+#import "UIColor+DanjiColor.h"
 
 
 @implementation DJHomeViewController
@@ -30,9 +31,6 @@
     
     [self setupViewAttributes];
     [self setupPickerView];
-    
-    
-    [[self tableView] setRowHeight:UITableViewAutomaticDimension];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -47,6 +45,7 @@
     {
         mCategory = nil;
         mContentsList = nil;
+        mContentsManager = nil;
     }
 }
 
@@ -62,7 +61,7 @@
 }
 
 
-#pragma mark - aler view delegate
+#pragma mark - alert view delegate
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
@@ -84,12 +83,14 @@
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
     DJCategories *categories = [[DJCategories alloc] init];
+    
     return [[categories categoriesForMain] count];
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
     DJCategories *categories = [[DJCategories alloc] init];
+    
     return [[categories categoriesForMain] objectAtIndex:row];
 }
 
@@ -98,6 +99,15 @@
     DJCategories *categories = [[DJCategories alloc] init];
     [mCategory setText:[[categories categoriesForMain] objectAtIndex:row]];
     [[self view] endEditing:YES];
+    
+    if ([[mCategory text] isEqualToString:@"TOTAL"])
+    {
+        [mContentsManager contentsFromParseDB];
+    }
+    else
+    {
+        [mContentsManager contentsFromParseDBWithCategory:[[mCategory text] lowercaseString]];
+    }
 }
 
 
@@ -125,6 +135,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    //dummy number for estimate row height
     return 700;
 }
 
@@ -161,7 +172,7 @@
     [pickerView setDataSource:self];
     [pickerView setDelegate:self];
     [pickerView setShowsSelectionIndicator:YES];
-    [pickerView setBackgroundColor:[UIColor colorWithRed:0.74 green:0.82 blue:0.8 alpha:1]];
+    [pickerView setBackgroundColor:[UIColor DJMintColor]];
     
     [mCategory setInputView:pickerView];
 }
@@ -181,7 +192,7 @@
     [body sizeToFit];
     CGFloat bodyHeight = [body bounds].size.height;
     
-    return imageHeight + bodyHeight + 50;
+    return imageHeight + bodyHeight + 60;
 }
 
 
