@@ -30,6 +30,7 @@
 - (void)contentsFromParseDBWithCategory:(NSString *)category;
 
 - (void)saveContentsToParseDB:(DJContents *)contents;
+- (void)increaseLikeCountToParseDB:(DJContents *)contents;
 
 
 @end

@@ -50,6 +50,44 @@
 }
 
 
+#pragma mark - table view delegate
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return [mContentsList count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    DJContentsViewCell *cell = [[self tableView] dequeueReusableCellWithIdentifier:@"contentsCell"];
+    [cell inputContents:[mContentsList objectAtIndex:[indexPath row]]];
+    
+    return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    CGFloat height = [self estimateCellHeightWithContents:[mContentsList objectAtIndex:[indexPath row]]];
+    
+    return height + 5;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    //dummy data for estimate row height
+    return 700;
+}
+
+
+#pragma mark - contents delegate
+
+- (void)contentsManager:(DJContentsManager *)aContentsManager didFinishGetContentsList:(NSArray *)contentsList
+{
+    mContentsList = [NSArray arrayWithArray:contentsList];
+    [[self tableView] reloadData];
+}
+
+
 #pragma mark - action
 
 - (IBAction)logoutButtonTapped:(id)sender
@@ -111,44 +149,6 @@
 }
 
 
-#pragma mark - table view delegate
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return [mContentsList count];
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    DJContentsViewCell *cell = [[self tableView] dequeueReusableCellWithIdentifier:@"contentsCell"];
-    [cell inputContents:[mContentsList objectAtIndex:[indexPath row]]];
-    
-    return cell;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    CGFloat height = [self estimateCellHeightWithContents:[mContentsList objectAtIndex:[indexPath row]]];
-    
-    return height + 5;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    //dummy number for estimate row height
-    return 700;
-}
-
-
-#pragma mark - contents delegate
-
-- (void)contentsManager:(DJContentsManager *)aContentsManager didFinishGetContentsList:(NSArray *)contentsList
-{
-    mContentsList = [NSArray arrayWithArray:contentsList];
-    [[self tableView] reloadData];
-}
-
-
 #pragma mark - setup
 
 - (void)setupViewAttributes
@@ -194,7 +194,6 @@
     
     return imageHeight + bodyHeight + 60;
 }
-
 
 
 @end

@@ -842,11 +842,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Danji/DJHomeViewController.m"
-            timestampString = "469005432.72494"
+            timestampString = "469009841.458874"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "53"
-            endingLineNumber = "53"
+            startingLineNumber = "91"
+            endingLineNumber = "91"
             landmarkName = "@implementation DJHomeViewController"
             landmarkType = "3">
          </BreakpointContent>

@@ -137,6 +137,13 @@
     
 }
 
+- (void)increaseLikeCountToParseDB:(DJContents *)contents
+{
+    
+}
+
+
+
 
 @end
 

@@ -71,10 +71,22 @@
 
 - (IBAction)likeButtonTapped:(id)sender
 {
-    NSInteger likeCount = [[mLikeCount text] integerValue];
-    likeCount ++;
-    [mLikeCount setText:[NSString stringWithFormat:@"%ld", (long)likeCount]];
-    //to do: db에 likecount 변동 반영
+    [mContents incrementKey:@"likeCount"];
+    [mContents saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error)
+    {
+        if (succeeded)
+        {
+            [mLikeCount setText:[NSString stringWithFormat:@"%ld", [mContents likeCount]]];
+            if ([mContents likeCount] > 9999)
+            {
+                [self setNeedsLayout];
+            }
+        }
+        else
+        {
+            NSLog(@"%@", [error description]);
+        }
+    }];
 }
 
 
@@ -90,7 +102,7 @@
 
 - (void)setupBodyView
 {
-    CGFloat screenWidth = [[UIScreen mainScreen] bounds].size.width;
+    CGFloat screenWidth = [self bounds].size.width;
     CGFloat margin = 10.0f;
     
     [mBody setFrame:CGRectMake(margin, mImageHeight + margin, screenWidth - 2 * margin, mBodyHeight)];
@@ -106,7 +118,7 @@
 
 - (void)setupBottomView
 {
-    CGFloat screenWidth = [[UIScreen mainScreen] bounds].size.width;
+    CGFloat screenWidth = [self bounds].size.width;
     CGFloat margin = 10.0f;
     CGFloat buttonSize = 28;
     CGFloat bottomY = mImageHeight + mBodyHeight + 2 * margin;
@@ -118,7 +130,18 @@
     [mLikeButton addTarget:self action:@selector(likeButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:mLikeButton];
     
-    [mLikeCount setFrame:CGRectMake(buttonSize, bottomY, 45, buttonSize)];
+    
+    if ([mContents likeCount] > 9999)
+    {
+        [mLikeCount sizeToFit];
+        CGFloat newWidth = [mLikeCount bounds].size.width + 4;
+        [mLikeCount setFrame:CGRectMake(buttonSize, bottomY, newWidth, buttonSize)];
+        likeViewWidth = buttonSize + newWidth;
+    }
+    else
+    {
+        [mLikeCount setFrame:CGRectMake(buttonSize, bottomY, 45, buttonSize)];
+    }
     [mLikeCount setText:[NSString stringWithFormat:@"%ld", (long)[mContents likeCount]]];
     [mLikeCount setBackgroundColor:[UIColor DJPinkColor]];
     [mLikeCount setTextColor:[UIColor whiteColor]];
