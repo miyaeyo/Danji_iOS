@@ -401,7 +401,6 @@
     mImageCount = 0;
 }
 
-
 - (void)saveParseDB
 {
     DJContents *contents = [DJContents object];
@@ -416,7 +415,7 @@
     }
     else
     {
-        [contents setReference:[NSString stringWithFormat:@"%@ - %@ 中", [mTitle text], [mCreator text]]];
+        [contents setReference:[NSString stringWithFormat:@"%@ - %@ 中", [mCreator text], [mTitle text]]];
     }
     [contents setLikeCount:0];
     [contents setCharacter:mCharacters];
@@ -425,68 +424,39 @@
     [contents setImageWidth:[self imageSize].width];
     
     [contents saveInBackground];
-    
-//    [contents saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error)
-//    {
-//        if (succeeded)
-//        {
-//            [self performSegueWithIdentifier:@"complete" sender:self];
-//        }
-//        else if (error)
-//        {
-//            NSLog(@"error: %@", [error description]);
-//        }
-//    }];
 }
 
 - (PFFile *)convertImages
 {
-    if ([mImages count] == 1)
-    {
-        NSData *imageData = UIImagePNGRepresentation([mImages firstObject]);
-        PFFile *imageFile = [PFFile fileWithData:imageData];
-        return imageFile;
-    }
-    else
-    {
-        CGSize mergeSize = [self imageSize];
-        
-        UIGraphicsBeginImageContext(mergeSize);
-        CGFloat prevHeight = 0.0f;
-        for (UIImage *image in mImages)
-        {
-            [image drawInRect:CGRectMake(0, prevHeight, mergeSize.width, image.size.height)];
-            prevHeight += image.size.height;
-        }
-        UIImage *finalImage = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
-        
-        NSData *imageData = UIImagePNGRepresentation(finalImage);
-        PFFile *imageFile = [PFFile fileWithData:imageData];
-        return imageFile;
-    }
+    CGSize mergeSize = [self imageSize];
     
+    UIGraphicsBeginImageContext(mergeSize);
+    CGFloat prevHeight = 0.0f;
+    for (UIImage *image in mImages)
+    {
+        CGFloat newHeight = mergeSize.width * image.size.height / image.size.width;
+        [image drawInRect:CGRectMake(0, prevHeight, mergeSize.width, newHeight)];
+        prevHeight += newHeight;
+    }
+    UIImage *finalImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    NSData *imageData = UIImagePNGRepresentation(finalImage);
+    PFFile *imageFile = [PFFile fileWithData:imageData];
+    
+    return imageFile;
 }
 
 - (CGSize)imageSize
 {
-    if ([mImages count] == 1)
+    CGFloat newHeight = 0.0f;
+    CGFloat newWidth = 414; // iphone 6 plus 414 * 736
+    for (UIImage *image in mImages)
     {
-        return [[mImages firstObject] bounds].size;
+        newHeight += (newWidth * image.size.height / image.size.width);
     }
-    else
-    {
-        CGFloat height = 0.0f;
-        UIImage *firstImage = [mImages firstObject];
-        CGFloat width = firstImage.size.width;
-        
-        for (UIImage *image in mImages)
-        {
-            height += image.size.height;
-        }
-        
-        return CGSizeMake(width, height);
-    }
+
+    return CGSizeMake(newWidth, newHeight);
 }
 
 
