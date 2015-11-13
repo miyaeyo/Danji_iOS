@@ -411,7 +411,7 @@
     [contents setBody:[mBody text]];
     [contents setImage:[self convertImages]];
     if ([[mCreator text] isEqualToString:@""]) {
-        [contents setReference:[mTitle text]];
+        [contents setReference:[NSString stringWithFormat:@"%@ 中", [mTitle text]]];
     }
     else
     {

@@ -52,11 +52,13 @@
 
 - (IBAction)doneButtonTapped:(id)sender
 {
-    [[[UIAlertView alloc] initWithTitle:@"Done"
-                                message:@"Do you complete contents editing?"
-                               delegate:self
-                      cancelButtonTitle:@"NO"
-                      otherButtonTitles:@"YES", nil] show];
+//    [[[UIAlertView alloc] initWithTitle:@"Done"
+//                                message:@"Do you complete contents editing?"
+//                               delegate:self
+//                      cancelButtonTitle:@"NO"
+//                      otherButtonTitles:@"YES", nil] show];
+    [[self navigationController] popToViewController:mDelegate animated:YES];
+    [mDelegate dialogeWriteController:self didFinishWriteCharacter:mCharacter dialog:mDialog];
 }
 
 - (IBAction)plusButtonTapped:(id)sender
