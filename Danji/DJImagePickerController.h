@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import <AssetsLibrary/AssetsLibrary.h>
-#import "DJAssetSelectionDelegate.h"
+#import "DJAssetPickerController.h"
+
 
 @class DJImagePickerController;
 @protocol DJImagePickerControllerDelegate <UINavigationControllerDelegate>
@@ -21,7 +22,7 @@
 
 
 
-@interface DJImagePickerController : UITableViewController <DJAssetSelectionDelegate>
+@interface DJImagePickerController : UITableViewController <DJAssetPickerDelegate>
 
 @property (nonatomic, weak) id<DJImagePickerControllerDelegate> imageDelegate;
 

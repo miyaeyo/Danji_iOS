@@ -47,6 +47,25 @@
 }
 
 
+#pragma mark - text view delegate
+
+- (void)textViewDidChange:(UITextView *)textView
+{
+    NSUInteger bytes = [[textView text] lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
+    
+    //parse object size limit 128kb
+    if (bytes > 128000)
+    {
+        [[[UIAlertView alloc] initWithTitle:@"Over maximum text length"
+                                    message:@"Text should be less than 128KB"
+                                   delegate:self
+                          cancelButtonTitle:@"OK"
+                          otherButtonTitles:nil, nil] show];
+        return;
+    }
+    
+}
+
 #pragma mark - action
 
 - (IBAction)doneButtonTapped:(id)sender

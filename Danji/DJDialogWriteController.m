@@ -13,8 +13,9 @@
 {
     __weak UIViewController<DJDialogWriteDelegate> *mDelegate;
     NSInteger                                      mFormCount;
-    NSMutableArray                                 *mCharacter;
-    NSMutableArray                                 *mDialog;
+    NSMutableArray                                 *mCharacters;
+    NSMutableArray                                 *mDialogs;
+    NSUInteger                                     mTextByte;
     
 }
 
@@ -27,17 +28,24 @@
 {
     [super viewDidLoad];
     
-    if (!mCharacter && !mDialog)
+    if (!mCharacters && !mDialogs)
     {
+        mTextByte = 0;
         mFormCount = 1;
-        mCharacter = [[NSMutableArray alloc] init];
-        mDialog = [[NSMutableArray alloc] init];
-        [mCharacter addObject:@""];
-        [mDialog addObject:@""];
+        mCharacters = [[NSMutableArray alloc] init];
+        mDialogs = [[NSMutableArray alloc] init];
+        [mCharacters addObject:@""];
+        [mDialogs addObject:@""];
     }
     else
     {
-        mFormCount = [mCharacter count];
+        mFormCount = [mCharacters count];
+        
+        for (int i = 0; i < mFormCount; i++)
+        {
+            mTextByte += ([[mCharacters objectAtIndex:i] lengthOfBytesUsingEncoding:NSUTF8StringEncoding]
+                          + [[mDialogs objectAtIndex:i] lengthOfBytesUsingEncoding:NSUTF8StringEncoding]);
+        }
     }
     
 }
@@ -53,12 +61,12 @@
 - (IBAction)doneButtonTapped:(id)sender
 {
     [[self navigationController] popToViewController:mDelegate animated:YES];
-    [mDelegate dialogeWriteController:self didFinishWriteCharacter:mCharacter dialog:mDialog];
+    [mDelegate dialogeWriteController:self didFinishWriteCharacter:mCharacters dialog:mDialogs];
 }
 
 - (IBAction)plusButtonTapped:(id)sender
 {
-    if ([[mCharacter objectAtIndex:(mFormCount-1)] isEqualToString:@""] || [[mDialog objectAtIndex:(mFormCount-1)] isEqualToString:@""])
+    if ([[mCharacters objectAtIndex:(mFormCount - 1)] isEqualToString:@""] || [[mDialogs objectAtIndex:(mFormCount - 1)] isEqualToString:@""])
     {
         [[[UIAlertView alloc] initWithTitle:@"Missing some field"
                                     message:@"Please fill the empty field"
@@ -67,23 +75,28 @@
                           otherButtonTitles:nil, nil] show];
         return;
     }
-    
-    if (mFormCount > 20)
+    else
     {
-        [[[UIAlertView alloc] initWithTitle:@"Over maximun Form Count"
-                                    message:@"You can add max 20 dialog form"
-                                   delegate:nil
-                          cancelButtonTitle:@"OK"
-                          otherButtonTitles:nil, nil] show];
-        return;
+        mTextByte += ([[mCharacters objectAtIndex:(mFormCount - 1)] lengthOfBytesUsingEncoding:NSUTF8StringEncoding]
+                      + [[mDialogs objectAtIndex:(mFormCount - 1)] lengthOfBytesUsingEncoding:NSUTF8StringEncoding]);
+        
+        NSLog(@"text byte: %ld", mTextByte);
+        if (mTextByte > 127000)
+        {
+            [[[UIAlertView alloc] initWithTitle:@"Over maximun contents length"
+                                        message:@"Text should be less than 128KB"
+                                       delegate:nil
+                              cancelButtonTitle:@"OK"
+                              otherButtonTitles:nil, nil] show];
+            return;
+        }
+       
+        mFormCount ++;
+        [mCharacters addObject:@""];
+        [mDialogs addObject:@""];
+        
+        [[self tableView] reloadData];
     }
-    
-    
-    mFormCount ++;
-    [mCharacter addObject:@""];
-    [mDialog addObject:@""];
-    
-    [[self tableView] reloadData];
 }
 
 
@@ -101,10 +114,10 @@
     [cell setNumber:[indexPath row]];
     [cell setDelegate:self];
     [[cell dialog] setDelegate:cell];
-    [[cell character] setText:[mCharacter objectAtIndex:[indexPath row]]];
-    [[cell dialog] setText:[mDialog objectAtIndex:[indexPath row]]];
+    [[cell character] setText:[mCharacters objectAtIndex:[indexPath row]]];
+    [[cell dialog] setText:[mDialogs objectAtIndex:[indexPath row]]];
     
-    if (![[mDialog objectAtIndex:[indexPath row]] isEqualToString:@""])
+    if (![[mDialogs objectAtIndex:[indexPath row]] isEqualToString:@""])
     {
         [[cell dialogPlaceholder] setText:@""];
     }
@@ -124,13 +137,16 @@
     if (mFormCount != 1)
     {
         mFormCount--;
-        [mCharacter removeObjectAtIndex:[cell number]];
-        [mDialog removeObjectAtIndex:[cell number]];
+        mTextByte -= ([[mCharacters objectAtIndex:[cell number]] lengthOfBytesUsingEncoding:NSUTF8StringEncoding]
+                      + [[mDialogs objectAtIndex:[cell number]] lengthOfBytesUsingEncoding:NSUTF8StringEncoding]);
+        [mCharacters removeObjectAtIndex:[cell number]];
+        [mDialogs removeObjectAtIndex:[cell number]];
     }
     else
     {
-        [mCharacter replaceObjectAtIndex:0 withObject:@""];
-        [mDialog replaceObjectAtIndex:0 withObject:@""];
+        mTextByte = 0;
+        [mCharacters replaceObjectAtIndex:0 withObject:@""];
+        [mDialogs replaceObjectAtIndex:0 withObject:@""];
     }
     
     [[self tableView] reloadData];
@@ -138,12 +154,12 @@
 
 - (void)dialogInputCell:(DJDialogInputCell *)cell didEndEditingCharacter:(NSString *)character
 {
-    [mCharacter replaceObjectAtIndex:[cell number] withObject:character];
+    [mCharacters replaceObjectAtIndex:[cell number] withObject:character];
 }
 
 - (void)dialogInputCell:(DJDialogInputCell *)cell didEndEditingDialog:(NSString *)dialog
 {
-    [mDialog replaceObjectAtIndex:[cell number] withObject:dialog];
+    [mDialogs replaceObjectAtIndex:[cell number] withObject:dialog];
 }
 
 
@@ -153,8 +169,8 @@
 {
     if ([characters count] != 0 && [dialogs count] != 0)
     {
-        mCharacter = [NSMutableArray arrayWithArray:characters];
-        mDialog = [NSMutableArray arrayWithArray:dialogs];
+        mCharacters = [NSMutableArray arrayWithArray:characters];
+        mDialogs = [NSMutableArray arrayWithArray:dialogs];
     }
 }
 

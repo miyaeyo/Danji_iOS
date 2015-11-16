@@ -114,7 +114,6 @@
 		9EE150A21BDF11560034258E /* DJImagePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJImagePickerController.m; sourceTree = "<group>"; };
 		9EE150A51BDF121B0034258E /* DJAsset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DJAsset.h; sourceTree = "<group>"; };
 		9EE150A61BDF121B0034258E /* DJAsset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJAsset.m; sourceTree = "<group>"; };
-		9EE150A81BDF14510034258E /* DJAssetSelectionDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DJAssetSelectionDelegate.h; sourceTree = "<group>"; };
 		9EE150AC1BE4B2B60034258E /* DJAssetPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DJAssetPickerController.h; sourceTree = "<group>"; };
 		9EE150AD1BE4B2B60034258E /* DJAssetPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJAssetPickerController.m; sourceTree = "<group>"; };
 		9EE150AF1BE5B6190034258E /* DJAssetCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DJAssetCell.h; sourceTree = "<group>"; };
@@ -351,7 +350,6 @@
 			children = (
 				9EE150A11BDF11560034258E /* DJImagePickerController.h */,
 				9EE150A21BDF11560034258E /* DJImagePickerController.m */,
-				9EE150A81BDF14510034258E /* DJAssetSelectionDelegate.h */,
 				9EE150A51BDF121B0034258E /* DJAsset.h */,
 				9EE150A61BDF121B0034258E /* DJAsset.m */,
 				9EE150AC1BE4B2B60034258E /* DJAssetPickerController.h */,

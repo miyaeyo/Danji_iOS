@@ -108,10 +108,19 @@
 
 - (IBAction)doneButtonTapped:(id)sender
 {
-    if ([[mTitle text] isEqualToString:@""] || [[mInputFormPicker text] isEqualToString:@""] || [[mCategoryPicker text] isEqualToString:@""])
+    if ([[mTitle text] isEqualToString:@""] || [[mInputFormPicker text] isEqualToString:@""] || [[mCategoryPicker text] isEqualToString:@""] || [mImages count] == 0)
     {
         [[[UIAlertView alloc] initWithTitle:@"Missing some fields"
-                                    message:@"Please fill the empty fields(title, input form, category).\n Only creator field is optional."
+                                    message:@"Please fill the empty fields(title, input form, category, image)."
+                                   delegate:nil
+                          cancelButtonTitle:@"OK"
+                          otherButtonTitles:nil, nil] show];
+        return;
+    }
+    else if ([[mTitle text] length] > 40 || [[mCreator text] length] > 40)
+    {
+        [[[UIAlertView alloc] initWithTitle:@"Title or Creator is too long"
+                                    message:@"Title and Creator input less than 40 characters"
                                    delegate:nil
                           cancelButtonTitle:@"OK"
                           otherButtonTitles:nil, nil] show];
@@ -291,7 +300,7 @@
     
     for (int i = 0; i < [characters count]; i++)
     {
-        [tempBody appendFormat:@" %@: %@\n", [characters objectAtIndex:i], [dialogs objectAtIndex:i]];
+        [tempBody appendFormat:@" %@: %@\n\n", [characters objectAtIndex:i], [dialogs objectAtIndex:i]];
     }
     
     [mBody setText:[NSString stringWithString:tempBody]];

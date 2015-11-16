@@ -8,12 +8,19 @@
 
 #import <UIKit/UIKit.h>
 #import "DJAsset.h"
-#import "DJAssetSelectionDelegate.h"
+
+
+@protocol DJAssetPickerDelegate <NSObject>
+
+@required
+- (void)selectedAssets:(NSArray *)assets;
+
+@end
 
 
 @interface DJAssetPickerController : UICollectionViewController
 
-@property (nonatomic, weak) id<DJAssetSelectionDelegate> pickerDelegate;
+@property (nonatomic, weak) id<DJAssetPickerDelegate> pickerDelegate;
 @property (nonatomic, strong) ALAssetsGroup *assetGroup;
 
 @end

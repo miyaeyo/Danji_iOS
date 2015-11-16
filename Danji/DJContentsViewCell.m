@@ -73,21 +73,21 @@
 {
     [mContents incrementKey:@"likeCount"];
     [mContents saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error)
-    {
-        if (succeeded)
-        {
-            [mLikeCount setText:[NSString stringWithFormat:@"%ld", (long)[mContents likeCount]]];
-            
-            if ([mContents likeCount] > 9999)
-            {
-                [self setNeedsLayout];
-            }
-        }
-        else
-        {
-            NSLog(@"%@", [error description]);
-        }
-    }];
+     {
+         if (succeeded)
+         {
+             [mLikeCount setText:[NSString stringWithFormat:@"%ld", (long)[mContents likeCount]]];
+             
+             if ([mContents likeCount] > 9999)
+             {
+                 [self setNeedsLayout];
+             }
+         }
+         else
+         {
+             NSLog(@"%@", [error description]);
+         }
+     }];
 }
 
 

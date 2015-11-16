@@ -13,7 +13,7 @@
 
 @implementation DJAssetPickerController
 {
-    __weak id<DJAssetSelectionDelegate> mDelegate;
+    __weak id<DJAssetPickerDelegate>    mDelegate;
     ALAssetsGroup                       *mAssetGroup;
     NSMutableArray                      *mAssets;
     NSUInteger                          mSelectionCount;
@@ -24,8 +24,7 @@
 @synthesize assetGroup = mAssetGroup;
 
 
-static NSString * const reuseIdentifier = @"photoCell";
-
+#pragma mark - view
 
 - (void)viewDidLoad
 {
@@ -46,6 +45,13 @@ static NSString * const reuseIdentifier = @"photoCell";
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+    
+    if ([self isViewLoaded])
+    {
+        mDelegate = nil;
+        mAssetGroup = nil;
+        mAssets = nil;
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -64,12 +70,10 @@ static NSString * const reuseIdentifier = @"photoCell";
     [[self collectionView] reloadData];
 }
 
-
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
     return 1;
 }
-
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
@@ -78,7 +82,7 @@ static NSString * const reuseIdentifier = @"photoCell";
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    DJAssetCell *cell = [[self collectionView] dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
+    DJAssetCell *cell = [[self collectionView] dequeueReusableCellWithReuseIdentifier:@"photoCell" forIndexPath:indexPath];
     
     [cell setupAsset:[mAssets objectAtIndex:[indexPath row]]];
     
@@ -140,7 +144,6 @@ static NSString * const reuseIdentifier = @"photoCell";
 
 
 #pragma mark - private
-
 
 - (void)preparePhotos
 {
