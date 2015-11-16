@@ -232,7 +232,7 @@
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
-- (void)DJImagePickerController:(DJAlbumPickerController *)picker didFinishPickingImages:(NSArray *)images
+- (void)DJImagePickerController:(DJImagePickerController *)picker didFinishPickingImages:(NSArray *)images
 {
     NSMutableArray *tempImages = [[NSMutableArray alloc] init];
     for(NSDictionary *dictionary in images)

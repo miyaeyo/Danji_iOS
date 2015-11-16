@@ -7,10 +7,10 @@
 //
 
 #import <CoreLocation/CoreLocation.h>
-#import "DJAlbumPickerController.h"
+#import "DJImagePickerController.h"
 #import "DJAssetPickerController.h"
 
-@implementation DJAlbumPickerController
+@implementation DJImagePickerController
 {
     ALAssetsLibrary                     *mLibrary;
     NSArray                             *mAssetGroups;
@@ -34,8 +34,6 @@
     [[self tableView] setDelegate:self];
     
     [self loadAlbums];
-    
-    
 }
 
 - (void)didReceiveMemoryWarning

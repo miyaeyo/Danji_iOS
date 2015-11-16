@@ -16,7 +16,4 @@
 @property (nonatomic, weak) id<DJAssetSelectionDelegate> pickerDelegate;
 @property (nonatomic, strong) ALAssetsGroup *assetGroup;
 
-//- (void)setAssets:(NSArray *)assets;
-//- (void)preparePhotos;
-
 @end

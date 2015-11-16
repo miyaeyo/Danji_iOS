@@ -57,7 +57,13 @@ static NSString * const reuseIdentifier = @"photoCell";
 }
 
 
-#pragma mark <UICollectionViewDataSource>
+#pragma mark - collection view delegate
+
+- (void)reloadCollectionView
+{
+    [[self collectionView] reloadData];
+}
+
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
@@ -78,9 +84,6 @@ static NSString * const reuseIdentifier = @"photoCell";
     
     return cell;
 }
-
-
-#pragma mark <UICollectionViewDelegate>
 
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -130,17 +133,9 @@ static NSString * const reuseIdentifier = @"photoCell";
                 [selectedPhotos addObject:asset];
             }
         }
- //       [self selectedAssets:selectedPhotos];
+        
         [mDelegate selectedAssets:selectedPhotos];
     }];
-}
-
-
-#pragma mark - public
-
-- (void)setAssets:(NSArray *)assets
-{
-    [mAssets arrayByAddingObjectsFromArray:assets];
 }
 
 
@@ -163,9 +158,19 @@ static NSString * const reuseIdentifier = @"photoCell";
             [mAssets addObject:asset];
         }];
         
-        [[self collectionView] reloadData];
+        [self performSelectorOnMainThread:@selector(reloadCollectionView) withObject:nil waitUntilDone:NO];
     }
 }
 
 
 @end
+
+
+
+//#pragma mark - public
+//
+//- (void)setAssets:(NSArray *)assets
+//{
+//    [mAssets arrayByAddingObjectsFromArray:assets];
+//}
+

@@ -31,7 +31,7 @@
 		9EE150961BD885030034258E /* DJDialogWriteController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EE150951BD885030034258E /* DJDialogWriteController.m */; };
 		9EE150991BD8868C0034258E /* DJParagraphWriteController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EE150981BD8868C0034258E /* DJParagraphWriteController.m */; };
 		9EE1509C1BD88A110034258E /* DJDialogInputCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EE1509B1BD88A110034258E /* DJDialogInputCell.m */; };
-		9EE150A31BDF11560034258E /* DJAlbumPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EE150A21BDF11560034258E /* DJAlbumPickerController.m */; };
+		9EE150A31BDF11560034258E /* DJImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EE150A21BDF11560034258E /* DJImagePickerController.m */; };
 		9EE150A71BDF121B0034258E /* DJAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EE150A61BDF121B0034258E /* DJAsset.m */; };
 		9EE150AE1BE4B2B60034258E /* DJAssetPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EE150AD1BE4B2B60034258E /* DJAssetPickerController.m */; };
 		9EE150B11BE5B6190034258E /* DJAssetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EE150B01BE5B6190034258E /* DJAssetCell.m */; };
@@ -110,8 +110,8 @@
 		9EE150981BD8868C0034258E /* DJParagraphWriteController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJParagraphWriteController.m; sourceTree = "<group>"; };
 		9EE1509A1BD88A110034258E /* DJDialogInputCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DJDialogInputCell.h; sourceTree = "<group>"; };
 		9EE1509B1BD88A110034258E /* DJDialogInputCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJDialogInputCell.m; sourceTree = "<group>"; };
-		9EE150A11BDF11560034258E /* DJAlbumPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DJAlbumPickerController.h; sourceTree = "<group>"; };
-		9EE150A21BDF11560034258E /* DJAlbumPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJAlbumPickerController.m; sourceTree = "<group>"; };
+		9EE150A11BDF11560034258E /* DJImagePickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DJImagePickerController.h; sourceTree = "<group>"; };
+		9EE150A21BDF11560034258E /* DJImagePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJImagePickerController.m; sourceTree = "<group>"; };
 		9EE150A51BDF121B0034258E /* DJAsset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DJAsset.h; sourceTree = "<group>"; };
 		9EE150A61BDF121B0034258E /* DJAsset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJAsset.m; sourceTree = "<group>"; };
 		9EE150A81BDF14510034258E /* DJAssetSelectionDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DJAssetSelectionDelegate.h; sourceTree = "<group>"; };
@@ -349,8 +349,8 @@
 		9EE150A01BDF0A010034258E /* ImagePicker */ = {
 			isa = PBXGroup;
 			children = (
-				9EE150A11BDF11560034258E /* DJAlbumPickerController.h */,
-				9EE150A21BDF11560034258E /* DJAlbumPickerController.m */,
+				9EE150A11BDF11560034258E /* DJImagePickerController.h */,
+				9EE150A21BDF11560034258E /* DJImagePickerController.m */,
 				9EE150A81BDF14510034258E /* DJAssetSelectionDelegate.h */,
 				9EE150A51BDF121B0034258E /* DJAsset.h */,
 				9EE150A61BDF121B0034258E /* DJAsset.m */,
@@ -486,7 +486,7 @@
 				9EE150991BD8868C0034258E /* DJParagraphWriteController.m in Sources */,
 				9ECBCBDE1BEA002F00EFA360 /* UIColor+DanjiColor.m in Sources */,
 				9EE150661BCE02540034258E /* DJContentsViewCell.m in Sources */,
-				9EE150A31BDF11560034258E /* DJAlbumPickerController.m in Sources */,
+				9EE150A31BDF11560034258E /* DJImagePickerController.m in Sources */,
 				9EE150B11BE5B6190034258E /* DJAssetCell.m in Sources */,
 				9EE2B28C1BCB4CD4003B929E /* DJLoginViewController.m in Sources */,
 				9EE150741BD3F73C0034258E /* DJSearchDetailViewController.m in Sources */,
