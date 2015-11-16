@@ -95,6 +95,14 @@
              }
          }];
     }
+    else
+    {
+        [[[UIAlertView alloc] initWithTitle:@"You already like this contents"
+                                    message:@""
+                                   delegate:nil
+                          cancelButtonTitle:@"OK"
+                          otherButtonTitles:nil, nil] show];
+    }
     
 }
 

@@ -73,13 +73,13 @@
     @autoreleasepool
     {
         
-        PFQuery *titleQuery = [DJContents query];
-        [titleQuery whereKey:@"title" containsString:searchText];
+        PFQuery *referenceQuery = [DJContents query];
+        [referenceQuery whereKey:@"reference" containsString:searchText];
         
         PFQuery *bodyQuery = [DJContents query];
         [bodyQuery whereKey:@"body" containsString:searchText];
         
-        PFQuery *query = [PFQuery orQueryWithSubqueries:@[titleQuery, bodyQuery]];
+        PFQuery *query = [PFQuery orQueryWithSubqueries:@[referenceQuery, bodyQuery]];
         [query orderByDescending:@"createdAt"];
         [query findObjectsInBackgroundWithBlock:^(NSArray *results, NSError *error)
          {
