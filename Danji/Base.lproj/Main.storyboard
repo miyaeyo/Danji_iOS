@@ -1007,10 +1007,10 @@
             </objects>
             <point key="canvasLocation" x="-1205" y="6"/>
         </scene>
-        <!--Image Picker Controller-->
+        <!--Navigation Controller-->
         <scene sceneID="H8y-N6-zeQ">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="RQ0-rN-znk" customClass="DJImagePickerController" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="RQ0-rN-znk" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="d3o-Zx-Z8k">

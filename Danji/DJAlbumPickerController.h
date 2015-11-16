@@ -7,14 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
-//#import <AssetsLibrary/AssetsLibrary.h>
-#import <Photos/Photos.h>
+#import <AssetsLibrary/AssetsLibrary.h>
 #import "DJAssetSelectionDelegate.h"
+
+@class DJAlbumPickerController;
+@protocol DJImagePickerControllerDelegate <UINavigationControllerDelegate>
+
+@required
+
+- (void)DJImagePickerController:(DJAlbumPickerController *)picker didFinishPickingImages:(NSArray *)images;
+
+@end
+
 
 @interface DJAlbumPickerController : UITableViewController <DJAssetSelectionDelegate>
 
-@property (nonatomic, weak) id<DJAssetSelectionDelegate> delegate;
-
-
+@property (nonatomic, weak) id<DJImagePickerControllerDelegate> imageDelegate;
 
 @end

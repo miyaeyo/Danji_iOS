@@ -20,7 +20,7 @@
 @end
 
 
-@interface DJDialogWriteController : UITableViewController <DJDialogInputCellDelegate, UIAlertViewDelegate>
+@interface DJDialogWriteController : UITableViewController <DJDialogInputCellDelegate>
 
 @property (nonatomic, weak) UIViewController<DJDialogWriteDelegate> *dialogDelegate;
 

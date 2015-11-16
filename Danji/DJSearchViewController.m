@@ -29,8 +29,6 @@
     
     [mTableView setDelegate:self];
     [mTableView setDataSource:self];
-    
-    [self findPopularContents];
 }
 
 - (void)didReceiveMemoryWarning
@@ -48,6 +46,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    [self findPopularContents];
     [self setupSearchBar];
 }
 

@@ -20,7 +20,6 @@
     NSUInteger                          mMaxSelectionCount;
 }
 
-
 @synthesize pickerDelegate = mDelegate;
 @synthesize assetGroup = mAssetGroup;
 
@@ -131,6 +130,7 @@ static NSString * const reuseIdentifier = @"photoCell";
                 [selectedPhotos addObject:asset];
             }
         }
+ //       [self selectedAssets:selectedPhotos];
         [mDelegate selectedAssets:selectedPhotos];
     }];
 }
@@ -145,6 +145,7 @@ static NSString * const reuseIdentifier = @"photoCell";
 
 
 #pragma mark - private
+
 
 - (void)preparePhotos
 {

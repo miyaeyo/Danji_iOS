@@ -90,7 +90,7 @@
     }
     if([[segue identifier] isEqualToString:@"openGallery"])
     {
-        [[segue destinationViewController] setImageDelegate:self];
+        [[[[segue destinationViewController] childViewControllers] objectAtIndex:0] setImageDelegate:self];
     }
 }
 
@@ -232,7 +232,7 @@
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
-- (void)DJImagePickerController:(DJImagePickerController *)picker didFinishPickingImages:(NSArray *)images
+- (void)DJImagePickerController:(DJAlbumPickerController *)picker didFinishPickingImages:(NSArray *)images
 {
     NSMutableArray *tempImages = [[NSMutableArray alloc] init];
     for(NSDictionary *dictionary in images)

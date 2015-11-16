@@ -35,7 +35,6 @@
 		9EE150A71BDF121B0034258E /* DJAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EE150A61BDF121B0034258E /* DJAsset.m */; };
 		9EE150AE1BE4B2B60034258E /* DJAssetPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EE150AD1BE4B2B60034258E /* DJAssetPickerController.m */; };
 		9EE150B11BE5B6190034258E /* DJAssetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EE150B01BE5B6190034258E /* DJAssetCell.m */; };
-		9EE150B51BE6798C0034258E /* DJImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EE150B41BE6798C0034258E /* DJImagePickerController.m */; };
 		9EE2B26C1BC5063F003B929E /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EE2B26B1BC5063F003B929E /* Bolts.framework */; };
 		9EE2B26E1BC5064F003B929E /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EE2B26D1BC5064F003B929E /* Parse.framework */; };
 		9EE2B2701BC50754003B929E /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EE2B26F1BC50754003B929E /* AudioToolbox.framework */; };
@@ -120,8 +119,6 @@
 		9EE150AD1BE4B2B60034258E /* DJAssetPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJAssetPickerController.m; sourceTree = "<group>"; };
 		9EE150AF1BE5B6190034258E /* DJAssetCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DJAssetCell.h; sourceTree = "<group>"; };
 		9EE150B01BE5B6190034258E /* DJAssetCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJAssetCell.m; sourceTree = "<group>"; };
-		9EE150B31BE6798C0034258E /* DJImagePickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DJImagePickerController.h; sourceTree = "<group>"; };
-		9EE150B41BE6798C0034258E /* DJImagePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJImagePickerController.m; sourceTree = "<group>"; };
 		9EE2B26B1BC5063F003B929E /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		9EE2B26D1BC5064F003B929E /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		9EE2B26F1BC50754003B929E /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -361,8 +358,6 @@
 				9EE150AD1BE4B2B60034258E /* DJAssetPickerController.m */,
 				9EE150AF1BE5B6190034258E /* DJAssetCell.h */,
 				9EE150B01BE5B6190034258E /* DJAssetCell.m */,
-				9EE150B31BE6798C0034258E /* DJImagePickerController.h */,
-				9EE150B41BE6798C0034258E /* DJImagePickerController.m */,
 			);
 			name = ImagePicker;
 			sourceTree = "<group>";
@@ -492,7 +487,6 @@
 				9ECBCBDE1BEA002F00EFA360 /* UIColor+DanjiColor.m in Sources */,
 				9EE150661BCE02540034258E /* DJContentsViewCell.m in Sources */,
 				9EE150A31BDF11560034258E /* DJAlbumPickerController.m in Sources */,
-				9EE150B51BE6798C0034258E /* DJImagePickerController.m in Sources */,
 				9EE150B11BE5B6190034258E /* DJAssetCell.m in Sources */,
 				9EE2B28C1BCB4CD4003B929E /* DJLoginViewController.m in Sources */,
 				9EE150741BD3F73C0034258E /* DJSearchDetailViewController.m in Sources */,

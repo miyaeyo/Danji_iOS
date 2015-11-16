@@ -6,6 +6,7 @@
 //  Copyright (c) 2015년 miyaeyo. All rights reserved.
 //
 
+#import <CoreLocation/CoreLocation.h>
 #import "DJAlbumPickerController.h"
 #import "DJAssetPickerController.h"
 
@@ -13,11 +14,11 @@
 {
     ALAssetsLibrary                     *mLibrary;
     NSArray                             *mAssetGroups;
-    __weak id<DJAssetSelectionDelegate> mDelegate;
+    __weak id<DJImagePickerControllerDelegate> mDelegate;
     NSUInteger                          mIndexForSegue;
 }
 
-@synthesize delegate = mDelegate;
+@synthesize imageDelegate = mDelegate;
 
 #pragma mark - view
 
@@ -115,22 +116,66 @@
     }
 }
 
+#pragma mark - asset selection delegate
 
 - (void)selectedAssets:(NSArray *)assets
 {
+    NSMutableArray *returnImages = [[NSMutableArray alloc] initWithCapacity:[assets count]];
+
+    for (DJAsset *aAsset in assets)
+    {
+        ALAsset *asset = [aAsset asset];
+        
+        id object = [asset valueForProperty:ALAssetPropertyType];
+        if (!object)
+        {
+            continue;
+        }
+        
+        NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] init];
+        CLLocation *location = [asset valueForProperty:ALAssetPropertyLocation];
+        if (location)
+        {
+            [dictionary setObject:location forKey:ALAssetPropertyLocation];
+        }
+        
+        [dictionary setObject:object forKey:UIImagePickerControllerMediaType];
+        
+        ALAssetRepresentation *assetRepresentation = [asset defaultRepresentation];
+        
+        if (assetRepresentation)
+        {
+            CGImageRef imageRef = [assetRepresentation fullScreenImage];
+            UIImage *image = [UIImage imageWithCGImage:imageRef
+                                                 scale:1.0f
+                                           orientation:UIImageOrientationUp];
+            
+            [dictionary setObject:image forKey:UIImagePickerControllerOriginalImage];
+            [dictionary setObject:[[asset valueForProperty:ALAssetPropertyURLs] valueForKey:[[[asset valueForProperty:ALAssetPropertyURLs] allKeys] objectAtIndex:0]]
+                           forKey:UIImagePickerControllerReferenceURL];
+            
+            [returnImages addObject:dictionary];
+        }
+    }
+    
+    if (mDelegate != nil && [mDelegate respondsToSelector:@selector(DJImagePickerController:didFinishPickingImages:)])
+    {
+        [mDelegate performSelector:@selector(DJImagePickerController:didFinishPickingImages:)
+                        withObject:self
+                        withObject:returnImages];
+    }
+    
     [self dismissViewControllerAnimated:YES completion:NULL];
-    [mDelegate selectedAssets:assets];
 
 }
 
 
-#pragma mark action
+#pragma mark - action
 
 - (IBAction)cancelButtonTapped:(id)sender
 {
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
-
 
 
 #pragma mark - private
@@ -189,7 +234,7 @@
                                       cancelButtonTitle:@"OK"
                                       otherButtonTitles:nil, nil] show];
                 }
-                NSLog(@"%@", [error description]);
+                NSLog(@"error: %@", [error description]);
             };
             
             [mLibrary enumerateGroupsWithTypes:ALAssetsGroupAll usingBlock:assetGroupEnumerator failureBlock:assetGroupEnumeratorFailure];

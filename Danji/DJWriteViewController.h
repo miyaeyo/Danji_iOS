@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "DJDialogWriteController.h"
 #import "DJParagraphWriteController.h"
-#import "DJImagePickerController.h"
+#import "DJAlbumPickerController.h"
 #import "DJThumbnailCell.h"
 
 

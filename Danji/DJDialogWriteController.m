@@ -52,11 +52,6 @@
 
 - (IBAction)doneButtonTapped:(id)sender
 {
-//    [[[UIAlertView alloc] initWithTitle:@"Done"
-//                                message:@"Do you complete contents editing?"
-//                               delegate:self
-//                      cancelButtonTitle:@"NO"
-//                      otherButtonTitles:@"YES", nil] show];
     [[self navigationController] popToViewController:mDelegate animated:YES];
     [mDelegate dialogeWriteController:self didFinishWriteCharacter:mCharacter dialog:mDialog];
 }
@@ -89,18 +84,6 @@
     [mDialog addObject:@""];
     
     [[self tableView] reloadData];
-}
-
-
-#pragma mark - alert view delegate
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if (buttonIndex == 1)
-    {
-        [[self navigationController] popToViewController:mDelegate animated:YES];
-        [mDelegate dialogeWriteController:self didFinishWriteCharacter:mCharacter dialog:mDialog];
-    }
 }
 
 
