@@ -71,23 +71,31 @@
 
 - (IBAction)likeButtonTapped:(id)sender
 {
-    [mContents incrementKey:@"likeCount"];
-    [mContents saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error)
-     {
-         if (succeeded)
+    //like 중복 count 방지.
+    NSUInteger likeCount = [[mContents likeUsers] count];
+    [mContents addUniqueObject:[[PFUser currentUser] username]  forKey:@"likeUsers"];
+    
+    if ([[mContents likeUsers] count] - likeCount == 1)
+    {
+        [mContents incrementKey:@"likeCount"];
+        [mContents saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error)
          {
-             [mLikeCount setText:[NSString stringWithFormat:@"%ld", (long)[mContents likeCount]]];
-             
-             if ([mContents likeCount] > 9999)
+             if (succeeded)
              {
-                 [self setNeedsLayout];
+                 [mLikeCount setText:[NSString stringWithFormat:@"%ld", (long)[mContents likeCount]]];
+                 
+                 if ([mContents likeCount] > 9999)
+                 {
+                     [self setNeedsLayout];
+                 }
              }
-         }
-         else
-         {
-             NSLog(@"%@", [error description]);
-         }
-     }];
+             else
+             {
+                 NSLog(@"%@", [error description]);
+             }
+         }];
+    }
+    
 }
 
 

@@ -31,12 +31,8 @@
     
     [self setupViewAttributes];
     [self setupPickerView];
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
+ 
     [self getContentsFromDB];
-    
 }
 
 - (void)didReceiveMemoryWarning

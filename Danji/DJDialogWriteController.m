@@ -80,7 +80,7 @@
         mTextByte += ([[mCharacters objectAtIndex:(mFormCount - 1)] lengthOfBytesUsingEncoding:NSUTF8StringEncoding]
                       + [[mDialogs objectAtIndex:(mFormCount - 1)] lengthOfBytesUsingEncoding:NSUTF8StringEncoding]);
         
-        NSLog(@"text byte: %ld", mTextByte);
+        NSLog(@"text byte: %ld", (unsigned long)mTextByte);
         if (mTextByte > 127000)
         {
             [[[UIAlertView alloc] initWithTitle:@"Over maximun contents length"

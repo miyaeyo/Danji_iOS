@@ -23,6 +23,7 @@
 @property (nonatomic, strong) NSArray   *dialog;
 @property (nonatomic)         CGFloat   imageHeight;
 @property (nonatomic)         CGFloat   imageWidth;
+@property (nonatomic, strong) NSArray   *likeUsers;
 
 + (NSString *)parseClassName;
 

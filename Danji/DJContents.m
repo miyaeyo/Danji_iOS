@@ -22,6 +22,8 @@
 @dynamic dialog;
 @dynamic imageHeight;
 @dynamic imageWidth;
+@dynamic likeUsers;
+
 
 + (void)load
 {
