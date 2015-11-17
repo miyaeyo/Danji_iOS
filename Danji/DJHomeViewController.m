@@ -80,8 +80,11 @@
 
 - (void)contentsManager:(DJContentsManager *)aContentsManager didFinishGetContentsList:(NSArray *)contentsList
 {
-    mContentsList = [NSArray arrayWithArray:contentsList];
-    [[self tableView] reloadData];
+    @autoreleasepool
+    {
+        mContentsList = [NSArray arrayWithArray:contentsList];
+        [[self tableView] reloadData];
+    }
 }
 
 

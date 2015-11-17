@@ -108,7 +108,7 @@
 
 - (IBAction)doneButtonTapped:(id)sender
 {
-    if ([[mTitle text] isEqualToString:@""] || [[mInputFormPicker text] isEqualToString:@""] || [[mCategoryPicker text] isEqualToString:@""] || [mImages count] == 0)
+    if ([[mTitle text] length] == 0 || [[mInputFormPicker text] length] == 0 || [[mCategoryPicker text] length] == 0 || [mImages count] == 0)
     {
         [[[UIAlertView alloc] initWithTitle:@"Missing some fields"
                                     message:@"Please fill the empty fields(title, input form, category, image)."
@@ -412,48 +412,54 @@
 
 - (void)saveParseDB
 {
-    DJContents *contents = [DJContents object];
-    [contents setUserName:[[PFUser currentUser] username]];
-    [contents setCategory:[mCategoryPicker text]];
-    [contents setTitle:[mTitle text]];
-    [contents setCreator:[mCreator text]];
-    [contents setBody:[mBody text]];
-    [contents setImage:[self convertImages]];
-    if ([[mCreator text] isEqualToString:@""]) {
-        [contents setReference:[NSString stringWithFormat:@"%@ 中", [mTitle text]]];
-    }
-    else
+    @autoreleasepool
     {
-        [contents setReference:[NSString stringWithFormat:@"%@ - %@ 中", [mCreator text], [mTitle text]]];
+        DJContents *contents = [DJContents object];
+        [contents setUserName:[[PFUser currentUser] username]];
+        [contents setCategory:[mCategoryPicker text]];
+        [contents setTitle:[mTitle text]];
+        [contents setCreator:[mCreator text]];
+        [contents setBody:[mBody text]];
+        [contents setImage:[self convertImages]];
+        if ([[mCreator text] isEqualToString:@""]) {
+            [contents setReference:[NSString stringWithFormat:@"%@ 中", [mTitle text]]];
+        }
+        else
+        {
+            [contents setReference:[NSString stringWithFormat:@"%@ - %@ 中", [mCreator text], [mTitle text]]];
+        }
+        [contents setLikeCount:0];
+        [contents setCharacter:mCharacters];
+        [contents setDialog:mDialogs];
+        [contents setImageHeight:[self imageSize].height];
+        [contents setImageWidth:[self imageSize].width];
+        
+        [contents saveInBackground];
     }
-    [contents setLikeCount:0];
-    [contents setCharacter:mCharacters];
-    [contents setDialog:mDialogs];
-    [contents setImageHeight:[self imageSize].height];
-    [contents setImageWidth:[self imageSize].width];
-    
-    [contents saveInBackground];
 }
 
 - (PFFile *)convertImages
 {
-    CGSize mergeSize = [self imageSize];
-    
-    UIGraphicsBeginImageContext(mergeSize);
-    CGFloat prevHeight = 0.0f;
-    for (UIImage *image in mImages)
+    @autoreleasepool
     {
-        CGFloat newHeight = mergeSize.width * image.size.height / image.size.width;
-        [image drawInRect:CGRectMake(0, prevHeight, mergeSize.width, newHeight)];
-        prevHeight += newHeight;
+        CGSize mergeSize = [self imageSize];
+        
+        UIGraphicsBeginImageContext(mergeSize);
+        CGFloat prevHeight = 0.0f;
+        for (UIImage *image in mImages)
+        {
+            CGFloat newHeight = mergeSize.width * image.size.height / image.size.width;
+            [image drawInRect:CGRectMake(0, prevHeight, mergeSize.width, newHeight)];
+            prevHeight += newHeight;
+        }
+        UIImage *finalImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        
+        NSData *imageData = UIImagePNGRepresentation(finalImage);
+        PFFile *imageFile = [PFFile fileWithData:imageData];
+        
+        return imageFile;
     }
-    UIImage *finalImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    NSData *imageData = UIImagePNGRepresentation(finalImage);
-    PFFile *imageFile = [PFFile fileWithData:imageData];
-    
-    return imageFile;
 }
 
 - (CGSize)imageSize

@@ -30,8 +30,8 @@
     [mPassword setDelegate:self];
     [mConfirmPassword setDelegate:self];
     
+    //keyboard control
     [self registerForKeyboardNotification];
-    
     UITapGestureRecognizer *backgroundTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(backgroundTapped:)];
     [mScrollView addGestureRecognizer:backgroundTapGesture];
 }
@@ -60,11 +60,13 @@
 
 - (IBAction)registerButtonTapped:(id)sender
 {
-    if ([[mUserName text] length] != 0 && [[mPassword text] length] != 0 && [[mPassword text] isEqualToString:[mConfirmPassword text]])
+    if ([[mUserName text] length] != 0 && [[mUserName text] length] <= 10
+        && [[mPassword text] length] != 0 && [[mPassword text] length] >= 8
+        && [[mPassword text] isEqualToString:[mConfirmPassword text]])
     {
         [self signUp];
     }
-    else if ([[mUserName text] isEqualToString:@""] || [[mPassword text] isEqualToString:@""])
+    else if ([[mUserName text] length] == 0 || [[mPassword text] length] == 0)
     {
         [[[UIAlertView alloc] initWithTitle:@"Missing information"
                                     message:@"Make sure you fill all of the information"
@@ -79,12 +81,12 @@
                                    delegate:nil
                           cancelButtonTitle:@"OK"
                           otherButtonTitles:nil, nil] show];
-
     }
 }
 
 - (IBAction)backgroundTapped:(id)sender
 {
+    //keyboard hide
     [[self view] endEditing:YES];
 }
 

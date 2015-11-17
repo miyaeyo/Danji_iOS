@@ -25,12 +25,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self registerForKeyboardNotifications];
     
     [mUserName setDelegate:self];
     [mPassword setDelegate:self];
     
-    //for keyboard hide
+    //keyboard control
+    [self registerForKeyboardNotifications];
     UITapGestureRecognizer *backgroundTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(backgroundTapped:)];
     [mScrollView addGestureRecognizer:backgroundTapGesture];
 }
