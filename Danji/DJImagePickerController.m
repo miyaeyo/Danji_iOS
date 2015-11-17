@@ -12,10 +12,10 @@
 
 @implementation DJImagePickerController
 {
-    ALAssetsLibrary                     *mLibrary;
-    NSArray                             *mAssetGroups;
-    __weak id<DJImagePickerControllerDelegate> mDelegate;
-    NSUInteger                          mIndexForSegue;
+    ALAssetsLibrary                             *mLibrary;
+    NSArray                                     *mAssetGroups;
+    __weak id<DJImagePickerControllerDelegate>  mDelegate;
+    NSUInteger                                  mIndexForSegue;
 }
 
 @synthesize imageDelegate = mDelegate;
@@ -51,6 +51,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    //asset library changed
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableView) name:ALAssetsLibraryChangedNotification object:nil];
     
     [self reloadTableView];
@@ -197,11 +198,11 @@
                     return;
                 }
                 
-                NSString *sGroupPropertyName = (NSString *)[group valueForProperty:ALAssetsGroupPropertyName];
+                NSString *groupPropertyName = (NSString *)[group valueForProperty:ALAssetsGroupPropertyName];
                 NSUInteger assetType = [[group valueForProperty:ALAssetsGroupPropertyType] intValue];
                 NSMutableArray *assetGroups = [[NSMutableArray alloc] init];
                 
-                if ([[sGroupPropertyName lowercaseString] isEqualToString:@"camera roll"] && assetType == ALAssetsGroupSavedPhotos)
+                if ([[groupPropertyName lowercaseString] isEqualToString:@"camera roll"] && assetType == ALAssetsGroupSavedPhotos)
                 {
                     [assetGroups insertObject:group atIndex:0];
                 }

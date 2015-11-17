@@ -32,7 +32,7 @@
     [self setupViewAttributes];
     [self setupPickerView];
  
-    [self getContentsFromDB];
+    [self setupContentsManager];
 }
 
 - (void)didReceiveMemoryWarning
@@ -84,6 +84,7 @@
     {
         mContentsList = [NSArray arrayWithArray:contentsList];
         [[self tableView] reloadData];
+        
     }
 }
 
@@ -159,7 +160,7 @@
     [[self tableView] setDataSource:self];
 }
 
-- (void)getContentsFromDB
+- (void)setupContentsManager
 {
     mContentsManager = [[DJContentsManager alloc] init];
     [mContentsManager setDelegate:self];
