@@ -7,10 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface DJCategories : NSObject
 
-- (NSArray *)categoriesForMain;
-- (NSArray *)categoriesForWrite;
+- (NSArray *)categories;
+- (UIImage *)imageForIcon:(NSString *)name;
 
 @end

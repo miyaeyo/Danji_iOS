@@ -304,6 +304,9 @@
     }
     
     [mBody setText:[NSString stringWithString:tempBody]];
+    [mBody setLineBreakMode:NSLineBreakByWordWrapping];
+    [mBody sizeToFit];
+    [[self view] setNeedsLayout];
     mCharacters = [NSArray arrayWithArray:characters];
     mDialogs = [NSArray arrayWithArray:dialogs];
 
@@ -312,6 +315,9 @@
 - (void)paragraphWriteController:(DJParagraphWriteController *)controller didFinishWriteParagraph:(NSString *)paragraph
 {
     [mBody setText:paragraph];
+    [mBody setLineBreakMode:NSLineBreakByWordWrapping];
+    [mBody sizeToFit];
+    [[self view] setNeedsLayout];
 }
 
 
@@ -332,7 +338,7 @@
     else if([pickerView tag] == 1)
     {
         DJCategories *categories = [[DJCategories alloc] init];
-        return [[categories categoriesForWrite] count];
+        return [[categories categories] count];
     }
     
     return 0;
@@ -348,7 +354,7 @@
     else if([pickerView tag] == 1)
     {
         DJCategories *categories = [[DJCategories alloc] init];
-        return [[categories categoriesForWrite] objectAtIndex:row];
+        return [[categories categories] objectAtIndex:row];
     }
     
     return 0;
@@ -364,7 +370,7 @@
     else if([pickerView tag] == 1)
     {
         DJCategories *categories = [[DJCategories alloc] init];
-        [mCategoryPicker setText:[[categories categoriesForWrite] objectAtIndex:row]];
+        [mCategoryPicker setText:[[categories categories] objectAtIndex:row]];
     }
     
     if (![[mInputFormPicker text] isEqualToString:@""] || ![[mCategoryPicker text] isEqualToString:@""])

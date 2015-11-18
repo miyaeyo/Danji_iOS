@@ -17,10 +17,9 @@
 @implementation DJSearchResultsController
 {
     UISearchBar         *mSearchBar;
-    DJSearchResultsCell *mCell;
-    NSMutableArray      *mContentsList;
+    NSArray             *mContentsList;
     NSInteger           mSelectedIndex;
-    NSString            *mSearchText;
+    DJContentsManager   *mContentsManager;
     
     BOOL                mSearchBarEditting;
 }
@@ -48,7 +47,8 @@
     
     [self setupViewAttributes];
     
-    mContentsList = [[NSMutableArray alloc] init];
+    mContentsManager = [[DJContentsManager alloc] init];
+    [mContentsManager setDelegate:self];
 }
 
 - (void)didReceiveMemoryWarning
@@ -58,9 +58,8 @@
     if ([self isViewLoaded])
     {
         mSearchBar = nil;
-        mCell = nil;
         mContentsList = nil;
-        mSearchText = nil;
+        mContentsManager = nil;
     }
 }
 
@@ -90,12 +89,12 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    mCell = [[self tableView] dequeueReusableCellWithIdentifier:@"searchList"];
+    DJSearchResultsCell *cell = [[self tableView] dequeueReusableCellWithIdentifier:@"searchList"];
     DJContents *contents = [mContentsList objectAtIndex:[indexPath row]];
+    NSString *title = [[[contents reference] componentsSeparatedByString:@"中"] objectAtIndex:0];
+    [cell inputTitle:title body:[contents body] category:[contents category]];
     
-    [mCell inputTitle:[contents reference] body:[contents body] category:[contents category]];
-    
-    return mCell;
+    return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -119,17 +118,23 @@
 
 #pragma mark - search bar delegate
 
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
+{
+    [searchBar setText:@""];
+    mContentsList = nil;
+    [[self tableView] reloadData];
+}
+
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
-    mSearchText = searchText;
     if ([searchText isEqualToString:@""])
     {
-        [mContentsList removeAllObjects];
+        mContentsList = nil;
         [[self tableView] reloadData];
         return;
     }
     
-    [self searchWithContentsManager];
+    [mContentsManager contentsFromParseDBWithSearchText:searchText];
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
@@ -142,7 +147,7 @@
 
 - (void)contentsManager:(DJContentsManager *)aContentsManager didFinishGetContentsList:(NSArray *)contentsList
 {
-    mContentsList = [NSMutableArray arrayWithArray:contentsList];
+    mContentsList = [NSArray arrayWithArray:contentsList];
     [[self tableView] reloadData];
 }
 
@@ -169,13 +174,6 @@
     [mSearchBar setDelegate:self];
     
     [navBar addSubview:mSearchBar];
-}
-
-- (void)searchWithContentsManager
-{
-    DJContentsManager *contentsManager = [[DJContentsManager alloc] init];
-    [contentsManager contentsFromParseDBWithSearchText:mSearchText];
-    [contentsManager setDelegate:self];
 }
 
 

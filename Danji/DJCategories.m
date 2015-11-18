@@ -10,14 +10,21 @@
 
 @implementation DJCategories
 
-- (NSArray *)categoriesForMain
-{
-   return [NSArray arrayWithObjects:@"TOTAL", @"MOVIE", @"DRAMA", @"BOOK", @"POEM", @"MUSIC", @"CARTOON", nil];
-    
-}
-
-- (NSArray *)categoriesForWrite
+- (NSArray *)categories
 {
     return [NSArray arrayWithObjects:@"movie", @"drama", @"book", @"poem", @"music", @"cartoon", nil];
+}
+
+- (UIImage *)imageForIcon:(NSString *)name
+{
+    NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+                                [UIImage imageNamed:@"music"], @"music",
+                                [UIImage imageNamed:@"movie"], @"movie",
+                                [UIImage imageNamed:@"drama"], @"drama",
+                                [UIImage imageNamed:@"cartoon"], @"cartoon",
+                                [UIImage imageNamed:@"poem"], @"poem",
+                                [UIImage imageNamed:@"book"], @"book", nil];
+    
+    return [dictionary objectForKey:name];
 }
 @end

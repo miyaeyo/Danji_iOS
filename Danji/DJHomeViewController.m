@@ -16,9 +16,9 @@
 
 @implementation DJHomeViewController
 {
-    __weak IBOutlet UITextField *mCategory;
-    NSArray                     *mContentsList;
-    DJContentsManager           *mContentsManager;
+    UITextField        *mCategory;
+    NSArray            *mContentsList;
+    DJContentsManager  *mContentsManager;
     
 }
 
@@ -30,9 +30,13 @@
     [super viewDidLoad];
     
     [self setupViewAttributes];
-    [self setupPickerView];
  
     [self setupContentsManager];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self setupPickerView];
 }
 
 - (void)didReceiveMemoryWarning
@@ -69,6 +73,17 @@
     return height + 5;
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    return mCategory;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    //category selection view height
+    return 35;
+}
+
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //dummy data for estimate row height
@@ -83,6 +98,11 @@
     @autoreleasepool
     {
         mContentsList = [NSArray arrayWithArray:contentsList];
+        if ([[self refreshControl] isRefreshing])
+        {
+            [self setupPickerView];
+            [[self refreshControl] endRefreshing];
+        }
         [[self tableView] reloadData];
         
     }
@@ -123,30 +143,23 @@
 {
     DJCategories *categories = [[DJCategories alloc] init];
     
-    return [[categories categoriesForMain] count];
+    return [[categories categories] count];
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
     DJCategories *categories = [[DJCategories alloc] init];
     
-    return [[categories categoriesForMain] objectAtIndex:row];
+    return [[[categories categories] objectAtIndex:row] capitalizedString];
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
     DJCategories *categories = [[DJCategories alloc] init];
-    [mCategory setText:[[categories categoriesForMain] objectAtIndex:row]];
+    [mCategory setText:[[[categories categories] objectAtIndex:row] capitalizedString]];
     [[self view] endEditing:YES];
     
-    if ([[mCategory text] isEqualToString:@"TOTAL"])
-    {
-        [mContentsManager contentsFromParseDB];
-    }
-    else
-    {
-        [mContentsManager contentsFromParseDBWithCategory:[[mCategory text] lowercaseString]];
-    }
+    [mContentsManager contentsFromParseDBWithCategory:[[mCategory text] lowercaseString]];
 }
 
 
@@ -158,6 +171,13 @@
     [[self tableView] setBackgroundColor:[UIColor whiteColor]];
     [[self tableView] setDelegate:self];
     [[self tableView] setDataSource:self];
+    
+    UIRefreshControl *refresh = [[UIRefreshControl alloc] init];
+    [refresh setBackgroundColor:[UIColor DJIvoryColor]];
+    [refresh setTintColor:[UIColor DJMintColor]];
+    [refresh addTarget:self action:@selector(setupContentsManager) forControlEvents:UIControlEventAllEvents];
+    [self setRefreshControl:refresh];
+    
 }
 
 - (void)setupContentsManager
@@ -169,6 +189,15 @@
 
 - (void)setupPickerView
 {
+    mCategory = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, [[self view] bounds].size.width, 35)];
+    [mCategory setBackgroundColor:[UIColor DJIvoryColor]];
+    [mCategory setTextColor:[UIColor DJBrownColor]];
+    [mCategory setFont:[UIFont boldSystemFontOfSize:17]];
+    [mCategory setTextAlignment:NSTextAlignmentCenter];
+    [mCategory setPlaceholder:@"CATEGORY"];
+    [mCategory setClearButtonMode:UITextFieldViewModeNever];
+    
+
     UIPickerView *pickerView = [[UIPickerView alloc] init];
     [pickerView setDataSource:self];
     [pickerView setDelegate:self];
