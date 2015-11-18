@@ -16,6 +16,7 @@
     UILabel     *mLikeCount;
     UILabel     *mReference;
     UIButton    *mLikeButton;
+    UIView      *mCellSpace;
     
     CGFloat     mImageHeight;
     CGFloat     mBodyHeight;
@@ -41,6 +42,7 @@
         mLikeCount = [[UILabel alloc] initWithFrame:CGRectZero];
         mReference = [[UILabel alloc] initWithFrame:CGRectZero];
         mLikeButton = [[UIButton alloc] initWithFrame:CGRectZero];
+        mCellSpace = [[UIView alloc] initWithFrame:CGRectZero];
     }
     
     return self;
@@ -179,6 +181,10 @@
     [mReference setNumberOfLines:numOfLines];
     [mReference setLineBreakMode:NSLineBreakByWordWrapping];
     [self addSubview:mReference];
+    
+    [mCellSpace setFrame:CGRectMake(0, bottomY + [mReference bounds].size.height + 5, [self bounds].size.width, 15)];
+    [mCellSpace setBackgroundColor:[UIColor DJIvoryColor]];
+    [self addSubview:mCellSpace];
 }
 
 

@@ -30,13 +30,9 @@
     [super viewDidLoad];
     
     [self setupViewAttributes];
- 
     [self setupContentsManager];
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
     [self setupPickerView];
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -73,16 +69,16 @@
     return height + 5;
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    return mCategory;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    //category selection view height
-    return 35;
-}
+//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+//{
+//    return mCategory;
+//}
+//
+//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+//{
+//    //category selection view height
+//    return 35;
+//}
 
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -196,6 +192,7 @@
     [mCategory setTextAlignment:NSTextAlignmentCenter];
     [mCategory setPlaceholder:@"CATEGORY"];
     [mCategory setClearButtonMode:UITextFieldViewModeNever];
+    [[self tableView] addSubview:mCategory];
     
 
     UIPickerView *pickerView = [[UIPickerView alloc] init];

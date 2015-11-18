@@ -112,17 +112,17 @@
                           otherButtonTitles:nil, nil] show];
     }
     //contirm password check
-    else if([textField tag] == 2)
-    {
-        if (![[textField text] isEqualToString:[mPassword text]])
-        {
-            [[[UIAlertView alloc] initWithTitle:@"Not match password"
-                                        message:@"Check your password"
-                                       delegate:nil
-                              cancelButtonTitle:@"OK"
-                              otherButtonTitles:nil, nil] show];
-        }
-    }
+//    else if([textField tag] == 2)
+//    {
+//        if (![[textField text] isEqualToString:[mPassword text]])
+//        {
+//            [[[UIAlertView alloc] initWithTitle:@"Not match password"
+//                                        message:@"Check your password"
+//                                       delegate:nil
+//                              cancelButtonTitle:@"OK"
+//                              otherButtonTitles:nil, nil] show];
+//        }
+//    }
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
