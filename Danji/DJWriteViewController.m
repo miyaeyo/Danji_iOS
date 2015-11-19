@@ -31,6 +31,7 @@
     NSInteger                        mImageCount;
     NSArray                          *mCharacters;
     NSArray                          *mDialogs;
+    UIActivityIndicatorView          *mProgressView;
 }
 
 
@@ -182,10 +183,14 @@
     {
         if ([alertView tag] == 100)
         {
+            [mProgressView startAnimating];
             [self saveParseDB];
         }
-        
-        [self performSegueWithIdentifier:@"complete" sender:self];
+        else
+        {
+            [self performSegueWithIdentifier:@"complete" sender:self];
+            
+        }
     }
 }
 
@@ -414,6 +419,12 @@
     
     mImages = [[NSArray alloc] init];
     mImageCount = 0;
+    
+    mProgressView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    [mProgressView setFrame:[[self view] frame]];
+    [mProgressView setBackgroundColor:[UIColor colorWithWhite:0 alpha:0.5]];
+    [mProgressView setHidesWhenStopped:YES];
+    [[self view] addSubview:mProgressView];
 }
 
 - (void)saveParseDB
@@ -440,7 +451,19 @@
         [contents setImageHeight:[self imageSize].height];
         [contents setImageWidth:[self imageSize].width];
         
-        [contents saveInBackground];
+        [contents saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error)
+        {
+            [mProgressView stopAnimating];
+            if (succeeded)
+            {
+                [self performSegueWithIdentifier:@"complete" sender:self];
+            }
+            else
+            {
+                [[[UIAlertView alloc] initWithTitle:@"Fail to save" message:@"try agian to save contents" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
+                NSLog(@"error: %@", [error description]);
+            }
+        }];
     }
 }
 
