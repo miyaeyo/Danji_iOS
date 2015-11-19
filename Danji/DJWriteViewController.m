@@ -101,10 +101,10 @@
 - (IBAction)cancelButtonTapped:(id)sender
 {
     [[[UIAlertView alloc] initWithTitle:@"Cancel"
-                                message:@"Do you really want to quit writing?"
+                                message:@"Do you really want to quit editing?"
                                delegate:self
-                      cancelButtonTitle:@"NO"
-                      otherButtonTitles:@"YES", nil] show];
+                      cancelButtonTitle:@"Keep editing"
+                      otherButtonTitles:@"Stop editing", nil] show];
 }
 
 - (IBAction)doneButtonTapped:(id)sender
@@ -131,8 +131,8 @@
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Done"
                                                     message:@"Do you want to save this contents?"
                                                    delegate:self
-                                          cancelButtonTitle:@"NO"
-                                          otherButtonTitles:@"YES", nil];
+                                          cancelButtonTitle:@"keep editing"
+                                          otherButtonTitles:@"Save", nil];
     
     [alert setTag:100];
     [alert show];

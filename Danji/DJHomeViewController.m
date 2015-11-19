@@ -112,8 +112,8 @@
     [[[UIAlertView alloc] initWithTitle:@"Logout"
                                 message:@"Do you want to logout Danji?"
                                delegate:self
-                      cancelButtonTitle:@"NO"
-                      otherButtonTitles:@"YES", nil] show];
+                      cancelButtonTitle:@"Stay danji"
+                      otherButtonTitles:@"Logout", nil] show];
 }
 
 
