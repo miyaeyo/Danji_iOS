@@ -193,6 +193,8 @@
     [mCategory setTextAlignment:NSTextAlignmentCenter];
     [mCategory setPlaceholder:@"CATEGORY"];
     [mCategory setClearButtonMode:UITextFieldViewModeNever];
+    [mCategory setTintColor:[UIColor clearColor]];
+    
     [[self tableView] addSubview:mCategory];
     
 

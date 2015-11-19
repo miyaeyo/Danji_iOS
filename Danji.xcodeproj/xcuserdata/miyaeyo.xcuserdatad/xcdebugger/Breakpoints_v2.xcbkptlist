@@ -906,11 +906,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Danji/DJHomeViewController.m"
-            timestampString = "469616464.985292"
+            timestampString = "469617805.572241"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "213"
-            endingLineNumber = "213"
+            startingLineNumber = "215"
+            endingLineNumber = "215"
             landmarkName = "-estimateCellHeightWithContents:"
             landmarkType = "5">
          </BreakpointContent>
