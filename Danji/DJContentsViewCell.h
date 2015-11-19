@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "DJContents.h"
+#import "DJContentsManager.h"
 
-
-@interface DJContentsViewCell : UITableViewCell
+@interface DJContentsViewCell : UITableViewCell <DJContentsDelegate>
 
 - (void)inputContents:(DJContents *)contents;
 

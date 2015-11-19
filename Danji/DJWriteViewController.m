@@ -145,7 +145,8 @@
     {
         [[[UIAlertView alloc] initWithTitle:@"Missing input form and category field"
                                     message:@"Please select input form and categry"
-                                   delegate:nil cancelButtonTitle:@"OK"
+                                   delegate:nil
+                          cancelButtonTitle:@"OK"
                           otherButtonTitles:nil, nil] show];
     }
     else if ([[mInputFormPicker text] isEqualToString:@"dialog"])
@@ -179,14 +180,14 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if (buttonIndex == 1)
+    if (buttonIndex == 1) // other button
     {
-        if ([alertView tag] == 100)
+        if ([alertView tag] == 100) // done button
         {
             [mProgressView startAnimating];
             [self saveParseDB];
         }
-        else
+        else // cancel button
         {
             [self performSegueWithIdentifier:@"complete" sender:self];
             

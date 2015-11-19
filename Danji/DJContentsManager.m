@@ -118,6 +118,32 @@
 }
 
 
+#pragma mark - increase like count
+
+- (void)increaseLikeCountInContents:(DJContents *)contents
+{
+    NSUInteger likeCount = [[contents likeUsers] count];
+    [contents addUniqueObject:[[PFUser currentUser] username]  forKey:@"likeUsers"];
+    
+    if ([[contents likeUsers] count] - likeCount == 1)
+    {
+        [contents incrementKey:@"likeCount"];
+        [contents saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error)
+         {
+             if (succeeded)
+             {
+                 [mDelegate contentsManager:self didFinishIncreaseLikeCount:[contents likeCount]];
+             }
+             else
+             {
+                 NSLog(@"%@", [error description]);
+             }
+         }];
+    }
+
+}
+
+
 #pragma mark - save
 
 - (void)saveContentsToParseDB:(DJContents *)contents

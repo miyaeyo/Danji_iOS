@@ -16,6 +16,7 @@
 
 @optional
 - (void)contentsManager:(DJContentsManager *)aContentsManager didFinishGetContentsList:(NSArray *)contentsList;
+- (void)contentsManager:(DJContentsManager *)aContentsManager didFinishIncreaseLikeCount:(NSUInteger)likeCount;
 
 @end
 
@@ -29,6 +30,9 @@
 - (void)contentsFromParseDBWithSearchText:(NSString *)searchText;
 - (void)contentsFromParseDBWithCategory:(NSString *)category;
 
+- (void)increaseLikeCountInContents:(DJContents *)contents;
+
 - (void)saveContentsToParseDB:(DJContents *)contents;
+
 
 @end

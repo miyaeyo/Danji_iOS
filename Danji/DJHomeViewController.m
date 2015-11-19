@@ -111,7 +111,8 @@
 {
     [[[UIAlertView alloc] initWithTitle:@"Logout"
                                 message:@"Do you want to logout Danji?"
-                               delegate:self cancelButtonTitle:@"NO"
+                               delegate:self
+                      cancelButtonTitle:@"NO"
                       otherButtonTitles:@"YES", nil] show];
 }
 
@@ -120,7 +121,7 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if (buttonIndex == 1)
+    if (buttonIndex == 1) // logout
     {
         [PFUser logOut];
         [self performSegueWithIdentifier:@"logout" sender:self];
