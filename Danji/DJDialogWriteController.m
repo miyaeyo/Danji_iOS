@@ -16,7 +16,6 @@
     NSMutableArray                                 *mCharacters;
     NSMutableArray                                 *mDialogs;
     NSUInteger                                     mTextByte;
-    
 }
 
 @synthesize dialogDelegate = mDelegate;
@@ -47,7 +46,6 @@
                           + [[mDialogs objectAtIndex:i] lengthOfBytesUsingEncoding:NSUTF8StringEncoding]);
         }
     }
-    
 }
 
 - (void)didReceiveMemoryWarning
@@ -80,7 +78,7 @@
         mTextByte += ([[mCharacters objectAtIndex:(mFormCount - 1)] lengthOfBytesUsingEncoding:NSUTF8StringEncoding]
                       + [[mDialogs objectAtIndex:(mFormCount - 1)] lengthOfBytesUsingEncoding:NSUTF8StringEncoding]);
         
-        NSLog(@"text byte: %ld", (unsigned long)mTextByte);
+        NSLog(@"text byte: %ld", (unsigned long)mTextByte);     //parse object size limit 128kb
         if (mTextByte > 127000)
         {
             [[[UIAlertView alloc] initWithTitle:@"Over maximun contents length"

@@ -186,7 +186,7 @@
          {
              UIImage *original = [UIImage imageWithData:data];
              CGSize originalSize = CGSizeMake([mContents imageWidth], [mContents imageHeight]);
-             CGFloat screenWidth = [[UIScreen mainScreen] bounds].size.width;
+             CGFloat screenWidth = [self bounds].size.width;
              CGSize newSize = CGSizeMake(screenWidth, originalSize.height * screenWidth / originalSize.width);
              
              UIGraphicsBeginImageContext(newSize);

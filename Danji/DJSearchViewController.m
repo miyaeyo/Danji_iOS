@@ -11,7 +11,6 @@
 #import "DJSearchResultsController.h"
 
 
-
 @implementation DJSearchViewController
 {
     UISearchBar                 *mSearchBar;

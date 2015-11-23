@@ -30,7 +30,7 @@
     [super viewDidLoad];
     
     [self setupViewAttributes];
-    [self setupContentsManager];
+    [self callContentsManager];
     [self setupPickerView];
 
 }
@@ -68,17 +68,6 @@
     
     return height + 5;
 }
-
-//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-//{
-//    return mCategory;
-//}
-//
-//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-//{
-//    //category selection view height
-//    return 35;
-//}
 
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -172,15 +161,15 @@
     UIRefreshControl *refresh = [[UIRefreshControl alloc] init];
     [refresh setBackgroundColor:[UIColor DJIvoryColor]];
     [refresh setTintColor:[UIColor DJMintColor]];
-    [refresh addTarget:self action:@selector(setupContentsManager) forControlEvents:UIControlEventAllEvents];
+    [refresh addTarget:self action:@selector(callContentsManager) forControlEvents:UIControlEventAllEvents];
     [self setRefreshControl:refresh];
     
-}
-
-- (void)setupContentsManager
-{
     mContentsManager = [[DJContentsManager alloc] init];
     [mContentsManager setDelegate:self];
+}
+
+- (void)callContentsManager
+{
     [mContentsManager contentsFromParseDB];
 }
 
